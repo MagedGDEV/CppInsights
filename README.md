@@ -8,3 +8,13 @@ The programming language we write our is called high-level language which is und
 
 Programs are made up of one or more files, the code in each file is linked together to form a single executable program, this process is done by a program called **linker**.
 
+It's normal to encounter **Errors** when writing programs, it is the nature of programming, So it's important to learn about different types of errors:
+
+- *Compiler Errors*
+
+  - Syntax Errors
+  - Semantic Errors
+
+- *Linker Errors*
+- *Runtime Errors*
+- *Logic Errors*
