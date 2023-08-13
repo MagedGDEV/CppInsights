@@ -45,3 +45,22 @@ void main()
     std::cout << "Hello World!" << std::endl // Missing semicolon
 } 
 ```
+
+### Semantic Errors
+
+Semantic errors deals with the meaning of the code written by programmer, and does it make sense or not, if the compiler can't understand the meaning of the code, it will generate a semantic error.
+
+These errors are like:
+
+- Using a variable with the wrong type.
+- Using a variable outside of its scope.
+- ...
+
+For example:
+
+```cpp
+void main() {
+    // Using a variable with the wrong type
+    int greet = "Hello World!";
+}
+```
