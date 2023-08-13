@@ -68,3 +68,24 @@ int main() {
     return 0;
 }
 ```
+
+## Linker Errors
+
+These types of errors are detected by the linker, where the linker is unable to link all the object files together to form a single executable program.
+
+These errors are detected after the compiler has completed its job, and they are like:
+
+- Missing libraries include
+- Multiple definitions of the same function
+- ...
+
+For example:
+
+```cpp
+
+int main() {
+    // Missing to include the std library
+    std::cout << "Hello World!" << endl;
+    return 0;
+}
+```
