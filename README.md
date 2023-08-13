@@ -89,3 +89,25 @@ int main() {
     return 0;
 }
 ```
+
+## Runtime Errors
+
+After linker formed the executable file, the program is ready to run, but sometimes program may crash while running, due to some errors that occur during the execution of the program, these errors are called runtime errors, these errors are harder than the previous errors to detect and fix.
+
+These errors are like:
+
+- Division by zero
+- Accessing an invalid memory address
+- File not found
+- ...
+
+For example:
+
+```cpp
+int main() {
+    // Division by zero
+    int z = 10 / 0;
+    return 0;
+}
+```
+
