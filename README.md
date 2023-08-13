@@ -18,3 +18,30 @@ It's normal to encounter **Errors** when writing programs, it is the nature of p
 - *Linker Errors*
 - *Runtime Errors*
 - *Logic Errors*
+
+## Compiler Errors
+
+These types of errors are detected by the compiler, and the prevent the compiler from compiling the program, and stop it from creating an object file.
+
+There are two types of errors that cause the compiler to generate compiler errors:
+
+### Syntax Errors
+
+Syntax is the grammar of a programming language, and it's rules that must be followed to write a valid program in that language. when you break the rules of the language, the compiler will generate a syntax error.
+
+These erros are like:
+
+- Missing semicolon at the end of the statement.
+- Missing closing parenthesis.
+- Misspelling a keyword.
+- Using a variable without declaring it.
+- ...
+
+For example:
+
+```cpp
+void main() 
+// Missing opening parenthesis
+    std::cout << "Hello World!" << std::endl // Missing semicolon
+} 
+```
