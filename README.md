@@ -40,9 +40,12 @@ These erros are like:
 For example:
 
 ```cpp
-void main() 
+#include <iostream>
+
+int main() 
 // Missing opening parenthesis
     std::cout << "Hello World!" << std::endl // Missing semicolon
+    return 0;
 } 
 ```
 
@@ -59,8 +62,9 @@ These errors are like:
 For example:
 
 ```cpp
-void main() {
+int main() {
     // Using a variable with the wrong type
     int greet = "Hello World!";
+    return 0;
 }
 ```
