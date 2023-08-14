@@ -70,3 +70,54 @@ There are two types of main functions:
     g++ main.cpp -o main
     ./main arg1 arg2 arg3
     ```
+
+**Namespaces** are used to organize code into logical groups and to prevent name collisions that can occur especially when your code base includes multiple libraries that uses the same names for different things.
+
+C++ provide us with 3 different ways to use namespaces:
+
+1. Explicitly use a specific name from a namespace.
+
+    ```cpp
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hello World!" << std::endl;
+        return 0;
+    }
+    ```
+
+    This is done by adding the namespace name followed by the scope resolution operator **`::`** before the name you want to use, in our example above we used the name **`cout`** from the namespace **`std`**.
+
+2. The using namespace directive.
+
+    ```cpp
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+        cout << "Hello World!" << endl;
+        return 0;
+    }
+    ```
+
+    This is done by adding the keyword **`using`** followed by the namespace name, in our example above we used the namespace **`std`**, it saves us from writing **`std::`** before every name we want to use from the namespace **`std`**.
+
+    > But it's not recommended to use this method because it can cause name collisions.
+
+3. The using directive.
+
+    ```cpp
+    #include <iostream>
+    using std::cout;
+    using std::endl;
+
+    int main() {
+        cout << "Hello World!" << endl;
+        return 0;
+    }
+    ```
+
+    This is done by adding the keyword **`using`** followed by the keyword **`std`** followed by the scope resolution operator **`::`** followed by the name you want to use, in our example above we used the name **`cout`** from the namespace **`std`**.
+
+    > This is best practice since it saves us from writing **`std::`** before every name we want to use, and it doesn't cause name collisions.
+
