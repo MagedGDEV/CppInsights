@@ -31,3 +31,42 @@ multi-line
 comment
 */
 ```
+
+Every C++ program has a ***main( ) function***, this function is the entry point of the program, the program starts executing from the first line of the main function and ends when it reaches the last line of the main function.
+
+The main( ) function has a return type of **`int`**, if the return value is **0** then the program ended successfully, if the return value is **non-zero** then the program ended with an error.
+
+There are two types of main functions:
+
+1. **`int main()`**: This is the most common type of main function, it doesn't take any arguments from the operating system.
+
+    ```cpp
+
+    int main() {
+        // Your code goes here
+        return 0;
+    }
+    ```
+
+    To run the program from the terminal, you need to compile the program first, then run the executable file.
+
+    ```bash
+    g++ main.cpp -o main
+    ./main
+    ```
+
+2. **`int main(int argc, char* argv[])`**: This type of main function takes two arguments from the operating system, the first argument is the number of arguments passed to the program, the second argument is an array of strings, each string is one of the arguments passed to the program.
+
+    ```cpp
+    int main(int argc, char* argv[]) {
+        // Your code goes here
+        return 0;
+    }
+    ```
+
+    To run the program from the terminal, you need to compile the program first, then run the executable file.
+
+    ```bash
+    g++ main.cpp -o main
+    ./main arg1 arg2 arg3
+    ```
