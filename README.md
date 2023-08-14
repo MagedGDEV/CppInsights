@@ -102,7 +102,7 @@ C++ provide us with 3 different ways to use namespaces:
 
     This is done by adding the keyword **`using`** followed by the namespace name, in our example above we used the namespace **`std`**, it saves us from writing **`std::`** before every name we want to use from the namespace **`std`**.
 
-    > But it's not recommended to use this method because it can cause name collisions.
+    > But it's not recommended to use this method for large projects because it can cause name collisions.
 
 3. The using directive.
 
