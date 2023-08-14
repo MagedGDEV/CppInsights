@@ -1,1 +1,1 @@
-# CppInsights
+# Structure of C++ Program
