@@ -121,3 +121,41 @@ C++ provide us with 3 different ways to use namespaces:
 
     > This is best practice since it saves us from writing **`std::`** before every name we want to use, and it doesn't cause name collisions.
 
+## Basic Input/Output
+
+C++ provides us with the **`iostream`** library, this library contains the definitions of **`cin`**, **`cout`**, **`cerr`**, and **`clog`**, these are objects that are used to communicate with the user.
+
+- **`cin`** is an object of type **`istream`**, it is used to read input from the user.
+- **`cout`** is an object of type **`ostream`**, it is used to write output to the user.
+- **`cerr`** is an object of type **`ostream`**, it is used to write errors to the user.
+- **`clog`** is an object of type **`ostream`**, it is used to write logs to the user.
+
+We use the **`<<`** operator to write to the user, and the **`>>`** operator to read from the user.
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x;
+    cout << "Enter a number: ";
+    cin >> x;
+    cout << "You entered: " << x << endl;
+    return 0;
+}
+```
+
+To break a line in the output, you can use the **`endl`** keyword or the **`\n`** character, both of them will do the same thing
+> But **endl** will flush the output buffer, which means it will write the output to the user immediately, while **\n** will not flush the output buffer, which means it will write the output to the user when the buffer is full.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello World!" << endl;
+    cout << "Hello World!\n";
+    return 0;
+}
+```
