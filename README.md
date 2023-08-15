@@ -93,3 +93,11 @@ int main() {
     return 0;
 }
 ```
+
+**Constants** are variables whose value cannot be changed during the execution of the program, and they are declared using the `const` keyword, for example:
+
+```cpp
+
+const int myVar {5};
+myVar = 10; // Error: cannot assign to variable 'myVar' with const-qualified type 'const int'
+```
