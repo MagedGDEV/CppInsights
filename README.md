@@ -70,7 +70,8 @@ The variables types are:
 |**`bool`**|at least 8 bits| Used to store boolean values: `true` or `false`|
 
 > To intialize a character variable, we must use single quotes (`'`), for example: `char myChar {'a'};`
-> The variable that stores integer values can be either `signed` or `unsigned`, the `signed` is the default type, and it can store both positive and negative values, while the `unsigned` type can only store positive values, to declare an `unsigned` variable, we must use the `unsigned` keyword before the type, for example: `unsigned int myVar {5};`
+
+The variable that stores integer values can be either `signed` or `unsigned`, the `signed` is the default type, and it can store both positive and negative values, while the `unsigned` type can only store positive values, to declare an `unsigned` variable, we must use the `unsigned` keyword before the type, for example: `unsigned int myVar {5};`
 
 The benefit of using list initialization is that it prevents narrowing conversions, for example, if we try to initialize a `int` variable with a `double` value, the compiler will throw an error, but other types of initialization will not throw an error, and the value will be truncated.
 
