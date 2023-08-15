@@ -58,7 +58,7 @@ Variables have different **types** that determine the size of the memory locatio
 
 The variables types are:
 | Type | Size  | Purpose |
-| ---- | ------------ | ------- |
+| ------------- | ------ | --- |
 |**`char`**|at least 8 bits | Used to store characters: `'a'`, `'b'`, `'c'`, etc.|
 |**`char16_t`**|at least 16 bits| Used to store Unicode characters: `u'a'`, `u'b'`, `u'c'`, etc.|
 |**`short`**|at least 16 bits| Used to store integers: `1`, `2`, `3`, etc.|
