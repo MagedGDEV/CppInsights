@@ -70,3 +70,26 @@ The ***name of the array*** represents the address of the first element in the a
 
 > You have to do the bounds checking yourself. If you try to access an element outside the bounds of the array, you will get undefined behavior.
 
+***Multidimensional arrays*** are arrays of arrays, where each element is itself an array. You have to be *`aware that some compilers limit the number of dimensions`* you can have in an array.
+
+To declare a multidimensional array, we use the following syntax:
+
+```cpp
+type arrayName [ arraySize1 ][ arraySize2 ];
+```
+
+For example:
+
+```cpp
+int numbers[5][5]; // array of 5 arrays of 5 integers
+```
+
+To initialize a multidimensional array, we use the following syntax:
+
+```cpp
+
+int array2D[2][3] = { 
+    { 1, 2, 3 }, 
+    { 4, 5, 6 } 
+}; // array of 2 arrays of 3 integers
+```
