@@ -49,3 +49,24 @@ int numbers[5] = { 0 }; // array of 5 integers -> { 0, 0, 0, 0, 0 }
 ```cpp
 int numbers[] = { 1, 2, 3, 4, 5 }; // array of 5 integers
 ```
+
+To access an element in an array, we use the following syntax:
+
+```cpp
+arrayName[index];
+```
+
+For example:
+
+```cpp
+int numbers[5] = { 1, 2, 3, 4, 5 };
+cout << numbers[0] << endl; // 1
+cout << numbers[1] << endl; // 2
+
+numbers[3] = 10; // assign 10 to 4th element
+```
+
+The ***name of the array*** represents the address of the first element in the array in memory. This is why we can use the array name as a pointer to the first element in the array. The ***index*** of the array represents the offset from the first element in the array.
+
+> You have to do the bounds checking yourself. If you try to access an element outside the bounds of the array, you will get undefined behavior.
+
