@@ -93,3 +93,9 @@ int array2D[2][3] = {
     { 4, 5, 6 } 
 }; // array of 2 arrays of 3 integers
 ```
+
+To access an element in a multidimensional array, we use the following syntax:
+
+```cpp
+array2D [0][1] = 2;
+```
