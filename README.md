@@ -153,3 +153,16 @@ cout << numbers.at(0) << endl; // 1
 
 The **`at()`** method is safer than the **`[]`** operator, because it does ***bounds checking***, and if you try to access an element outside the bounds of the vector, it will throw an exception during runtime instead of undefined behavior.
 
+To add an element to a vector, we use the method **`push_back()`**, as follows:
+
+```cpp
+vector<int> numbers { 1, 2, 3, 4, 5 };
+numbers.push_back(6); // { 1, 2, 3, 4, 5, 6 }
+```
+
+To remove an element from a vector, we use the method **`pop_back()`**, as follows:
+
+```cpp
+vector<int> numbers { 1, 2, 3, 4, 5 };
+numbers.pop_back(); // { 1, 2, 3, 4 }
+```
