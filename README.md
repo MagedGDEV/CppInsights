@@ -124,3 +124,32 @@ int main() {
 
 Unlike arrays, when we declare a vector the values of the vector are intialized to **`0`** incase of integers and **`0.0`** incase of doubles, ...
 
+We can also initialize a vector with values, we use the following syntax:
+
+```cpp
+vector<int> numbers { 1, 2, 3, 4, 5 }; // Vector of 5 integers
+```
+
+You can intialize a vector with a specific size, and specify a value for all elements, we use the following syntax:
+
+```cpp
+vector<int> numbers (5, 100); // Vector of 5 integers initialized to 100
+```
+
+To access an element in a vector, we can do it in two ways:
+
+- Using the `[]` operator
+
+```cpp
+vector<int> numbers { 1, 2, 3, 4, 5 };
+cout << numbers[0] << endl; // 1
+```
+
+- Using the `at()` method
+
+```cpp
+cout << numbers.at(0) << endl; // 1
+```
+
+The **`at()`** method is safer than the **`[]`** operator, because it does ***bounds checking***, and if you try to access an element outside the bounds of the vector, it will throw an exception during runtime instead of undefined behavior.
+
