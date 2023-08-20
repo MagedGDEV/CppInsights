@@ -99,3 +99,28 @@ To access an element in a multidimensional array, we use the following syntax:
 ```cpp
 array2D [0][1] = 2;
 ```
+
+***Vectors*** are similar to arrays, where they are a collection of variables of the same type, it is provided by the C++ Standard Library. Vectors are more flexible than arrays which provides the following characteristics:
+
+- Size of the vector is **dynamic**
+- Variables are of same type
+- Stored in contiguous memory locations
+- Each element can be accessed by using an index (position)
+- Position of first element is **`0`** not **`1`**
+- Provides methods to add and remove, sort, and ...
+
+To use vectors, we have to include the `<vector>` header file, and to declare a vector, we use the following syntax:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> numbers; // Empty vector of integers
+    vector<double> values (10); // Vector of 10 doubles initialized to 0.0
+}
+```
+
+Unlike arrays, when we declare a vector the values of the vector are intialized to **`0`** incase of integers and **`0.0`** incase of doubles, ...
+
