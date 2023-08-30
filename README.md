@@ -155,3 +155,41 @@ This is the preferred way of casting in C++, as it is more safe than C-style cas
     ```
 
 > **Note:** `cout << boolalpha;` is used to print boolean values as `true` or `false` instead of `1` or `0` and you can revert back to the default behavior by using `cout << noboolalpha;`
+
+**Relational** operators are used to compare two operands and return a boolean value (`true` or `false`):
+
+- Equal to (`==`)
+
+  - ```cpp
+    bool x = 5 == 10; // x = false
+    ```
+
+- Not equal to (`!=`)
+
+  - ```cpp
+    bool x = 5 != 10; // x = true
+    ```
+
+- Greater than (`>`)
+  
+  - ```cpp
+    bool x = 10 > 10; // x = false
+    ```
+
+- Less than (`<`)
+
+  - ```cpp
+    bool x = 10 < 10; // x = false
+    ```
+
+- Greater than or equal to (`>=`)
+
+  - ```cpp
+    bool x = 10 >= 10; // x = true
+    ```
+
+- Less than or equal to (`<=`)
+
+  - ```cpp
+    bool x = 10 <= 10; // x = true
+    ```
