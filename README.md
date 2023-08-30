@@ -54,3 +54,43 @@ x = y = z = 10; // x = (y = (z = 10))
 ```
 
 What happens above is that the value of `10` is assigned to `z`, then the value of `z` is assigned to `y`, and finally the value of `y` is assigned to `x`.
+
+**Arithmetic** operators are used to perform arithmetic operations on operands (variables and literals):
+
+- Addition (**`+`**)
+
+  - ```cpp
+    int x = 5 + 10; // x = 15
+    ```
+
+- Subtraction (`-`)
+
+  - ```cpp
+    int x = 5 - 10; // x = -5
+    ```
+
+- Multiplication (`*`)
+
+  - ```cpp
+    int x = 5 * 10; // x = 50
+    ```
+
+- Division (`/`)
+
+  - ```cpp
+    int x = 5 / 10; // x = 0
+    ```
+
+  - The result of the above expression is `0` because both operands are integers, so the result is an integer, to get a floating-point result, at least one of the operands must be a floating-point number.
+
+  - ```cpp
+    double x = 5.0 / 10; // x = 0.5
+    ```
+
+- Modulus (`%`)
+
+  - ```cpp
+    int x = 5 % 10; // x = 5
+    ```
+
+  - This operator returns the remainder of the division of the first operand by the second operand.
