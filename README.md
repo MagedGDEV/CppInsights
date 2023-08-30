@@ -243,5 +243,5 @@ and this is enough to make the whole expression true*/
 | `/=` | `x /= 5;` | `x = x / 5;` |
 | `%=` | `x %= 5;` | `x = x % 5;` |
 | `&=` | `x &= 5;` | `x = x & 5;` |
-| `|=` | `x |= 5;` | `x = x | 5;` |
+| `\|=` | `x \|= 5;` | `x = x \| 5;` |
 
