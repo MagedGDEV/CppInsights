@@ -135,3 +135,21 @@ It is important to know that the precedence of arithmetic operators is from left
 - `++` and `--`
 - `*`, `/` and `%`
 - `+` and `-`
+
+In some cases you may need to change type of variable for specific operation only, this is known as ***type-casting***, and there are two ways to do it:
+
+- C-style casting
+In the below example we needed to cast the value of `x` to `double` to get a floating-point result.
+
+  - ```cpp
+    int x = 5;
+    double y = (double) x / 10; // y = 0.5
+    ```
+
+- Modern C++ casting
+This is the preferred way of casting in C++, as it is more safe than C-style casting, and checks if the casting is possible at compile time.
+
+  - ```cpp
+    int x = 5;
+    double y = static_cast<double>(x) / 10; // y = 0.5
+    ```
