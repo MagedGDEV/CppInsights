@@ -193,3 +193,42 @@ This is the preferred way of casting in C++, as it is more safe than C-style cas
   - ```cpp
     bool x = 10 <= 10; // x = true
     ```
+
+**Logical** operators are used to combine two or more relational expressions and return a boolean value (`true` or `false`):
+
+- Logical NOT (`!`)
+
+  - ```cpp
+    bool x = !false; // x = true
+    ```
+
+- Logical AND (`&&`)
+
+  - ```cpp
+    bool x = (5 == 10) && (10 > 5); // x = false
+    ```
+
+- Logical OR (`||`)
+
+  - ```cpp
+    bool x = (5 == 10) || (10 > 5); // x = true
+    ```
+
+The precedence of logical operators is from left to right, and going from highest to lowest precedence:
+
+- `!`
+- `&&`
+- `||`
+
+Be smart about using logical operators, since it uses short-circuit evaluation, which means that if the first operand of `&&` is `false`, then the second operand will not be evaluated, and if the first operand of `||` is `true`, then the second operand will not be evaluated.
+
+```cpp
+
+bool x = (5 == 10) && (0 == 10); 
+/* (0 == 10) will not be evaluated because (5 == 10) is false
+ and this is enough to make the whole expression false */
+
+bool y = (5 == 5) || (10 == 10);
+/* (10 == 10) will not be evaluated because (5 == 5) is true 
+and this is enough to make the whole expression true*/
+```
