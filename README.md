@@ -94,3 +94,37 @@ What happens above is that the value of `10` is assigned to `z`, then the value 
     ```
 
   - This operator returns the remainder of the division of the first operand by the second operand.
+
+- Increment & Decrement
+
+  - Increment (`++`)
+
+    - ```cpp
+      int x = 5;
+      x++; // x = 6
+      ```
+
+    - This operator increments the value of the operand by `1`.
+
+  - Decrement (`--`)
+
+    - ```cpp
+      int x = 5;
+      x--; // x = 4
+      ```
+
+    - This operator decrements the value of the operand by `1`.
+
+  - Prefix & Postfix
+
+    - ```cpp
+      int x = 5;
+      int y = ++x; // x = 6, y = 6
+      ```
+
+    - ```cpp
+      int x = 5;
+      int y = x++; // x = 6, y = 5
+      ```
+
+    - The difference between prefix and postfix is that the prefix operator increments the value of the operand and then returns the incremented value, while the postfix operator returns the value of the operand and then increments it.
