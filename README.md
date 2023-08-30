@@ -30,7 +30,7 @@ C++ has a rich set of operators that can be classified into the following catego
 
 The operator can be either **unary, binary or ternary**.
 
-**Assignment** opertor (`=`) is used to assign a value to a variable.
+***Assignment*** opertor (`=`) is used to assign a value to a variable.
 
 ```cpp
 LHS = RHS;
@@ -55,7 +55,7 @@ x = y = z = 10; // x = (y = (z = 10))
 
 What happens above is that the value of `10` is assigned to `z`, then the value of `z` is assigned to `y`, and finally the value of `y` is assigned to `x`.
 
-**Arithmetic** operators are used to perform arithmetic operations on operands (variables and literals):
+***Arithmetic*** operators are used to perform arithmetic operations on operands (variables and literals):
 
 - Addition (**`+`**)
 
@@ -156,7 +156,7 @@ This is the preferred way of casting in C++, as it is more safe than C-style cas
 
 > **Note:** `cout << boolalpha;` is used to print boolean values as `true` or `false` instead of `1` or `0` and you can revert back to the default behavior by using `cout << noboolalpha;`
 
-**Relational** operators are used to compare two operands and return a boolean value (`true` or `false`):
+***Relational*** operators are used to compare two operands and return a boolean value (`true` or `false`):
 
 - Equal to (`==`)
 
@@ -194,7 +194,7 @@ This is the preferred way of casting in C++, as it is more safe than C-style cas
     bool x = 10 <= 10; // x = true
     ```
 
-**Logical** operators are used to combine two or more relational expressions and return a boolean value (`true` or `false`):
+***Logical*** operators are used to combine two or more relational expressions and return a boolean value (`true` or `false`):
 
 - Logical NOT (`!`)
 
@@ -232,3 +232,15 @@ bool y = (5 == 5) || (10 == 10);
 /* (10 == 10) will not be evaluated because (5 == 5) is true 
 and this is enough to make the whole expression true*/
 ```
+
+***Compound assignment*** operators are used to combine an arithmetic or relational operator with the assignment operator.
+
+| Operator | Example | Equivalent to |
+| :---: | :---: | :---: |
+| `+=` | `x += 5;` | `x = x + 5;` |
+| `-=` | `x -= 5;` | `x = x - 5;` |
+| `*=` | `x *= 5;` | `x = x * 5;` |
+| `/=` | `x /= 5;` | `x = x / 5;` |
+| `%=` | `x %= 5;` | `x = x % 5;` |
+| `&=` | `x &= 5;` | `x = x & 5;` |
+| `|=` | `x |= 5;` | `x = x | 5;` |
