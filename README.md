@@ -153,3 +153,5 @@ This is the preferred way of casting in C++, as it is more safe than C-style cas
     int x = 5;
     double y = static_cast<double>(x) / 10; // y = 0.5
     ```
+
+> **Note:** `cout << boolalpha;` is used to print boolean values as `true` or `false` instead of `1` or `0` and you can revert back to the default behavior by using `cout << noboolalpha;`
