@@ -128,3 +128,10 @@ What happens above is that the value of `10` is assigned to `z`, then the value 
       ```
 
     - The difference between prefix and postfix is that the prefix operator increments the value of the operand and then returns the incremented value, while the postfix operator returns the value of the operand and then increments it.
+
+It is important to know that the precedence of arithmetic operators is from left to right,  and going from highest to lowest precedence:
+
+- `()` prantheses
+- `++` and `--`
+- `*`, `/` and `%`
+- `+` and `-`
