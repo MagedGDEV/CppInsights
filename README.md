@@ -70,4 +70,4 @@ int main()
 ```
 
 >[!IMPORTANT]
-> Even though we already have a variable named **`x`** in the global scope, we can still declare another variable with the same name inside another block and now the global variable is hidden inside that block, and we can only access the local variable inside that blockm, this is known as **shadowing**.
+> Even though we already have a variable named **`x`** in the first scope, we can still declare another variable with the same name inside another block and now the first variable **`x`** is hidden inside that block, and we can only access the local variable inside that block, this is known as **shadowing**.
