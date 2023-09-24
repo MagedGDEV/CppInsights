@@ -71,3 +71,53 @@ int main()
 
 >[!IMPORTANT]
 > Even though we already have a variable named **`x`** in the first scope, we can still declare another variable with the same name inside another block and now the first variable **`x`** is hidden inside that block, and we can only access the local variable inside that block, this is known as **shadowing**.
+
+## Selection
+
+In this section we will learn about the different ways to make decisions in C++, to allow our programs to behave differently based on different conditions.
+
+1. **`if`** statement
+
+    - The **`if`** statement is used to execute a block of code if a condition is true.
+
+    - The syntax of the **`if`** statement is:
+
+        ```cpp
+        if (condition)
+            statement;
+        ```
+
+    - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators.
+
+    - The statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+
+    - The syntax of the **`if`** statement with a block is:
+
+        ```cpp
+        if (condition)
+        {
+            statement1;
+            statement2;
+            ...
+        }
+        ```
+
+    - Example:
+
+        ```cpp
+        #include <iostream>
+
+        using std::cout;
+        using std::cin;
+        using std::endl;
+
+        int main()
+        {
+            int x;
+            cout << "Enter a number: ";
+            cin >> x;
+            if (x > 0)
+                cout << "The number is positive" << endl;
+            return 0;
+        }
+        ```
