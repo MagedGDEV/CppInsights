@@ -11,9 +11,10 @@ There are **three** types of controlling program flow in C++:
     - Making decisions based on conditions using:
         1. **`if`** statement
         2. **`if-else`** statement
-        3. Nested **`if`** statement
-        4. **`switch`** statement
-        5. Conditional operator **`?:`**
+        3. **`if-else-if`** statement
+        4. Nested **`if`** statement
+        5. **`switch`** statement
+        6. Conditional operator **`?:`**
 
 3. Iteration
 
@@ -121,3 +122,92 @@ In this section we will learn about the different ways to make decisions in C++,
             return 0;
         }
         ```
+
+2. **`if-else`** statement
+
+    - The **`if-else`** statement is used to execute a block of code if a condition is true, and another block of code if the condition is false.
+
+    - The syntax of the **`if-else`** statement is:
+
+        ```cpp
+        if (condition)
+            statement1;
+        else
+            statement2;
+        ```
+
+    - Like the **`if`** statement, the condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+
+    - Example:
+
+        ```cpp
+        #include <iostream>
+
+        using std::cout;
+        using std::cin;
+        using std::endl;
+
+        int main()
+        {
+            int x;
+            cout << "Enter a number: ";
+            cin >> x;
+            if (x > 0) {
+                cout << "The number is positive" << endl;
+            }
+            else {
+                cout << "The number is negative" << endl;
+            }
+            return 0;
+        }
+        ```
+
+3. **`if-else-if`** statement
+
+    - The **`if-else-if`** statement is used to execute a block of code if a condition is true, and another block of code if the condition is false, and another block of code if another condition is true, and so on.
+
+    - The syntax of the **`if-else-if`** statement is:
+
+        ```cpp
+        if (condition1)
+            statement1;
+        else if (condition2)
+            statement2;
+        else if (condition3)
+            statement3;
+        ...
+        else
+            statementN;
+        ```
+
+    - Like the **`if`** statement, the condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+
+    - Example:
+
+        ```cpp
+        #include <iostream>
+
+        using std::cout;
+        using std::cin;
+        using std::endl;
+
+        int main()
+        {
+            int x;
+            cout << "Enter a number: ";
+            cin >> x;
+            if (x > 0) {
+                cout << "The number is positive" << endl;
+            }
+            else if (x < 0) {
+                cout << "The number is negative" << endl;
+            }
+            else {
+                cout << "The number is zero" << endl;
+            }
+            return 0;
+        }
+        ```
+
+        > [!NOTE]
+        > Once a condition is true, the rest of the conditions are not checked. and the statements in the block of the first true condition are executed.
