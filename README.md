@@ -279,3 +279,84 @@ In this section we will learn about the different ways to make decisions in C++,
             return 0;
         }
         ```
+
+5. **`switch`** statement
+
+    - The **`switch`** statement is used to execute a block of code based on the value of a variable, it is similar to the **`if-else-if`** statement, but it is more readable when we have a lot of conditions.
+
+    - The syntax of the **`switch`** statement is:
+
+        ```cpp
+        switch (variable)
+        {
+            case value1:
+                statement1;
+                break;
+            case value2:
+                statement2;
+                break;
+            ...
+            default:
+                statementN;
+        }
+        ```
+
+    > [!IMPORTANT]
+    > The existence of the **`break`** statement is very important, because without it the program will continue executing the statements in the next cases, until it finds a **`break`** statement or the end of the **`switch`** statement.
+
+    - The **`default`** case is optional, and it is executed if none of the cases is true, so it is similar to the **`else`** statement in the **`if-else-if`** statement. Even though it is optional, it is recommended to always include it, to make sure that the program will always execute a statement.
+
+    - if you want to execute the same statement for multiple cases, you can do that by omitting the **`break`** statement, for example:
+
+        ```cpp
+        switch (variable)
+        {
+            case value1:
+            case value2:
+                statement1;
+                break;
+            case value3:
+                statement2;
+                break;
+            ...
+            default:
+                statementN;
+        }
+        ```
+
+    - In the above example, statement1 will be executed if the value of the variable is either value1 or value2.
+
+    - The variable can be of any integral type, and the cases can be any integral constant expression.
+
+    - Example:
+
+        ```cpp
+        #include <iostream>
+
+        using std::cout;
+        using std::cin;
+        using std::endl;
+
+        int main()
+        {
+            int x;
+            cout << "Enter a number: ";
+            cin >> x;
+            switch (x)
+            {
+                case 1:
+                    cout << "The number is one" << endl;
+                    break;
+                case 2:
+                    cout << "The number is two" << endl;
+                    break;
+                case 3:
+                    cout << "The number is three" << endl;
+                    break;
+                default:
+                    cout << "The number is not one, two or three" << endl;
+            }
+            return 0;
+        }
+        ```
+        
