@@ -359,4 +359,34 @@ In this section we will learn about the different ways to make decisions in C++,
             return 0;
         }
         ```
-        
+
+6. Conditional operator **`?:`**
+
+    - The conditional operator **`?:`** is used to execute one of two expressions based on a condition, it is similar to the **`if-else`** statement, but it is more readable when we have a simple condition.
+
+    - The syntax of the conditional operator **`?:`** is:
+
+        ```cpp
+        (condition) ? expression1 : expression2;
+        ```
+
+    - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the expressions can be any expression, and they can be compound expressions using the comma operator.
+
+    - Example:
+
+        ```cpp
+        #include <iostream>
+
+        using std::cout;
+        using std::cin;
+        using std::endl;
+
+        int main()
+        {
+            int x;
+            cout << "Enter a number: ";
+            cin >> x;
+            cout << "The number is " << ((x > 0) ? "positive" : "negative") << endl;
+            return 0;
+        }
+        ```
