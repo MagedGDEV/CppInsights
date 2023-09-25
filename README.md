@@ -390,3 +390,6 @@ In this section we will learn about the different ways to make decisions in C++,
             return 0;
         }
         ```
+
+    > [!NOTE]
+    > Don't add nested conditional operators, because it will make your code less readable.
