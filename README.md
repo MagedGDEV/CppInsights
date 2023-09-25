@@ -211,3 +211,71 @@ In this section we will learn about the different ways to make decisions in C++,
 
         > [!NOTE]
         > Once a condition is true, the rest of the conditions are not checked. and the statements in the block of the first true condition are executed.
+
+4. Nested **`if`** statement
+
+    - We can have an **`if`** statement inside another **`if`** statement.
+
+    - The syntax of the nested **`if`** statement is:
+
+        ```cpp
+        if (condition1)
+        {
+            statement1;
+            if (condition2)
+                statement2;
+            else
+                statement3;
+        }
+        ```
+
+    - You can have as many nested **`if`** statements as you want, but make sure to indent your code properly to make it more readable.
+
+    - Be aware of **dangling else** problem, which is when we have an **`if-else`** statement inside another **`if`** statement, and we don't know which **`if`** statement the **`else`** belongs to, for example:
+
+        ```cpp
+        if (condition1)
+            if (condition2)
+                statement1;
+        else 
+            statement3;
+        ```
+
+        >[!WARNING]
+        > The compiler will generate warning to inform you about the dangling else problem, but it will not prevent you from compiling your code, so you need to use curly braces so that the compiler knows which **`if`** statement the **`else`** belongs to.
+
+    - Example:
+
+        ```cpp
+        #include <iostream>
+
+        using std::cout;
+        using std::cin;
+        using std::endl;
+
+        int main() {
+            int x;
+            cout << "Enter a number: ";
+            cin >> x;
+            if (x > 0) {
+                if (x % 2 == 0) {
+                    cout << "The number is positive and even" << endl;
+                }
+                else {
+                    cout << "The number is positive and odd" << endl;
+                }
+            }
+            else if (x < 0) {
+                if (x % 2 == 0) {
+                    cout << "The number is negative and even" << endl;
+                }
+                else {
+                    cout << "The number is negative and odd" << endl;
+                }
+            }
+            else {
+                cout << "The number is zero" << endl;
+            }
+            return 0;
+        }
+        ```
