@@ -154,7 +154,7 @@ int main() {
 To break a line in the output (start typing in a new line), you can use the **`endl`** keyword or the **`\n`** character, both of them will do the same thing.
 
 > [!IMPORTANT]
-> But **endl** will flush the output buffer, which means it will write the output to the user immediately, while **\n** will not flush the output buffer, which means it will write the output to the user when the buffer is full.
+> **endl** will flush the output buffer, which means it will write the output to the user immediately, while **\n** will not flush the output buffer, which means it will write the output to the user when the buffer is full.
 
 ```cpp
 #include <iostream>
