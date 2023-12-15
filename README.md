@@ -2,12 +2,12 @@
 
 C++ has alot of ***keywords***, these keywords are parts of the language that have a special meaning. These keywords are reserved and cannot be used as by programmers as names for variables, functions, classes, or any other identifier.
 
-***Preprocessor*** is a program that process your source code even before compiler sees it, it takes the cpp file do the following:
+***Preprocessor*** is a program that process your source code even before compiler sees it, it takes the cpp file and do the following:
 
 1. Removes all comments and replace it with a single space
 2. Looks for preprocessor directives and process them
 
-Preprocessor directives are lines in source code that start with a # symbol, these directives are instructions for preprocessor to do something. For example: **`#include`** is a preprocessor directive that tells preprocessor to include a header file in the source code.
+Preprocessor directives are lines in source code that start with a **`#`** symbol, these directives are instructions for preprocessor to do something. For example: **`#include`** is a preprocessor directive that tells preprocessor to include a header file in the source code.
 
 ```cpp
 #include <iostream> // This is a preprocessor directive
@@ -34,7 +34,7 @@ comment
 
 Every C++ program has a ***main( ) function***, this function is the entry point of the program, the program starts executing from the first line of the main function and ends when it reaches the last line of the main function.
 
-The main( ) function has a return type of **`int`**, if the return value is **0** then the program ended successfully, if the return value is **non-zero** then the program ended with an error.
+The main( ) function has a return type of **`int`**, if the return value is **0** then the program ended successfully, if the return value is **non-zero** value then the program ended with an error.
 
 There are two types of main functions:
 
@@ -51,8 +51,8 @@ There are two types of main functions:
     To run the program from the terminal, you need to compile the program first, then run the executable file.
 
     ```bash
-    g++ main.cpp -o main
-    ./main
+    g++ main.cpp -o main # To compile the program called main.cpp and output the executable file as main
+    ./main # To run the program
     ```
 
 2. **`int main(int argc, char* argv[])`**: This type of main function takes two arguments from the operating system, the first argument is the number of arguments passed to the program, the second argument is an array of strings, each string is one of the arguments passed to the program.
@@ -70,6 +70,9 @@ There are two types of main functions:
     g++ main.cpp -o main
     ./main arg1 arg2 arg3
     ```
+
+    >[!NOTE]
+    > ***arg1*** is the count of arguments passed to the program, ***arg2, arg3*** are the arguments passed to the program.
 
 **Namespaces** are used to organize code into logical groups and to prevent name collisions that can occur especially when your code base includes multiple libraries that uses the same names for different things.
 
@@ -102,6 +105,7 @@ C++ provide us with 3 different ways to use namespaces:
 
     This is done by adding the keyword **`using`** followed by the namespace name, in our example above we used the namespace **`std`**, it saves us from writing **`std::`** before every name we want to use from the namespace **`std`**.
 
+    >[!WARNING]
     > But it's not recommended to use this method for large projects because it can cause name collisions.
 
 3. The using directive.
@@ -117,8 +121,9 @@ C++ provide us with 3 different ways to use namespaces:
     }
     ```
 
-    This is done by adding the keyword **`using`** followed by the keyword **`std`** followed by the scope resolution operator **`::`** followed by the name you want to use, in our example above we used the name **`cout`** from the namespace **`std`**.
+    This is done by adding the keyword **`using`** followed by the keyword **`std`** followed by the scope resolution operator **`::`** followed by the name you want to use, in our example above we used the name **`cout`**  and **`endl`** from the namespace **`std`**.
 
+    >[!NOTE]
     > This is best practice since it saves us from writing **`std::`** before every name we want to use, and it doesn't cause name collisions.
 
 ## Basic Input/Output
@@ -146,7 +151,9 @@ int main() {
 }
 ```
 
-To break a line in the output, you can use the **`endl`** keyword or the **`\n`** character, both of them will do the same thing
+To break a line in the output (start typing in a new line), you can use the **`endl`** keyword or the **`\n`** character, both of them will do the same thing.
+
+>[!IMPORTANT]
 > But **endl** will flush the output buffer, which means it will write the output to the user immediately, while **\n** will not flush the output buffer, which means it will write the output to the user when the buffer is full.
 
 ```cpp
