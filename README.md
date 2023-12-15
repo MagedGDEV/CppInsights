@@ -71,8 +71,8 @@ There are two types of main functions:
     ./main arg1 arg2 arg3
     ```
 
-    >[!NOTE]
-    > ***arg1*** is the count of arguments passed to the program, ***arg2, arg3*** are the arguments passed to the program.
+> [!NOTE]
+> ***arg1*** is the count of arguments passed to the program, ***arg2, arg3*** are the arguments passed to the program.
 
 **Namespaces** are used to organize code into logical groups and to prevent name collisions that can occur especially when your code base includes multiple libraries that uses the same names for different things.
 
@@ -105,8 +105,8 @@ C++ provide us with 3 different ways to use namespaces:
 
     This is done by adding the keyword **`using`** followed by the namespace name, in our example above we used the namespace **`std`**, it saves us from writing **`std::`** before every name we want to use from the namespace **`std`**.
 
-    >[!WARNING]
-    > But it's not recommended to use this method for large projects because it can cause name collisions.
+> [!CAUTION]
+> But it's not recommended to use this method for large projects because it can cause name collisions.
 
 3. The using directive.
 
@@ -123,8 +123,8 @@ C++ provide us with 3 different ways to use namespaces:
 
     This is done by adding the keyword **`using`** followed by the keyword **`std`** followed by the scope resolution operator **`::`** followed by the name you want to use, in our example above we used the name **`cout`**  and **`endl`** from the namespace **`std`**.
 
-    >[!NOTE]
-    > This is best practice since it saves us from writing **`std::`** before every name we want to use, and it doesn't cause name collisions.
+> [!TIP]
+> This is best practice since it saves us from writing **`std::`** before every name we want to use, and it doesn't cause name collisions.
 
 ## Basic Input/Output
 
@@ -153,7 +153,7 @@ int main() {
 
 To break a line in the output (start typing in a new line), you can use the **`endl`** keyword or the **`\n`** character, both of them will do the same thing.
 
->[!IMPORTANT]
+> [!IMPORTANT]
 > But **endl** will flush the output buffer, which means it will write the output to the user immediately, while **\n** will not flush the output buffer, which means it will write the output to the user when the buffer is full.
 
 ```cpp
