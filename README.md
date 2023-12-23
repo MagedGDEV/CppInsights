@@ -5,7 +5,7 @@
 Arrays have several characteristics:
 
 - Size of the array is fixed
-- Variables are of same type
+- Variables are of the same type
 - Stored in contiguous memory locations
 - Each element can be accessed by using an index (position)
 - Position of first element is **`0`** not **`1`**
@@ -23,7 +23,7 @@ int numbers[5]; // array of 5 integers
 double values[10]; // array of 10 doubles
 ```
 
-To intialize an array there multiple ways:
+To intialize an array there are multiple ways:
 
 - Initialize each element individually
 
@@ -68,9 +68,10 @@ numbers[3] = 10; // assign 10 to 4th element
 
 The ***name of the array*** represents the address of the first element in the array in memory. This is why we can use the array name as a pointer to the first element in the array. The ***index*** of the array represents the offset from the first element in the array.
 
+>[!WARNING]
 > You have to do the bounds checking yourself. If you try to access an element outside the bounds of the array, you will get undefined behavior.
 
-***Multidimensional arrays*** are arrays of arrays, where each element is itself an array. You have to be *`aware that some compilers limit the number of dimensions`* you can have in an array.
+***Multidimensional arrays*** are arrays of arrays, where each element is itself an array. You have to be **aware that some compilers limit the number of dimensions** you can have in an array.
 
 To declare a multidimensional array, we use the following syntax:
 
@@ -100,10 +101,10 @@ To access an element in a multidimensional array, we use the following syntax:
 array2D [0][1] = 2;
 ```
 
-***Vectors*** are similar to arrays, where they are a collection of variables of the same type, it is provided by the C++ Standard Library. Vectors are more flexible than arrays which provides the following characteristics:
+***Vectors*** are similar to arrays, where they are collections of variables of the same type, it is provided by the C++ Standard Library. Vectors are more flexible than arrays which provides the following characteristics:
 
 - Size of the vector is **dynamic**
-- Variables are of same type
+- Variables are of the same type
 - Stored in contiguous memory locations
 - Each element can be accessed by using an index (position)
 - Position of first element is **`0`** not **`1`**
