@@ -136,25 +136,28 @@ It is important to know that the precedence of arithmetic operators is from left
 - `*`, `/` and `%`
 - `+` and `-`
 
-In some cases you may need to change type of variable for specific operation only, this is known as ***type-casting***, and there are two ways to do it:
+In some cases you may need to change the type of variable for specific operation only, this is known as ***type-casting***, and there are two ways to do it:
 
 - C-style casting
+
 In the below example we needed to cast the value of `x` to `double` to get a floating-point result.
 
-  - ```cpp
+- ```cpp
     int x = 5;
     double y = (double) x / 10; // y = 0.5
     ```
 
 - Modern C++ casting
+
 This is the preferred way of casting in C++, as it is more safe than C-style casting, and checks if the casting is possible at compile time.
 
-  - ```cpp
+- ```cpp
     int x = 5;
     double y = static_cast<double>(x) / 10; // y = 0.5
     ```
 
-> **Note:** `cout << boolalpha;` is used to print boolean values as `true` or `false` instead of `1` or `0` and you can revert back to the default behavior by using `cout << noboolalpha;`
+>[!NOTE]
+> **`cout << boolalpha;`** is used to print boolean values as `true` or `false` instead of **`1`** or **`0`** and you can revert back to the default behavior by using **`cout << noboolalpha;`**
 
 ***Relational*** operators are used to compare two operands and return a boolean value (`true` or `false`):
 
