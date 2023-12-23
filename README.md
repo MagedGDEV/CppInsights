@@ -32,7 +32,7 @@ int my age; // Cannot contain spaces
 int my-age; // Cannot contain hyphens
 ```
 
-After declaring a variable, it can have any value which is not predictable, So before using a variable, we must ***initialize*** it with a value first, otherwise, it will have a garbage value.
+After declaring a variable, it can have any value which is not predictable, So before using a variable, we must ***initialize*** it with a value first. Otherwise, it will have a garbage value.
 
 C++ has multiple ways to intialize a variable:
 
@@ -69,7 +69,8 @@ The variables types are:
 |**`double`**|at least (64 bits / 15 decimal digits)| Used to store floating-point numbers|
 |**`bool`**|at least 8 bits| Used to store boolean values: `true` or `false`|
 
-> To intialize a character variable, we must use single quotes (`'`), for example: `char myChar {'a'};`
+> [!TIP]
+> To intialize a character variable, we must use single quotes (**`'`**), for example: **`char myChar {'a'};`**
 
 The variable that stores integer values can be either `signed` or `unsigned`, the `signed` is the default type, and it can store both positive and negative values, while the `unsigned` type can only store positive values, to declare an `unsigned` variable, we must use the `unsigned` keyword before the type, for example: `unsigned int myVar {5};`
 
