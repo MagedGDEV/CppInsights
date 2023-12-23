@@ -70,7 +70,7 @@ int main()
 }
 ```
 
->[!IMPORTANT]
+>[!CAUTION]
 > Even though we already have a variable named **`x`** in the first scope, we can still declare another variable with the same name inside another block and now the first variable **`x`** is hidden inside that block, and we can only access the local variable inside that block, this is known as **shadowing**.
 
 ## Selection
@@ -164,7 +164,7 @@ In this section we will learn about the different ways to make decisions in C++,
 
 3. **`if-else-if`** statement
 
-    - The **`if-else-if`** statement is used to execute a block of code if a condition is true, and another block of code if the condition is false, and another block of code if another condition is true, and so on.
+    - The if-else-if statement is used to execute a block of code if a condition is true. If the condition is false, it checks another condition and, if true, executes a different block of code. This process can continue for multiple conditions, with each else-if block providing an alternative code path when its condition is true.
 
     - The syntax of the **`if-else-if`** statement is:
 
@@ -209,8 +209,8 @@ In this section we will learn about the different ways to make decisions in C++,
         }
         ```
 
-        > [!NOTE]
-        > Once a condition is true, the rest of the conditions are not checked. and the statements in the block of the first true condition are executed.
+> [!NOTE]
+> Once a condition is true, the rest of the conditions are not checked. and the statements in the block of the first true condition are executed.
 
 4. Nested **`if`** statement
 
@@ -231,7 +231,7 @@ In this section we will learn about the different ways to make decisions in C++,
 
     - You can have as many nested **`if`** statements as you want, but make sure to indent your code properly to make it more readable.
 
-    - Be aware of **dangling else** problem, which is when we have an **`if-else`** statement inside another **`if`** statement, and we don't know which **`if`** statement the **`else`** belongs to, for example:
+    - Be aware of **dangling else** problem, which happens when we have an **`if-else`** statement inside another **`if`** statement, and we don't know which **`if`** statement the **`else`** belongs to, for example:
 
         ```cpp
         if (condition1)
@@ -241,8 +241,8 @@ In this section we will learn about the different ways to make decisions in C++,
             statement3;
         ```
 
-        >[!WARNING]
-        > The compiler will generate warning to inform you about the dangling else problem, but it will not prevent you from compiling your code, so you need to use curly braces so that the compiler knows which **`if`** statement the **`else`** belongs to.
+>[!WARNING]
+> The compiler will generate warning to inform you about the dangling else problem, but it will not prevent you from compiling your code, so you need to use curly braces so that the compiler knows which **`if`** statement the **`else`** belongs to.
 
     - Example:
 
@@ -301,8 +301,8 @@ In this section we will learn about the different ways to make decisions in C++,
         }
         ```
 
-    > [!IMPORTANT]
-    > The existence of the **`break`** statement is very important, because without it the program will continue executing the statements in the next cases, until it finds a **`break`** statement or the end of the **`switch`** statement.
+> [!IMPORTANT]
+> The existence of the **`break`** statement is very important, because without it the program will continue executing the statements in the next cases, until it finds a **`break`** statement or the end of the **`switch`** statement.
 
     - The **`default`** case is optional, and it is executed if none of the cases is true, so it is similar to the **`else`** statement in the **`if-else-if`** statement. Even though it is optional, it is recommended to always include it, to make sure that the program will always execute a statement.
 
@@ -391,5 +391,5 @@ In this section we will learn about the different ways to make decisions in C++,
         }
         ```
 
-    > [!NOTE]
-    > Don't add nested conditional operators, because it will make your code less readable.
+> [!CAUTION]
+> Don't add nested conditional operators, because it will make your code less readable.
