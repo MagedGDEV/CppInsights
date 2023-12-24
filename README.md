@@ -77,319 +77,319 @@ int main()
 
 In this section we will learn about the different ways to make decisions in C++, to allow our programs to behave differently based on different conditions.
 
-1. **`if`** statement
+- **`if`** statement
 
-    - The **`if`** statement is used to execute a block of code if a condition is true.
+  - The **`if`** statement is used to execute a block of code if a condition is true.
 
-    - The syntax of the **`if`** statement is:
+  - The syntax of the **`if`** statement is:
 
-        ```cpp
-        if (condition)
-            statement;
-        ```
+      ```cpp
+      if (condition)
+          statement;
+      ```
 
-    - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators.
+  - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators.
 
-    - The statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+  - The statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
 
-    - The syntax of the **`if`** statement with a block is:
+  - The syntax of the **`if`** statement with a block is:
 
-        ```cpp
-        if (condition)
-        {
-            statement1;
-            statement2;
-            ...
-        }
-        ```
+      ```cpp
+      if (condition)
+      {
+          statement1;
+          statement2;
+          ...
+      }
+      ```
 
-    - Example:
+  - Example:
 
-        ```cpp
-        #include <iostream>
+      ```cpp
+      #include <iostream>
 
-        using std::cout;
-        using std::cin;
-        using std::endl;
+      using std::cout;
+      using std::cin;
+      using std::endl;
 
-        int main()
-        {
-            int x;
-            cout << "Enter a number: ";
-            cin >> x;
-            if (x > 0)
-                cout << "The number is positive" << endl;
-            return 0;
-        }
-        ```
+      int main()
+      {
+          int x;
+          cout << "Enter a number: ";
+          cin >> x;
+          if (x > 0)
+              cout << "The number is positive" << endl;
+          return 0;
+      }
+      ```
 
-2. **`if-else`** statement
+- **`if-else`** statement
 
-    - The **`if-else`** statement is used to execute a block of code if a condition is true, and another block of code if the condition is false.
+  - The **`if-else`** statement is used to execute a block of code if a condition is true, and another block of code if the condition is false.
 
-    - The syntax of the **`if-else`** statement is:
+  - The syntax of the **`if-else`** statement is:
 
-        ```cpp
-        if (condition)
-            statement1;
-        else
-            statement2;
-        ```
+    ```cpp
+    if (condition)
+        statement1;
+    else
+        statement2;
+    ```
 
-    - Like the **`if`** statement, the condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+  - Like the **`if`** statement, the condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
 
-    - Example:
+  - Example:
 
-        ```cpp
-        #include <iostream>
+      ```cpp
+      #include <iostream>
 
-        using std::cout;
-        using std::cin;
-        using std::endl;
+      using std::cout;
+      using std::cin;
+      using std::endl;
 
-        int main()
-        {
-            int x;
-            cout << "Enter a number: ";
-            cin >> x;
-            if (x > 0) {
-                cout << "The number is positive" << endl;
-            }
-            else {
-                cout << "The number is negative" << endl;
-            }
-            return 0;
-        }
-        ```
+      int main()
+      {
+          int x;
+          cout << "Enter a number: ";
+          cin >> x;
+          if (x > 0) {
+              cout << "The number is positive" << endl;
+          }
+          else {
+              cout << "The number is negative" << endl;
+          }
+          return 0;
+      }
+      ```
 
-3. **`if-else-if`** statement
+- **`if-else-if`** statement
 
-    - The if-else-if statement is used to execute a block of code if a condition is true. If the condition is false, it checks another condition and, if true, executes a different block of code. This process can continue for multiple conditions, with each else-if block providing an alternative code path when its condition is true.
+  - The if-else-if statement is used to execute a block of code if a condition is true. If the condition is false, it checks another condition and, if true, executes a different block of code. This process can continue for multiple conditions, with each else-if block providing an alternative code path when its condition is true.
 
-    - The syntax of the **`if-else-if`** statement is:
+  - The syntax of the **`if-else-if`** statement is:
 
-        ```cpp
-        if (condition1)
-            statement1;
-        else if (condition2)
-            statement2;
-        else if (condition3)
-            statement3;
-        ...
-        else
-            statementN;
-        ```
+      ```cpp
+      if (condition1)
+          statement1;
+      else if (condition2)
+          statement2;
+      else if (condition3)
+          statement3;
+      ...
+      else
+          statementN;
+      ```
 
-    - Like the **`if`** statement, the condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+  - Like the **`if`** statement, the condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the if condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
 
-    - Example:
+  - Example:
 
-        ```cpp
-        #include <iostream>
+      ```cpp
+      #include <iostream>
 
-        using std::cout;
-        using std::cin;
-        using std::endl;
+      using std::cout;
+      using std::cin;
+      using std::endl;
 
-        int main()
-        {
-            int x;
-            cout << "Enter a number: ";
-            cin >> x;
-            if (x > 0) {
-                cout << "The number is positive" << endl;
-            }
-            else if (x < 0) {
-                cout << "The number is negative" << endl;
-            }
-            else {
-                cout << "The number is zero" << endl;
-            }
-            return 0;
-        }
-        ```
+      int main()
+      {
+          int x;
+          cout << "Enter a number: ";
+          cin >> x;
+          if (x > 0) {
+              cout << "The number is positive" << endl;
+          }
+          else if (x < 0) {
+              cout << "The number is negative" << endl;
+          }
+          else {
+              cout << "The number is zero" << endl;
+          }
+          return 0;
+      }
+      ```
 
 > [!NOTE]
 > Once a condition is true, the rest of the conditions are not checked. and the statements in the block of the first true condition are executed.
 
-4. Nested **`if`** statement
+- Nested **`if`** statement
 
-    - We can have an **`if`** statement inside another **`if`** statement.
+  - We can have an **`if`** statement inside another **`if`** statement.
 
-    - The syntax of the nested **`if`** statement is:
+  - The syntax of the nested **`if`** statement is:
 
-        ```cpp
-        if (condition1)
-        {
-            statement1;
-            if (condition2)
-                statement2;
-            else
-                statement3;
-        }
-        ```
+      ```cpp
+      if (condition1)
+      {
+          statement1;
+          if (condition2)
+              statement2;
+          else
+              statement3;
+      }
+      ```
 
-    - You can have as many nested **`if`** statements as you want, but make sure to indent your code properly to make it more readable.
+  - You can have as many nested **`if`** statements as you want, but make sure to indent your code properly to make it more readable.
 
-    - Be aware of **dangling else** problem, which happens when we have an **`if-else`** statement inside another **`if`** statement, and we don't know which **`if`** statement the **`else`** belongs to, for example:
+  - Be aware of **dangling else** problem, which happens when we have an **`if-else`** statement inside another **`if`** statement, and we don't know which **`if`** statement the **`else`** belongs to, for example:
 
-        ```cpp
-        if (condition1)
-            if (condition2)
-                statement1;
-        else 
-            statement3;
-        ```
+      ```cpp
+      if (condition1)
+          if (condition2)
+              statement1;
+      else 
+          statement3;
+      ```
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::cin;
+      using std::endl;
+
+      int main() {
+          int x;
+          cout << "Enter a number: ";
+          cin >> x;
+          if (x > 0) {
+              if (x % 2 == 0) {
+                  cout << "The number is positive and even" << endl;
+              }
+              else {
+                  cout << "The number is positive and odd" << endl;
+              }
+          }
+          else if (x < 0) {
+              if (x % 2 == 0) {
+                  cout << "The number is negative and even" << endl;
+              }
+              else {
+                  cout << "The number is negative and odd" << endl;
+              }
+          }
+          else {
+              cout << "The number is zero" << endl;
+          }
+          return 0;
+      }
+      ```
 
 >[!WARNING]
 > The compiler will generate warning to inform you about the dangling else problem, but it will not prevent you from compiling your code, so you need to use curly braces so that the compiler knows which **`if`** statement the **`else`** belongs to.
 
-    - Example:
+- **`switch`** statement
 
-        ```cpp
-        #include <iostream>
+  - The **`switch`** statement is used to execute a block of code based on the value of a variable, it is similar to the **`if-else-if`** statement, but it is more readable when we have a lot of conditions.
 
-        using std::cout;
-        using std::cin;
-        using std::endl;
+  - The syntax of the **`switch`** statement is:
 
-        int main() {
-            int x;
-            cout << "Enter a number: ";
-            cin >> x;
-            if (x > 0) {
-                if (x % 2 == 0) {
-                    cout << "The number is positive and even" << endl;
-                }
-                else {
-                    cout << "The number is positive and odd" << endl;
-                }
-            }
-            else if (x < 0) {
-                if (x % 2 == 0) {
-                    cout << "The number is negative and even" << endl;
-                }
-                else {
-                    cout << "The number is negative and odd" << endl;
-                }
-            }
-            else {
-                cout << "The number is zero" << endl;
-            }
-            return 0;
-        }
-        ```
+      ```cpp
+      switch (variable)
+      {
+          case value1:
+              statement1;
+              break;
+          case value2:
+              statement2;
+              break;
+          ...
+          default:
+              statementN;
+      }
+      ```
 
-5. **`switch`** statement
+  - The **`default`** case is optional, and it is executed if none of the cases is true, so it is similar to the **`else`** statement in the **`if-else-if`** statement. Even though it is optional, it is recommended to always include it, to make sure that the program will always execute a statement.
 
-    - The **`switch`** statement is used to execute a block of code based on the value of a variable, it is similar to the **`if-else-if`** statement, but it is more readable when we have a lot of conditions.
+  - if you want to execute the same statement for multiple cases, you can do that by omitting the **`break`** statement, for example:
 
-    - The syntax of the **`switch`** statement is:
+      ```cpp
+      switch (variable)
+      {
+          case value1:
+          case value2:
+              statement1;
+              break;
+          case value3:
+              statement2;
+              break;
+          ...
+          default:
+              statementN;
+      }
+      ```
 
-        ```cpp
-        switch (variable)
-        {
-            case value1:
-                statement1;
-                break;
-            case value2:
-                statement2;
-                break;
-            ...
-            default:
-                statementN;
-        }
-        ```
+  - In the above example, statement1 will be executed if the value of the variable is either value1 or value2.
+
+  - The variable can be of any integral type, and the cases can be any integral constant expression.
+
+  - Example:
+
+  ```cpp
+  #include <iostream>
+  
+  using std::cout;
+  using std::cin;
+  using std::endl;
+
+  int main()
+  {
+      int x;
+      cout << "Enter a number: ";
+      cin >> x;
+      switch (x)
+      {
+          case 1:
+              cout << "The number is one" << endl;
+              break;
+          case 2:
+              cout << "The number is two" << endl;
+              break;
+          case 3:
+              cout << "The number is three" << endl;
+              break;
+          default:
+              cout << "The number is not one, two or three" << endl;
+      }
+      return 0;
+  }
+  ```
 
 > [!IMPORTANT]
 > The existence of the **`break`** statement is very important, because without it the program will continue executing the statements in the next cases, until it finds a **`break`** statement or the end of the **`switch`** statement.
 
-    - The **`default`** case is optional, and it is executed if none of the cases is true, so it is similar to the **`else`** statement in the **`if-else-if`** statement. Even though it is optional, it is recommended to always include it, to make sure that the program will always execute a statement.
+- Conditional operator **`?:`**
 
-    - if you want to execute the same statement for multiple cases, you can do that by omitting the **`break`** statement, for example:
+  - The conditional operator **`?:`** is used to execute one of two expressions based on a condition, it is similar to the **`if-else`** statement, but it is more readable when we have a simple condition.
 
-        ```cpp
-        switch (variable)
-        {
-            case value1:
-            case value2:
-                statement1;
-                break;
-            case value3:
-                statement2;
-                break;
-            ...
-            default:
-                statementN;
-        }
-        ```
+  - The syntax of the conditional operator **`?:`** is:
 
-    - In the above example, statement1 will be executed if the value of the variable is either value1 or value2.
+      ```cpp
+      (condition) ? expression1 : expression2;
+      ```
 
-    - The variable can be of any integral type, and the cases can be any integral constant expression.
+  - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the expressions can be any expression, and they can be compound expressions using the comma operator.
 
-    - Example:
+  - Example:
 
-        ```cpp
-        #include <iostream>
+      ```cpp
+      #include <iostream>
 
-        using std::cout;
-        using std::cin;
-        using std::endl;
+      using std::cout;
+      using std::cin;
+      using std::endl;
 
-        int main()
-        {
-            int x;
-            cout << "Enter a number: ";
-            cin >> x;
-            switch (x)
-            {
-                case 1:
-                    cout << "The number is one" << endl;
-                    break;
-                case 2:
-                    cout << "The number is two" << endl;
-                    break;
-                case 3:
-                    cout << "The number is three" << endl;
-                    break;
-                default:
-                    cout << "The number is not one, two or three" << endl;
-            }
-            return 0;
-        }
-        ```
-
-6. Conditional operator **`?:`**
-
-    - The conditional operator **`?:`** is used to execute one of two expressions based on a condition, it is similar to the **`if-else`** statement, but it is more readable when we have a simple condition.
-
-    - The syntax of the conditional operator **`?:`** is:
-
-        ```cpp
-        (condition) ? expression1 : expression2;
-        ```
-
-    - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the expressions can be any expression, and they can be compound expressions using the comma operator.
-
-    - Example:
-
-        ```cpp
-        #include <iostream>
-
-        using std::cout;
-        using std::cin;
-        using std::endl;
-
-        int main()
-        {
-            int x;
-            cout << "Enter a number: ";
-            cin >> x;
-            cout << "The number is " << ((x > 0) ? "positive" : "negative") << endl;
-            return 0;
-        }
-        ```
+      int main()
+      {
+          int x;
+          cout << "Enter a number: ";
+          cin >> x;
+          cout << "The number is " << ((x > 0) ? "positive" : "negative") << endl;
+          return 0;
+      }
+      ```
 
 > [!CAUTION]
 > Don't add nested conditional operators, because it will make your code less readable.
