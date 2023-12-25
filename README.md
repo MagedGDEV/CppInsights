@@ -393,3 +393,346 @@ In this section we will learn about the different ways to make decisions in C++,
 
 > [!CAUTION]
 > Don't add nested conditional operators, because it will make your code less readable.
+
+## Iteration
+
+In this section we will learn about the different ways to repeat a block of code and how to control the flow of the loop.
+
+- **`for`** loop
+
+  - The **`for`** loop is used to repeat a block of code a certain number of times, it is the most commonly used loop in C++.
+
+  - The syntax of the **`for`** loop is:
+
+      ```cpp
+      for (initialization; condition; update)
+          statement;
+      ```
+
+  - The initialization is used to initialize the loop counter, it is executed only once before the loop starts.
+
+  - The condition is used to check if the loop counter has reached the end of the loop, if the condition is true, the statement is executed, if the condition is false, the loop is terminated.
+
+  - The update is used to update the loop counter, it is executed after each iteration.
+
+  - The statement can be any statement, the for condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          for (int i = 0; i < 10; i++)
+              cout << i << endl;
+          return 0;
+      }
+      ```
+
+  - The initialization, condition and update can be any expression, and they can be compound expressions using the **comma operator `,`**.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          int x = 0;
+          for (int i = 0; i < 10; i++, x += 2)
+              cout << i << " " << x << endl;
+          return 0;
+      }
+      ```
+
+  - The initialization, condition and update can be omitted, but you need to make sure that the loop will terminate, otherwise it will be an infinite loop.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          int i = 0;
+          for (;;)
+          {
+              cout << i << endl;
+              i++;
+              if (i == 10)
+                  break;
+          }
+          return 0;
+      }
+      ```
+
+- **Range-based `for`** loop
+
+  - This is a new type of **`for`** loop that was introduced in C++11, it is used to iterate over the elements of a range, such as an array or a container.
+
+  - The syntax of the range-based **`for`** loop is:
+
+      ```cpp
+      for (declaration : range)
+          statement;
+      ```
+
+  - The declaration is used to declare a variable that will be used to store the value of each element in the range, it can be a reference to the elements of the range, or it can be a copy of the elements of the range.
+
+  - The range is used to specify the range of elements to iterate over, it can be an array, a container, a vector, or any other range of elements.
+
+  - The statement can be any statement, the for condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          int arr[] = { 1, 2, 3, 4, 5 };
+          for (int x : arr)
+              cout << x << endl;
+          return 0;
+      }
+      ```
+
+  - The output of the above example is:
+
+      ```dash
+      1
+      2
+      3
+      4
+      5
+      ```
+  
+  - If the elements you are iterating over won't be useful in the code later, you can add the container to the **`for`** loop directly, without declaring a variable to store the elements.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+      #include <vector>
+
+      using std::cout;
+      using std::endl;
+      using std::vector;
+
+      int main()
+      {
+          for (int x : { 1, 2, 3, 4, 5 })
+              cout << x << endl;
+          return 0;
+      }
+      ```
+
+  - At some point you won't be able to specify the type of the elements in the range, in this case you can use **`auto`** to let the compiler deduce the type of the elements.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+      #include <vector>
+    
+      using std::cout;
+      using std::endl;
+      using std::vector;
+    
+      int main()
+      {
+          vector<int> v = { 1, 2, 3, 4, 5 };
+          for (auto x : v)
+              cout << x << endl;
+          return 0;
+      }
+      ```
+
+> [!TIP]
+> You can control the precision of the decimal points of the output using **`std::setprecision`** function from the **`iomanip`** header.
+
+- **`while`** loop
+
+  - The **`while`** loop is used to repeat a block of code while a condition is true.
+
+  - The syntax of the **`while`** loop is:
+
+      ```cpp
+      while (condition)
+          statement;
+      ```
+
+  - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the while condition is followed by a single statement, if we want to execute multiple statements we need to enclose them in a block.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          int i = 0;
+          while (i < 10)
+          {
+              cout << i << endl;
+              i++;
+          }
+          return 0;
+      }
+      ```
+
+  - The condition can be omitted, but you need to make sure that the loop will terminate, otherwise it will be an infinite loop.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          int i = 0;
+          while (true)
+          {
+              cout << i << endl;
+              i++;
+              if (i == 10)
+                  break;
+          }
+          return 0;
+      }
+      ```
+
+- **`do-while`** loop
+
+  - The **`do-while`** loop is similar to the **`while`** loop, but the condition is checked at the end of the loop, so the loop will always execute at least once.
+
+  - The syntax of the **`do-while`** loop is:
+
+      ```cpp
+      do
+          statement;
+      while (condition);
+      ```
+
+  - The condition can be any expression that evaluates to a boolean value, and it can be a compound condition using logical operators, and the statement can be any statement, the do-while condition is followed by a semicolon **`;`**.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          int i = 0;
+          do
+          {
+              cout << i << endl;
+              i++;
+          } while (i < 10);
+          return 0;
+      }
+      ```
+
+> [!CAUTION]
+> Be careful when dealing with variables in the condition of the **`do-while`** loop, you need to make sure that the variable is initialized before the loop not inside the do block, otherwise it would lead to an error.
+
+- **`continue`** & **`break`** statements
+
+  - The **`continue`** statement is used to skip the rest of the statements in the current iteration of the loop, and start the next iteration.
+
+  - The **`break`** statement is used to terminate the loop immediately.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          for (int i = 0; i < 10; i++)
+          {
+              if (i % 2 == 0)
+                  continue;
+              if (i == 7)
+                  break;
+              cout << i << endl;
+          }
+          return 0;
+      }
+      ```
+
+  - The output of the above example is:
+
+      ```dash
+      1
+      3
+      5
+      ```
+
+- Nested loops
+
+  - We can have a loop inside another loop, this is known as nested loops.
+
+  - Example:
+
+      ```cpp
+      #include <iostream>
+
+      using std::cout;
+      using std::endl;
+
+      int main()
+      {
+          for (int i = 0; i < 10; i++)
+          {
+              for (int j = 0; j < 10; j++)
+                  cout << i << " " << j << endl;
+          }
+          return 0;
+      }
+      ```
+  
+  - The output of the above example is:
+
+      ```dash
+        0 0
+        0 1
+        0 2
+        0 3
+        .
+        .
+        .
+        5 9
+        6 0
+        6 1
+        6 2
+        6 3
+        .
+        .
+        9 9
+      ```
