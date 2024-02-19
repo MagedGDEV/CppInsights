@@ -79,3 +79,41 @@ The above code will give you an error, because you cannot assign a string to a C
 char myName[5];
 strcpy(myName, "Alex");
 ```
+
+There are many functions provided by the `<cstring>` header that can be useful when working with C-style strings, such as:
+
+| Function | Description |
+| --- | --- |
+| **`strlen()`** | Returns the length of the string |
+| **`strcpy()`** | Copies a string to another string |
+| **`strcat()`** | Concatenates two strings |
+| **`strcmp()`** | Compares two strings |
+
+You can convert a C-style String to an integer, float, long, .... using functions provided by the `<cstdlib>` header, such as:
+
+| Function | Description |
+| --- | --- |
+| **`atoi()`** | Converts a C-style string to an integer |
+| **`atof()`** | Converts a C-style string to a float |
+| **`atol()`** | Converts a C-style string to a long |
+
+```cpp
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+
+using namespace std;
+
+int main() {
+    char myName[] = "Alex";
+    cout << strlen(myName) << endl; // 4
+
+    char myName2[] = "123";
+    cout << atoi(myName2) << endl; // 123
+
+    return 0;
+}
+```
+
+> [!IMPORTANT]
+> All the functions provided by the `<cstring>` and `<cstdlib>` headers depend on the null terminator to work properly. If the null terminator is not present, the functions will continue reading characters until they find a null terminator, so it is important to make sure that the null terminator is present when working with C-style strings and their functions.
