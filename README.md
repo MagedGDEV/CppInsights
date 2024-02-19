@@ -141,3 +141,50 @@ Maged Elesseily # "Maged Elesseily" will be stored in myName
 
 > [!TIP]
 > When working with functions that returns the size of an array, string, .... it would be better to store the result in a variable of type `size_t` which is a type that is guaranteed to be big enough to hold the size of any object, and this type's size is dependent on the machine and the compiler you are using.
+
+### C++ strings
+
+ A C++ string (**`string`**) is a class that is provided by the `<string>` header. It is a compound type. This means that it is made up of `char`s. it is a lot easier to work with than C-style strings and provides lots of advantages:
+
+- Ability to increase and decrease the size of the string dynamically at runtime.
+- Does not require a null terminator.
+- Works with operators and functions that are not available for C-style strings (e.g. `+`, `==`, `!=`, `+=`, `[]`, ...).
+- Can be converted to C-style strings when needed.
+- .....
+
+There are several ways that gives us several functionalities when intializing a C++ string:
+
+- You can use the ways of intializing any variable with the C++ string type:
+
+```cpp
+#include <iostream>
+#include <string>
+
+using std::string;
+
+int main() {
+    string myName = "Maged"; // using the C-like initialization
+    string myName("Maged"); // using the Constructor initialization
+    string myName{"Maged"}; // using the List initialization
+
+    return 0;
+}
+```
+
+- You can get a specific number of characters from a string at initialization:
+
+```cpp
+string myName {"Maged", 3}; // "Mag" will be stored in myName
+```
+
+- You can get a specific number of characters from a string at initialization starting from a specific index:
+
+```cpp
+string myName {"Maged", 2, 3}; // "ged" will be stored in myName
+```
+
+- You can initialize a string with a specific number of a specific character:
+
+```cpp
+string myName(5, 'a'); // "aaaaa" will be stored in myName
+```
