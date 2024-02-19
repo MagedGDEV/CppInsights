@@ -29,3 +29,53 @@ In C++, there are useful functions that can be useful for working with **`char`*
 | **`toupper()`** | Returns the uppercase version of the character, if possible |
 
 and many more...
+
+## Strings
+
+A `string` is a sequence of characters. It is written as a sequence of characters surrounded by double quotes, like this:
+
+```cpp
+string myName = "Alex";
+```
+
+There are two types of strings in C++:
+
+- C-style strings
+- C++ strings
+
+### C-style strings
+
+A C-style string is simply an array of characters (**`char`**) that uses a null terminator. A null terminator is a special character (**`\0`**) used to indicate the end of the string. For example:
+
+```cpp
+char myName[] = "Alex"; // C-style string
+```
+
+|A|l|e|x|\0|
+|---|---|---|---|---|
+
+The string `"Alex"` is actually 5 characters long, because there is a null terminator at the end of the string. The null terminator is automatically added to the end of C-style strings.
+
+if you decide to change character 5 to another character, the null terminator will be removed and the string will still be longer than 5 characters.
+
+```cpp
+myName[5] = 'a'; // Change the null terminator to 'a'
+```
+
+The above code will not give you an error, but it could cause problems later on when you try to use the string. This is because the null terminator is no longer at the end of the string, so the program will continue reading characters until it finds a null terminator. This is called a **buffer overflow**.
+
+You need to be careful when intializing C-style strings away from their declaration. For example:
+
+```cpp
+char myName[5];
+myName = "Alex"; // Error!
+```
+
+The above code will give you an error, because you cannot assign a string to a C-style string after it has been declared. instead, you need to use the `strcpy()` function from the `<cstring>` header:
+
+```cpp
+// #include <cstring>
+
+char myName[5];
+strcpy(myName, "Alex");
+```
