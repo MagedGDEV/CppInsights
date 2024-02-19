@@ -116,4 +116,28 @@ int main() {
 ```
 
 > [!CAUTION]
-> All the functions provided by the `<cstring>` and `<cstdlib>` headers depend on the null terminator to work properly. If the null terminator is not present, the functions will continue reading characters until they find a null terminator, so it is important to make sure that the null terminator is present when working with C-style strings and their functions.
+> All the functions provided by the `<cstring>` and `<cstdlib>` headers may depend on the null terminator to work properly. If the null terminator is not present, the functions will continue reading characters until they find a null terminator, so it is important to make sure that the null terminator is present when working with C-style strings and their functions.
+
+In some cases you may need to ignore the spaces the user enters, and get everything the user enters in that line as a string to do that you can use the `cin.getline()` function.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    char myName[100];
+    cin.getline(myName, 100); // 100 is the maximum number of characters that can be stored in myName
+    cout << myName << endl;
+
+    return 0;
+}
+```
+
+user input:
+
+```bash
+Maged Elesseily # "Maged Elesseily" will be stored in myName
+```
+
+> [!TIP]
+> When working with functions that returns the size of an array, string, .... it would be better to store the result in a variable of type `size_t` which is a type that is guaranteed to be big enough to hold the size of any object, and this type's size is dependent on the machine and the compiler you are using.
