@@ -188,3 +188,94 @@ string myName {"Maged", 2, 3}; // "ged" will be stored in myName
 ```cpp
 string myName(5, 'a'); // "aaaaa" will be stored in myName
 ```
+
+> [!NOTE]
+> Unlike C-style strings, when you declare a C++ string, it will be automatically intialized to an empty string if you don't intialize it yourself no need to worry about the null terminator, and you can intialize it after declaration using the assignment operator `=`, which is not allowed for C-style strings you have to use `strcpy()`.
+
+You can access any index in C++ strings just like you do with vectors:
+
+```cpp
+string myName = "Maged";
+cout << myName[0] << endl; // M
+cout << myName.at(1) << endl; // a
+```
+
+C++ operators provides a lot of functionalities when working with C++ strings:
+
+- You can concatenate using the `+` operator, you can concatenate **a string with a C-style string, character, another string**. for example:
+
+```cpp
+string myName = "Maged";
+string fullName = myName + " Elesseily"; // "Maged Elesseily" will be stored in fullName
+string fullName2 = "Maged" + " Elesseily"; // Illegal!, because you can't concatenate two C-style strings using the + operator
+```
+
+- You can compare **a string with another string or C-style string** using the `==`, `!=`, `>`, `<`, `>=`, `<=` operators, for example:
+
+```cpp
+string myName = "Maged";
+if (myName == "Maged") {
+    cout << "Equal" << endl;
+} else {
+    cout << "Not Equal" << endl;
+}
+// Output: Equal
+```
+
+>[!NOTE]
+>\>, <, >=, <= operators are used to compare the strings lexicographically (i.e. dictionary order).
+
+We are provided with a lot of functions that can be useful when working with C++ strings, such as:
+
+| Function | Description |
+| --- | --- |
+| **`length() / size()`** | Returns the length of the string |
+| **`substr(begin, length)`** | Returns a substring of the string starting from the index `begin` and has a length of `length` |
+| **`find(substring)`** | Returns the index of the first occurrence of `substring` in the string, if not found it returns `string::npos` (not found)|
+| **`find(substring, begin)`** | Returns the index of the first occurrence of `substring` in the string starting from the index `begin`, if not found it returns `string::npos`|
+| **`erase(begin, length)`** | Erases a substring of the string starting from the index `begin` and has a length of `length` |
+| **`clear()`** | Erases the whole string |
+
+Just like C-style strings, we can ignore the spaces the user enters, and get everything the user enters in that line as a string using the `getline()` function.
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string myName;
+    getline(cin, myName);
+    cout << myName << endl;
+
+    return 0;
+}
+```
+
+user input:
+
+```bash
+Maged Elesseily # "Maged Elesseily" will be stored in myName
+```
+
+You can also specify a delimiter to stop reading the input when it is found, for example:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string myName;
+    getline(cin, myName, 'x'); // Stop reading when 'x' is found
+    cout << myName << endl;
+
+    return 0;
+}
+```
+
+user input:
+
+```bash
+Magedx Elesseily # "Maged" will be stored in myName
+```
