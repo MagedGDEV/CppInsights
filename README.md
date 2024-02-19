@@ -115,5 +115,5 @@ int main() {
 }
 ```
 
-> [!IMPORTANT]
+> [!CAUTION]
 > All the functions provided by the `<cstring>` and `<cstdlib>` headers depend on the null terminator to work properly. If the null terminator is not present, the functions will continue reading characters until they find a null terminator, so it is important to make sure that the null terminator is present when working with C-style strings and their functions.
