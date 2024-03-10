@@ -147,5 +147,5 @@ In the prototype, you only need to specify the function name, return type, and p
 int calculateSum(int, int);
 ```
 
-But it is good practice to specify the parameter names in the function prototype for documentation and better understanding of the function.
-
+> [!TIP]
+> But it is good practice to specify the parameter names in the function prototype for documentation and better understanding of the function.
