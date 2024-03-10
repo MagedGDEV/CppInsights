@@ -97,7 +97,7 @@ int main() {
 ```
 
 > [!CAUTION]
-> The function must be defined before it is called. If the function is defined after it is called, the compiler will produce an error because it does not know the definition of the function.
+> The function must be defined before it is called (before main function). If the function is defined after it is called, the compiler will produce an error because it does not know the definition of the function.
 
 | Error | Solution |
 | --- | --- |
