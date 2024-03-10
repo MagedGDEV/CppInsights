@@ -103,3 +103,49 @@ int main() {
 | --- | --- |
 | ![Function Definition Error](screenshots/function_definition_error.png) | ![Function Definition Solution](screenshots/function_definition_solution.png) |
 
+## Function Prototypes
+
+As the program grows, the number of functions will increase and the function definitions will be scattered throughout the program. This makes the program difficult to read and understand. To solve this problem, we can use function prototypes.
+
+The function prototype is a declaration of the function that tells the compiler about the function name, return type, and parameters. The function prototype does not contain the function body. The function prototype is used to tell the compiler about the function before the function is called.
+
+The syntax of the function prototype is as follows:
+
+```cpp
+return_type function_name(parameters);
+```
+
+The following example shows how to use function prototypes:
+
+```cpp
+// Function prototypes
+void printHello();
+void printSum(int a, int b);;
+
+int main() {
+
+    printHello(); // Output: Hello, World!
+    printSum(5, 3); // Output: The sum of 5 and 3 is 8
+    return 0;
+}
+
+// Function definitions
+void printHello() {
+    cout << "Hello, World!" << endl;
+}
+
+void printSum(int a, int b) {
+    cout << "The sum of " << a << " and " << b << " is " << a + b << endl;
+}
+```
+
+You do not need to use function prototypes if the function is defined before it is called. However, it is a good practice to use function prototypes to make the program more readable and understandable.
+
+In the prototype, you only need to specify the function name, return type, and parameters. You do not need to specify the parameter names. The following example shows the function prototype for the `calculateSum` function:
+
+```cpp
+int calculateSum(int, int);
+```
+
+But it is good practice to specify the parameter names in the function prototype for documentation and better understanding of the function.
+
