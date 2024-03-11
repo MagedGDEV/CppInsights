@@ -240,3 +240,61 @@ void printSum(int a, int b, char symbol) {
 > [!NOTE]
 > Sort the parameters with default values according to their importance and the probability of being provided by the user by placing the most important parameters at the beginning of the parameter list and the least important parameters at the end of the parameter list. Because at calling function, we can't skip parameters in the middle and provide the value for the last parameter only.
 
+## Overloading Functions
+
+C++ allows us to define multiple functions with the same name but with different parameters. This is called ***function overloading***. The functions with the same name must have different parameters, such as:
+
+- Different number of parameters
+- Different types of parameters
+- Different order of parameters.
+
+This is an **Abstraction** technique, where the function name is the same but the parameters are different and the body of the functions can be different. The function call will be matched with the function definition according to the number and types of the parameters.
+
+The following example shows how to use function overloading:
+
+```cpp
+int max(int a, int b);
+double max(double a, double b);
+int max(int a, int b, int c);
+
+int main() {
+    cout << max(5, 3) << endl; // Output: 5
+    cout << max(5.5, 3.3) << endl; // Output: 5.5
+    cout << max(5, 3, 7) << endl; // Output: 7
+    return 0;
+}
+
+int max(int a, int b) {
+    return a > b ? a : b;
+}
+
+double max(double a, double b) {
+    return a > b ? a : b;
+}
+
+int max(int a, int b, int c) {
+    return max(max(a, b), c);
+}
+```
+
+Parameters with default values can be used in function overloading, but the function call will be matched with the function definition according to the number and types of the parameters, not the default values, so you need to be careful when using default values with function overloading. For example:
+
+```cpp
+void print(int a = 100);
+void print(double a = 100.0);
+
+int main() {
+    print(); // Ambiguous
+    return 0;
+}
+
+void print(int a) {
+    cout << a << endl;
+}
+
+void print(double a) {
+    cout << a << endl;
+}
+```
+
+The above code will give an error because the compiler does not know which function to call because the function call matches both function definitions.
