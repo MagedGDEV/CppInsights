@@ -382,3 +382,39 @@ void swap(int &a, int &b) {
 
 >[!TIP]
 > Passing by reference can be used also to **save memory** by avoiding the creation of a copy of the argument and to **avoid the overhead** of copying the argument, such as: (Avoiding to copy a large sized vector).
+
+## Scope Rules
+
+The scope of a variable is the part of the program where the variable can be accessed. The scope of a variable is determined by its location in the program. The scope rules are as follows for functions:
+
+- The variables declared inside a function are called ***local variables***, and they can only be accessed inside the function.
+- The variables declared outside all functions are called ***global variables***, and they can be accessed by all functions in the program.
+- The function variables are active only during the function call, and they are destroyed when the function call is finished.
+
+C++ provide us also with an extra feature for functions, where you can intialize a variable only once when the function is initialized for the first time and the value of the variable will be saved for the next function calls. This is called ***`static` local variables***.
+
+The following example shows how to use local, global and static local variables:
+
+```cpp
+int global = 5;
+
+void printNumber();
+
+int main() {
+    int local = 3;
+    cout << "Inside the main function: " << local << " " << global << endl; // Output: Inside the main function: 3 5
+    printNumber(); // Output: Inside the function, number is 1 local is 2
+    printNumber(); // Output: Inside the function, number is 2 local is 2
+    printNumber(); // Output: Inside the function, number is 3 local is 2
+    return 0;
+}
+
+void printNumber() {
+    static int number = 0;
+    int local = 2;
+    cout << "Inside the function, number is " << ++number  << "local is " << local<< endl;
+}
+```
+
+>[!IMPORTANT]
+> Do not use global variables unless you have to, because they make the program difficult to read and understand. The global variables can be accessed and modified by all functions in the program, and this may lead to unexpected changes in the program.
