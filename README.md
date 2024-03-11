@@ -298,3 +298,58 @@ void print(double a) {
 ```
 
 The above code will give an error because the compiler does not know which function to call because the function call matches both function definitions.
+
+## Passing Arrays to Functions
+
+When an array is passed to a function, the function receives the location of the first element of the array. The function can access the elements of the array using the location of the first element, this leads to the fact that the function can change the elements of the array.
+
+>[!IMPORTANT]
+> The function does not know the size of an array unless you pass it to the function.
+
+The following example shows how to pass an array to a function:
+
+```cpp
+void printArray(int arr[], int size);
+void setArray(int arr[], int size, int value);
+
+int main() {
+    int arr[] = {5, 3, 7, 1, 4};
+    printArray(arr, 5); // Output: 5 3 7 1 4
+    setArray(arr, 5, 0);
+    printArray(arr, 5); // Output: 0 0 0 0 0
+    return 0;
+}
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+void setArray(int arr[], int size, int value) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = value;
+    }
+}
+
+```
+
+If you do not want the function to change the values stored in an array at the function call, you can use the `const` keyword to make the array read-only at the function definition. The following example shows how to use the `const` keyword with arrays:
+
+```cpp
+void printArray(const int arr[], int size);
+
+int main() {
+    int arr[] = {5, 3, 7, 1, 4};
+    printArray(arr, 5); // Output: 5 3 7 1 4
+    return 0;
+}
+
+void printArray(const int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+```
