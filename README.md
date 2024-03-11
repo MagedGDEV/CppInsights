@@ -418,3 +418,42 @@ void printNumber() {
 
 >[!IMPORTANT]
 > Do not use global variables unless you have to, because they make the program difficult to read and understand. The global variables can be accessed and modified by all functions in the program, and this may lead to unexpected changes in the program.
+
+## How Functions Work
+
+When a function is called, the following steps are performed:
+
+1. The control is transferred from the main function to the called function.
+2. The parameters are passed to the function.
+3. The function is executed.
+
+When the function is finished, the following steps are performed:
+
+1. The control is transferred from the called function to the main function.
+2. The return value is passed to the main function.
+3. The function is terminated.
+
+The functions uses the LIFO concept (Last In First Out), which means that the function that is called last is the first to be finished. each function call is stored in the memory in a stack, and when the function is finished, it is removed from the stack.
+
+> [!CAUTION]
+> The size of the stack is finite and if the stack is full, the program will crash. This is called ***stack overflow***. The stack overflow occurs when the program calls too many functions and the stack is full.
+
+## Inline Functions
+
+The inline functions are used to reduce the overhead of function calls. The inline functions are used to replace the function call with the function body. The inline functions are used for small functions that are called frequently.
+
+Using the **`inline`** keyword we suggest to the compiler to do the following:
+
+- Avoid the overhead of function calls.
+- Save the time of function calls.
+- generate inline assembly code.
+
+Nowadays, Compilers are smart enough to decide whether to make the function inline or not, so you do not need to use the **`inline`** keyword, but you can use it to suggest to the compiler to make the function inline.
+
+The following example shows how to use the **`inline`** keyword:
+
+```cpp
+inline int max(int a, int b) {
+    return a > b ? a : b;
+}
+```
