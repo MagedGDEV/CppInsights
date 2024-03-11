@@ -149,3 +149,66 @@ int calculateSum(int, int);
 
 > [!TIP]
 > But it is good practice to specify the parameter names in the function prototype for documentation and better understanding of the function.
+
+## Function Parameters
+
+Data passed into a function are called **parameters** at the function definition and **arguments** at the function call. The parameters and arguments must match in number, order and in type.
+
+> [!NOTE]
+> The data type at the function call may be different from the type at the function definition as long as the compiler is able to convert the type of the argument to the type of the parameter, such as: (`int` into `double` or `C Strings` into `string`).
+
+The data transferred into the functions are ***passed by value***, which means that the function receives a copy of the data and stored at another location in the memory. Whatever changes made to the parameter inside the function does not affect the original value at the function call (at the main function).
+
+The following example explains how the parameters, arguments and passing data by value works:
+
+```cpp
+void multiplyByTen(int number);
+
+int main() {
+    int number = 5;
+    cout << "Before the function: " << number << endl; // Output: Before the function: 5
+    multiplyByTen(number); // Output: Inside the function: 50
+    cout << "Outside the function: " << number << endl; // Output: Outside the function: 5
+    return 0;
+}
+
+void multiplyByTen(int number) {
+    number *= 10;
+    cout << "Inside the function: " << number << endl;
+}
+```
+
+## Return Statements
+
+The return statement is used to return a value from the function, and it can be placed anywhere in the body of the function. When the `return` statement is executed, the function is terminated.
+
+When the function does not return a value (**`void`**), the `return` statement can still be used to terminate the function according to some conditions. Multiple of `return` statements can be used in the same function, but only one of them will be executed.
+
+The following example shows how to use the `return` statement in different situations:
+
+```cpp
+int max(int a, int b);
+void printAreaOfSquare(double side);
+
+int main() {
+    cout << max(5, 3) << endl; // Output: 5
+    printAreaOfSquare(5); // Output: The area of the square with side 5 is 25
+    printAreaOfSquare(-5); // Output: The side of the square must be positive
+    return 0;
+}
+
+int max(int a, int b) {
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
+
+void printAreaOfSquare(double side) {
+    if (side <= 0) {
+        cout << "The side of the square must be positive" << endl;
+        return; // The function is terminated
+    }
+    cout << "The area of the square with side " << side << " is " << side * side << endl;
+}
+```
