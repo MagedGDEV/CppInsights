@@ -353,3 +353,32 @@ void printArray(const int arr[], int size) {
     cout << endl;
 }
 ```
+
+## Passing by Reference
+
+As mentioned above, when passing an argument to a function, the function receives a copy of the argument and stored at another location in the memory. Whatever changes made to the parameter inside the function does not affect the original value at the main function.
+
+C++ provides us with a solution to pass the argument by reference, which means that the function receives the original value of the argument and stored at the same location in the memory. Whatever changes made to the parameter inside the function will affect the original value at the main function.
+
+The parameter at the function is an ***alias*** for the argument at the main function. The reference is indicated by the `&` symbol after the data type of the parameter at the function definition as shown below:
+
+```cpp
+void swap(int &a, int &b);
+
+int main() {
+    int a = 5, b = 3;
+    cout << "Before the function: " << a << " " << b << endl; // Output: Before the function: 5 3
+    swap(a, b);
+    cout << "After the function: " << a << " " << b << endl; // Output: After the function: 3 5
+    return 0;
+}
+
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+```
+
+>[!TIP]
+> Passing by reference can be used also to **save memory** by avoiding the creation of a copy of the argument and to **avoid the overhead** of copying the argument, such as: (Avoiding to copy a large sized vector).
