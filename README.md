@@ -212,3 +212,31 @@ void printAreaOfSquare(double side) {
     cout << "The area of the square with side " << side << " is " << side * side << endl;
 }
 ```
+
+## Default Arguments
+
+At a function call, all arguments must be provided, but in some cases we may want to provide same value for multiple function calls. C++ provided us with a solution to add default values for parameters in the function definition or function prototype.
+
+After adding default values for parameters, the function call can be made without providing the value for the parameters with default values. If the value is provided, it will override the default value.
+
+We can add as many default values as we want, and we have one rule to follow which is: ***All the parameters with default values must be at the end of the parameter list***.
+
+The following example shows how to use default arguments:
+
+```cpp
+void printSum(int a, int b, char symbol = '+');
+
+int main() {
+    printSum(5, 3); // Output: 5 + 3 = 8
+    printSum(5, 3, '-'); // Output: 5 - 3 = 2
+    return 0;
+}
+
+void printSum(int a, int b, char symbol) {
+    cout << a << " " << symbol << " " << b << " = " << (symbol == '+' ? a + b : a - b) << endl;
+}
+```
+
+> [!NOTE]
+> Sort the parameters with default values according to their importance and the probability of being provided by the user by placing the most important parameters at the beginning of the parameter list and the least important parameters at the end of the parameter list. Because at calling function, we can't skip parameters in the middle and provide the value for the last parameter only.
+
