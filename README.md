@@ -80,3 +80,39 @@ cout << *ptr; // Output: 30000
 ptr = &low_salary;
 cout << *ptr; // Output: 10000
 ```
+
+## Dynamic Memory Allocation
+
+Dynamic memory allocation is the process of allocating memory from the heap at run time which allows us to do the following:
+
+1. Allocate memory at run time.
+2. Create arrays of user-defined size.
+
+To allocate memory at run time, we use the **`new`** operator, and to deallocate the memory we use the **`delete`** operator where it frees the allocated location from memory. Below is an example of how to allocate memory at run time:
+
+```cpp
+int *ptr = new int; // Allocate memory for an integer
+*ptr = 10; // Assign 10 to the memory location
+.
+.
+.
+.
+delete ptr; // Deallocate the memory
+```
+
+>[!NOTE]
+> After allocating memory using the `new` operator, Don't forget to intialize the memory location to avoid any garbage value.
+
+To allocate memory for an array, we use the **`new`** operator followed by the data type and the size of the array, and to deallocate the memory we use the **`delete[]`** operator. Below is an example of how to allocate memory for an array at run time:
+
+```cpp
+int size; 
+cin >> size;
+int *ptr = new int[size]; // Allocate memory for an array of integers and the size is determined at run time
+
+for (int i = 0; i < size; i++) {
+    ptr[i] = i; // Assign i to the memory location
+}
+
+delete[] ptr; // Deallocate the memory
+```
