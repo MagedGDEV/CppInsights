@@ -28,3 +28,55 @@ It's important to intialize the pointer to `nullptr` or `0` to avoid any garbage
 int *ptr = nullptr;
 double *ptr = 0;
 ```
+
+## Accessing Pointers & Storing addresses
+
+To access the address of a variable, we use the **`&`** unary operator. This address can be different each time you run the program, and it's stored in hexadecimal format. Below is an example of how to access the address of a variable:
+
+```cpp
+int x = 10;
+cout << &x; // Output: 0x16f1a2ff8
+```
+
+Pointers are not the same as variables, changing the type of the pointer will not change the size of the pointer, it will only change the type of the data it points to, The size of the pointer depends on the architecture of the system, for example in a 32-bit system the size of the pointer is 4 bytes, and in a 64-bit system the size of the pointer is 8 bytes, below is an example of how to store the address of a variable in a pointer:
+
+```cpp
+int x = 10;
+int *ptr = &x; // ptr now contains the address of x
+double y = 10.5;
+double *ptr2 = &y; // ptr2 now contains the address of y and have the same size as ptr
+cout << ptr << " " << sizeof(ptr); // Output: 0x16f1a2ff8 8
+cout << ptr2 << " " << sizeof(ptr2); // Output: 0x16f1a2ff0 8
+float *ptr3 = &x; // Error: Incompatible types
+```
+
+Pointers are also variables so the same rules apply to them, you can change the value of the pointer, and you can also change the address it points to.
+
+## Dereferencing Pointers
+
+To access the data that the pointer points to, we use the **`*`** operator, this operator is called the dereference operator, and it's used to access the value of the variable that the pointer points to.
+
+```cpp
+int x = 10;
+int *ptr = &x;
+cout << *ptr; // Output: 10
+```
+
+You can also change the value of the variable that the pointer points to using the dereference operator, and this will change the value of the variable itself.
+
+```cpp
+int x = 10;
+int *ptr = &x;
+cout << *ptr; // Output: 10
+*ptr = 20;
+cout << x; // Output: 20
+```
+
+```cpp
+double high_salary {30000};
+double low_salary {10000};
+double *ptr = &high_salary;
+cout << *ptr; // Output: 30000
+ptr = &low_salary;
+cout << *ptr; // Output: 10000
+```
