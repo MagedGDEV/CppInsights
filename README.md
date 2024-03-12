@@ -10,3 +10,17 @@ You might think that why do we need to use pointers and not use the variables di
     - Useful in embedded systems.
     - Useful in system programming.
 4. Pointers allows you to access variables that are defined outside the current function.
+
+## Declaration & Initialization
+
+To declare a pointer, we must use the `*` operator, and follow the same rules as we did for declaring variables **(Check [Variables branch](https://github.com/MagedGDEV/CppInsights/tree/variables))** as shown below:
+
+```cpp
+int *ptr; // Pointer to an integer
+char *ptr; // Pointer to a character
+double *ptr; // Pointer to a double
+float *ptr; // Pointer to a float
+```
+
+It's important to intialize the pointer to `nullptr` or `0` to avoid any garbage value, and to avoid any undefined behavior unless you are going to intialize the pointer to a specific variable address.
+
