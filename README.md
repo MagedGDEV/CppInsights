@@ -24,3 +24,7 @@ float *ptr; // Pointer to a float
 
 It's important to intialize the pointer to `nullptr` or `0` to avoid any garbage value, and to avoid any undefined behavior unless you are going to intialize the pointer to a specific variable address.
 
+```cpp
+int *ptr = nullptr;
+double *ptr = 0;
+```
