@@ -210,3 +210,32 @@ const int *const ptr = &x; // Constant Pointer to Constant
 *ptr = 20; // Error
 ptr = &y; // Error
 ```
+
+## Pointers & Functions
+
+Pointers can be passed to functions as arguments, and this is useful when you want to change the value of the variable that the pointer points to, and you don't want to return the value from the function, and you can also pass the address of the variable to the function and change the value of the variable using the dereference operator, This is called **Pass by Reference with pointers**. Below is an example of how to pass pointers to functions:
+
+```cpp
+void changeValue(int *ptr) {
+    *ptr = 20;
+}
+
+int main() {
+    int x = 10;
+    changeValue(&x); // Pass the address of x to the function
+    cout << x; // Output: 20
+}
+```
+
+```cpp
+void changeValue(int *ptr) {
+    *ptr = 20;
+}
+
+int main() {
+    int x = 10;
+    int *ptr = &x;
+    changeValue(ptr); // Pass the pointer of x to the function
+    cout << x; // Output: 20
+}
+```
