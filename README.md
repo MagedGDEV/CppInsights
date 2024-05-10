@@ -239,3 +239,59 @@ int main() {
     cout << x; // Output: 20
 }
 ```
+
+Pointers can also be returned from functions just like any other variable, this is useful because it provides us with multiple advantages, this is accomplished using the following syntax:
+
+```cpp
+int* function(int size) {
+    int *ptr = new int[size];
+    /*
+    .
+    Code
+    .
+    */
+    return ptr;
+}
+
+int main() {
+    int *ptr = function(5);
+    delete[] ptr;
+}
+```
+
+Below is an example of how to return a pointer from a function where we use the function to allocate memory for an array and give each element an initial value:
+
+```cpp
+int* createArray(int size, int initial_value) {
+    int *ptr = new int[size];
+    for (int i = 0; i < size; i++) {
+        ptr[i] = initial_value;
+    }
+    return ptr;
+}
+
+int main() {
+    int *arr = createArray(5, 10);
+    for (int i = 0; i < 5; i++) {
+        cout << arr[i] << " "; // Output: 10 10 10 10 10
+    }
+    delete[] arr;
+}
+```
+
+>[!CAUTION]
+> Dealing with functions and pointers together could be tricky and could lead to undefined behavior, which could be hard to detect later in the future so it's important to be careful when using pointers with functions.
+
+One of the things we shouldn't do when using pointers with functions is to return a pointer to a local variable, because the local variable will be destroyed after the function ends, and the pointer will point to an invalid memory location, and this will lead to undefined behavior.
+
+```cpp
+int* function() {
+    int x = 10;
+    return &x;
+}
+
+int main() {
+    int *ptr = function();
+    cout << *ptr; // Undefined Behavior
+}
+```
