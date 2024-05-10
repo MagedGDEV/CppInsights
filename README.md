@@ -178,3 +178,35 @@ cout << (ptr == ptr2) << endl; // Output: true
 ptr2++;
 cout << (ptr == ptr2) << endl; // Output: false
 ```
+
+## Constants & Pointers
+
+**`const`** can be used with pointers to specify the following:
+
+1. **Constant Pointers**: The pointer itself is constant and can't be changed, but the value it points to can be changed.
+2. **Pointer to Constants**: The value the pointer points to is constant and can't be changed, but the pointer itself can be changed.
+3. **Constant Pointer to Constants**: Both the pointer and the value it points to are constant and can't be changed.
+
+```cpp
+int x = 10;
+const int y = 20;
+int *const ptr = &x; // Constant Pointer
+*ptr = 20; // Valid
+ptr = &y; // Error
+```
+
+```cpp
+int x = 10;
+const int y = 20;
+const int *ptr = &x; // Pointer to Constant
+*ptr = 20; // Error
+ptr = &y; // Valid
+```
+
+```cpp
+int x = 10;
+const int y = 20;
+const int *const ptr = &x; // Constant Pointer to Constant
+*ptr = 20; // Error
+ptr = &y; // Error
+```
