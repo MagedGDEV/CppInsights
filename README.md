@@ -38,7 +38,7 @@ int x = 10;
 cout << &x; // Output: 0x16f1a2ff8
 ```
 
-Pointers are not the same as variables, changing the type of the pointer will not change the size of the pointer, it will only change the type of the data it points to, The size of the pointer depends on the architecture of the system, for example in a 32-bit system the size of the pointer is 4 bytes, and in a 64-bit system the size of the pointer is 8 bytes, below is an example of how to store the address of a variable in a pointer:
+Pointers are not the same as variables, ***changing the type of the pointer will not change the size of the pointer***, it will only change the type of the data it points to, The size of the pointer depends on the architecture of the system, for example in a 32-bit system the size of the pointer is 4 bytes, and in a 64-bit system the size of the pointer is 8 bytes, below is an example of how to store the address of a variable in a pointer:
 
 ```cpp
 int x = 10;
@@ -109,10 +109,58 @@ To allocate memory for an array, we use the **`new`** operator followed by the d
 int size; 
 cin >> size;
 int *ptr = new int[size]; // Allocate memory for an array of integers and the size is determined at run time
-
-for (int i = 0; i < size; i++) {
-    ptr[i] = i; // Assign i to the memory location
-}
-
+.
+.
+.
+.
 delete[] ptr; // Deallocate the memory
+```
+
+### Relationship between Pointers & Arrays
+
+Arrays are a collection of similar data types, and they are stored in contiguous memory locations, and the name of the array is also a pointer to the first element of the array, and we can access the elements of the array using the pointer
+
+If we pointed a pointer to the first element of the array or set it's value to the name of the array, we can access the elements of the array using the pointer, and we can also use the dereference operator to access the value of the element as shown below:
+
+```cpp
+int arr[] = {1, 2, 3, 4, 5};
+cout << arr << endl; // Output: 0x16f1a2ff8
+int *ptr = arr; // ptr now points to the first element of the array
+cout << ptr << endl; // Output: 0x16f1a2ff8
+cout << *ptr << endl; // Output: 1
+```
+
+Adding and subtracting from the pointers does not work as it does with normal variables. For example, adding 1 to an integer variable will increase the value by 1, but adding 1 to a pointer will increase the address by the size of the data type it points to, and subtracting 1 from a pointer will decrease the address by the size of the data type it points to.
+
+```cpp
+int arr[] = {1, 2, 3, 4, 5};
+int *ptr = arr;
+cout << ptr << endl; // Output: 0x16f1a2ff4
+ptr++; // ptr now points to the second element of the array
+cout << ptr << endl; // Output: 0x16f1a2ff8
+```
+
+Using this addition we will be able to access the whole array using pointers and C++ provides us to access the elements of the array using the pointer name using the **`[]`** operator, and this is the same as using the name of the array itself.
+
+```cpp
+int arr[] = {1, 2, 3, 4, 5};
+int *ptr = arr;
+cout << ptr[0] << endl; // Output: 1
+cout << ptr[1] << endl; // Output: 2
+cout << *(ptr) << endl; // Output: 1
+cout << *(ptr + 1) << endl; // Output: 2
+```
+
+## Pointers Arithmetic
+
+Pointers can be used in multiple operations which are: Assignnment, Arithmetic, Comparison Operations.
+
+Adding and Subtracting from pointers moves the pointers to the next memmory location by adding/subtracting the size of the data type it points to and multiply it by the number of elements you want to move.
+
+```cpp
+int arr[] = {1, 2, 3, 4, 5};
+int *ptr = arr;
+cout << ptr << endl; // Output: 0x16f1a2ff0
+ptr+=2; // ptr now points to the third element of the array
+cout << ptr << endl; // Output: 0x16F1A2FF8 (assuming the size of int is 4 bytes)
 ```
