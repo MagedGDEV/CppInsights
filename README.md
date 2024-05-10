@@ -50,7 +50,7 @@ cout << ptr2 << " " << sizeof(ptr2); // Output: 0x16f1a2ff0 8
 float *ptr3 = &x; // Error: Incompatible types
 ```
 
-Pointers are also variables so the same rules apply to them, you can change the value of the pointer, and you can also change the address it points to.
+Pointers are also variables so the same rules apply to them, you can change the value of the pointer, but you can't change the type of variable it points to.
 
 ## Dereferencing Pointers
 
@@ -62,7 +62,7 @@ int *ptr = &x;
 cout << *ptr; // Output: 10
 ```
 
-You can also change the value of the variable that the pointer points to using the dereference operator, and this will change the value of the variable itself.
+You can also change the value of the variable that the pointer points to using the dereference operator as follows:
 
 ```cpp
 int x = 10;
@@ -71,6 +71,8 @@ cout << *ptr; // Output: 10
 *ptr = 20;
 cout << x; // Output: 20
 ```
+
+You can also change the address that the pointer points to by assigning a new address to the pointer  to point to another variable as shown below:
 
 ```cpp
 double high_salary {30000};
@@ -163,4 +165,16 @@ int *ptr = arr;
 cout << ptr << endl; // Output: 0x16f1a2ff0
 ptr+=2; // ptr now points to the third element of the array
 cout << ptr << endl; // Output: 0x16F1A2FF8 (assuming the size of int is 4 bytes)
+```
+
+Comparing pointers is also possible, and it's used to compare the addresses of the pointers, and it's used to check if the pointers point to the same memory location or not.
+
+```cpp
+int arr[] = {1, 2, 3, 4, 5};
+int *ptr = arr;
+int *ptr2 = arr;
+cout << boolalpha;
+cout << (ptr == ptr2) << endl; // Output: true
+ptr2++;
+cout << (ptr == ptr2) << endl; // Output: false
 ```
