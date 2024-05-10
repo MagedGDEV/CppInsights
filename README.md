@@ -295,3 +295,18 @@ int main() {
     cout << *ptr; // Undefined Behavior
 }
 ```
+
+## Potential Pitfalls
+
+Dealing with pointers could be tricky and could lead to undefined behavior, and it's important to be careful when using pointers, and to avoid the following pitfalls:
+
+1. **Dangling Pointers**: Dangling pointers are pointers that point to an invalid memory location, and this could happen by:
+
+   - Returning a pointer to a function local variable.
+   - 2 pointers pointing to the same memory location and one of them is deleted and the other one is trying to access the same memory location.
+
+2. **Uninitialized Pointers**: Uninitialized pointers could lead to undefined behavior, and it's important to initialize the pointer to `nullptr` or `0` to avoid any garbage value.
+
+3. **Memory Leaks**: Memory leaks happen when we allocate memory using the `new` operator and forget to deallocate the memory using the `delete` operator, and this could lead to memory exhaustion.
+
+4. **Not Checking if `new` Fails**: The `new` operator could fail to allocate memory if there is no enough memory, and it's important to check if the `new` operator fails to avoid any undefined behavior.
