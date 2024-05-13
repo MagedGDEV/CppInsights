@@ -25,3 +25,30 @@ Even though ***OOP*** could solve lots of ***Procedural Programming*** problems,
 - Steeper learning curve.
 - More complex to Design.
 - Can be slower to run.
+
+## What are Classes and Objects?
+
+***Class***: is a blueprint for creating objects. It defines the properties and behaviors that objects can have:
+
+- User defined data type.
+- Can have variables and functions.
+- Can hide data and methods from outside access.
+
+For example, we can have a class called `Car` that has variables like `color`, `make`, `model`, `year`, and functions like `start()`, `stop()`, `accelerate()`, `brake()`.
+
+***Object***: is an instance of a class. It represents a specific instance of a class which has the following properties:
+
+- You can create multiple objects from the same class.
+- Each object has its own data and functions.
+
+For example, we can have an object called `myCar` that has the color `red`, make `Toyota`, model `Corolla`, year `2020`, and functions like `start()`, `stop()`, `accelerate()`, `brake()`.
+
+```cpp
+int main() {
+    // Create an object of the class
+    Car myCar;
+    return 0;
+}
+```
+
+In the above example, we created an object called `myCar` from the class `Car` which is the implementation of the object `Car`(how to create implementation will be shown later in this branch).
