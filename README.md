@@ -53,5 +53,5 @@ int main() {
 
 In the above example, we created an object called `myCar` from the class `Car` which is the implementation of the object `Car`(how to create implementation will be shown later in this branch). 
 
-> [!HINT]
+> [!NOTE]
 > Objects are like variables, but they can store multiple variables and functions.
