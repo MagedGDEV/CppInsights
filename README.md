@@ -104,6 +104,11 @@ Once we have declared the class, we can create objects from it. we can deal with
 To create an object from a class, we use the class name followed by the object name, and the object name.
 
 ```cpp
+
+class Player {
+    // Same as the previous example
+};
+
 int main() {
     // Create an object of the class
     Player player1;
@@ -121,3 +126,64 @@ int main() {
 ```
 
 In the above example, each object of class `Player` created it contains its own copy of the variables and functions of the class. and the variables will contain garbage values because we didn't initialize them. (how to initialize the variables will be shown later in this branch).
+
+## Accessing Class Members
+
+To access the class members (variables and functions) from outside the class, we use the `.` operator for objects and the `->` operator for pointers to objects,  but these members should be declared as `public` in the class definition, otherwise, they will be private by default. (explained in details later in this branch).
+
+```cpp
+class Player {
+    // Set the access specifier to public 
+    public:
+        int health;
+        int speed;
+        int level;
+        int xp;
+
+        // Declare functions
+        void move();
+        void attack();
+        void loseHealth(int amount);
+
+
+        // Function definitions
+        // ...
+        void loseHealth(int amount) {
+            health -= amount;
+            cout << "Player lost " << amount << " health points." << endl;
+            cout << "Player health is now " << health << endl;
+        }
+};
+```
+
+In the previous example, we set the class members to public to be able to access it from outside the class, at the main function.
+
+```cpp
+int main() {
+    // Create an object of the class
+    Player player1;
+
+    // Access the class members
+    player1.health = 100;
+    player1.speed = 10;
+    player1.level = 1;
+    player1.xp = 0;
+
+
+    // Call the functions
+    player1.move();
+    player1.lostHealth(10);
+    // Player lost 10 health points.
+    // Player health is now 90 
+
+    Player* pPlayer = new Player();
+    pPlayer->health = 100;
+
+    delete pPlayer;
+
+    return 0;
+}
+```
+
+>[!IMPORTANT]
+> Notice that we did not need to pass the player\`s health to the function, because the function can access the player\`s health directly since it is a member of the class.
