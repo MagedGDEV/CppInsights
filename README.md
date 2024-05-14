@@ -51,7 +51,73 @@ int main() {
 }
 ```
 
-In the above example, we created an object called `myCar` from the class `Car` which is the implementation of the object `Car`(how to create implementation will be shown later in this branch). 
+In the above example, we created an object called `myCar` from the class `Car` which is the implementation of the object `Car`(how to create implementation will be shown later in this branch).
 
 > [!NOTE]
 > Objects are like variables, but they can store multiple variables and functions.
+
+## Declaring a Class and Creating Objects
+
+To declare a class, we use the `class` keyword followed by the class name, and the class body enclosed in curly braces `{}`. The class body can contain class members like variables and functions, at the end of the class declaration, don't forget to add a semicolon `;`.
+
+```cpp
+class ClassName {
+    // Class variables and functions
+};
+```
+
+In the following example, we are creating a basic class called **`Player`** that can be used in multiple video games:
+
+```cpp
+class Player {
+    // Variables
+    int health;
+    int damage;
+    int speed;
+    int level;
+    int xp;
+
+    // Declare functions
+    void move();
+    void attack();
+    void levelUp();
+    void gainXP();
+    void die();
+
+    // Function definitions
+    void move() {
+        // Code to move the player
+    }
+    void attack() {
+        // Code to attack
+    }
+    /* 
+    .
+    .   Other functions 
+    .
+    */
+};
+```
+
+Once we have declared the class, we can create objects from it. we can deal with the object as we deal with variables, we can create an array of objects, pass objects to functions, and return objects from functions, create objects on the heap using pointers, and so on.
+
+To create an object from a class, we use the class name followed by the object name, and the object name.
+
+```cpp
+int main() {
+    // Create an object of the class
+    Player player1;
+    Player player2;
+
+    // Create an array of objects
+    Player enemies[10];
+
+    // declare an pointer to an object
+    Player* pPlayer = new Player();
+
+    delete pPlayer;
+    return 0;
+}
+```
+
+In the above example, each object of class `Player` created it contains its own copy of the variables and functions of the class. and the variables will contain garbage values because we didn't initialize them. (how to initialize the variables will be shown later in this branch).
