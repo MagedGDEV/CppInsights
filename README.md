@@ -231,3 +231,125 @@ int main() {
 ```
 
 In the above example, the balance is a private member, so we can't access it from outside the class, but we can access it from the public functions `deposit()` and `withdraw()`. This gives us more control over the data and functions of the class, For example the user of this class can not set the balance to another value directly by mistake.
+
+## Implementing Class Functions
+
+When implementing the class functions, we have several ways to do that:
+
+1. **Inside the class definition**
+2. **Outside the class definition**
+3. **Separate specification and implementation**
+
+In all cases, the class variables are accessible from the class functions directly without the need to pass them as arguments.
+
+### Inside the class definition
+
+In this case, we define the functions inside the class definition, this is useful for small functions that are simple and don't need to be defined outside the class.
+
+```cpp
+class Player {
+    public:
+        // Player's variables
+
+        // Define functions
+        void move() {
+            cout << "Player is moving" << endl;
+        }
+
+};
+```
+
+### Outside the class definition
+
+In this case, we define the functions outside the class definition, this is useful for large functions that are complex and need to be defined outside the class.
+
+we need to use the scope resolution operator `::` to define the function outside the class, to tell the compiler that this function belongs to the class otherwise it will be treated as a normal function.
+
+```cpp
+class Player {
+    public:
+        // Player's variables
+
+        // Declare functions
+        void move();
+};
+
+// Define the function outside the class
+void Player::move() {
+    cout << "Player is moving" << endl;
+}
+```
+
+### Separate specification and implementation
+
+In this case, we separate the class declaration from the class implementation, this is useful when we have a large class with many functions and we want to separate the interface from the implementation.
+
+```cpp
+// Player.h file (declaration file)
+class Player {
+    public:
+        // Player's variables
+
+        // Declare functions
+        void move();
+};
+```
+
+```cpp
+// Player.cpp file (implementation file)
+#include "Player.h" 
+// This is the header file that contains the class declaration 
+// it should be included in the implementation file
+
+// Define the function outside the class
+void Player::move() {
+    cout << "Player is moving" << endl;
+}
+```
+
+In the above example, we have two files, the first file is the header file that contains the class declaration, and the second file is the implementation file that contains the class implementation. The header file should be included in the implementation file to tell the compiler that this implementation belongs to this class.
+
+>[!NOTE]
+> When using **`#include "filename"`**  the compiler will look for the file in the current directory first, then in the standard directories. When using **`#include <filename>`** the compiler will look for the file in the standard directories only.
+
+Using the separate specification and implementation method is the most common way to implement classes in C++. It makes the code more organized and easier to maintain. but it can cause some problems like the **`multiple definition`** error if you include the implementation file in multiple source files.
+
+To avoid this problem, C++ provided us with include guards, which are preprocessor directives that prevent the header file from being included more than once in the same source file.
+
+```cpp
+// Player.h file (declaration file)
+#ifndef _PLAYER_H_
+#define _PLAYER_H_
+
+class Player {
+    // Player's class declaration
+};
+
+#endif
+```
+
+In the above example, we used the `#ifndef`, `#define`, and `#endif` preprocessor directives to create an include guard. The first time the header file is included, the `_PLAYER_H_` macro is defined, and the class declaration is included. The next time the header file is included, the `_PLAYER_H_` macro is already defined, so the class declaration will not be included again.
+
+You can use any name for the macro, but it's a common practice to use the name of the header file in uppercase with an underscore at the beginning and the end.
+
+There is also another way include guards, which is using `#pragma once` directive, but it's not standard and not supported by all compilers.
+
+```cpp
+// Player.h file (declaration file)
+#pragma once
+
+class Player {
+    // Player's class declaration
+};
+```
+
+The implementation file(.cpp) remains the same, and in the main file, you only need to include the header file.
+
+```cpp
+#include "Player.h"
+int main (){
+    Player player;
+    player.move(); // Player is moving
+    return 0;
+}
+```
