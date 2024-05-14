@@ -187,3 +187,47 @@ int main() {
 
 >[!IMPORTANT]
 > Notice that we did not need to pass the player\`s health to the function, because the function can access the player\`s health directly since it is a member of the class.
+
+## public & private Access Specifiers
+
+OOP gives us the power to control the access to the class members by using access specifiers, which are keywords that define the access level of the class members. There are three access specifiers in C++:
+
+- `public`: members are accessible from outside the class.
+- `private`: members are only accessible from within the class or from friends of the class (friends will be explained later in this branch).
+- `protected`: members are accessible from outside the class but only in a class derived from it. (explained later in another branch).
+
+This power allows us to hide the implementation details of the class from the users of the class, and to protect the data from being modified in an unexpected way, and to allow for more abstraction since the users don't need to know the logic behind the implementation of the class, easier to debug and maintain.
+
+***By default, the members of a class are always private, unless we specify otherwise.*** In the following example, we have a class called **`BankAccount`** that has a private member called **`balance`** and public members called **`deposit()`**, **`withdraw()`**.
+
+For now let's assume that the balance is initialized to **100** in the below example.
+
+```cpp
+class BankAccount {
+    // private members
+    private: // You don't need to write private, 
+             // it's the default access specifier
+        double balance;
+    public:
+        // public members 
+        // You need to specify it as public
+        void deposit(double amount) {
+            balance += amount;
+            cout << "balance is now " << balance << endl;
+        }
+        void withdraw(double amount) {
+            balance -= amount;
+            cout << "balance is now " << balance << endl;
+        }  
+};
+
+int main() {
+    BankAccount account;
+    account.deposit(100); // balance is now 200
+    account.withdraw(50); // balance is now 150
+    account.balance = 1000; // Error: balance is private (Compile error)
+    return 0;
+}
+```
+
+In the above example, the balance is a private member, so we can't access it from outside the class, but we can access it from the public functions `deposit()` and `withdraw()`. This gives us more control over the data and functions of the class, For example the user of this class can not set the balance to another value directly by mistake.
