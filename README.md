@@ -403,6 +403,9 @@ int main() {
 
 In the above example, we defined two constructors for the class `Player`, the first constructor is the constructor that initializes the player's variables to default values, and the second constructor is a parameterized constructor that initializes the player's variables to the values passed to it.
 
+>[!CAUTION]
+> Since you can have multiple constructors for the same class, you can't have two constructors with the same signature, because the compiler will not be able to differentiate between them. meaning that you can't have two constructors with the same number of parameters and the same types.
+
 if you define a constructor with parameters, the compiler will not provide a default constructor for you, **so you have to define it yourself if you need it otherwise you will get a compile error**.
 
 ```cpp
@@ -414,7 +417,7 @@ class Player {
         int level;
         int xp;
 
-        // Constructors
+        // Constructor
         Player(int h, int s, int l, int x) {
             health = h;
             speed = s;
@@ -430,9 +433,6 @@ int main() {
     return 0;
 }
 ```
-
->[!CAUTION]
-> Since you can have multiple constructors for the same class, you can't have two constructors with the same signature, because the compiler will not be able to differentiate between them. meaning that you can't have two constructors with the same number of parameters and the same types.
 
 **C++11** allowed us to give default values to the class members without the need to define a specific constructor for that, this is called **default member initialization**.
 
