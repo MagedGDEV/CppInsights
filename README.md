@@ -360,7 +360,7 @@ When creating an object from a class, the object is created in memory, and the c
 
 ### Constructors
 
-We can call our constructors as intialization function for our objects, it's a special member function that is called when an object is created, it has the same name as the class, and it doesn't have a return type, and it can have parameters. and you can have multiple constructors for the same class.
+We can call our constructors as intialization function for our objects, it's a special member function that is called when an object is created, it has the same name as the class, and it doesn't have a return type, and it can have parameters. and you can have multiple constructors for the same class this is called **constructor overloading**.
 
 Constructors are always public, because they are created specifically to be used when creating objects outside the class.
 
@@ -430,6 +430,9 @@ int main() {
     return 0;
 }
 ```
+
+>[!CAUTION]
+> Since you can have multiple constructors for the same class, you can't have two constructors with the same signature, because the compiler will not be able to differentiate between them. meaning that you can't have two constructors with the same number of parameters and the same types.
 
 **C++11** allowed us to give default values to the class members without the need to define a specific constructor for that, this is called **default member initialization**.
 
