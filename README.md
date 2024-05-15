@@ -353,3 +353,104 @@ int main (){
     return 0;
 }
 ```
+
+## Constructors & Destructors
+
+When creating an object from a class, the object is created in memory, and the class constructor is called to initialize the object, and when the object is destroyed, the class destructor is called to clean up the object such as releasing memory from the heap or closing files.
+
+### Constructors
+
+We can call our constructors as intialization function for our objects, it's a special member function that is called when an object is created, it has the same name as the class, and it doesn't have a return type, and it can have parameters. and you can have multiple constructors for the same class.
+
+Constructors are always public, because they are created specifically to be used when creating objects outside the class.
+
+If you don't define a constructor for your class, the compiler will provide a default constructor for you, which does nothing. but if you define a constructor, the compiler will not provide a default constructor for you.
+
+In the following example, multiple constructors will be defined for the class `Player`:
+
+```cpp
+class Player {
+    public:
+        // Player's variables
+        int health;
+        int speed;
+        int level;
+        int xp;
+
+        // Constructors
+        Player() {
+            health = 100;
+            speed = 10;
+            level = 1;
+            xp = 0;
+        }
+
+        Player(int h, int s, int l, int x) {
+            health = h;
+            speed = s;
+            level = l;
+            xp = x;
+        }
+};
+
+int main() {
+    // Create an object of the class
+    Player player1; // health = 100, speed = 10, level = 1, xp = 0
+    Player player2(200, 20, 2, 100); // health = 200, speed = 20, level = 2, xp = 100
+    return 0;
+}
+```
+
+In the above example, we defined two constructors for the class `Player`, the first constructor is the default constructor that initializes the player's variables to default values, and the second constructor is a parameterized constructor that initializes the player's variables to the values passed to it.
+
+**C++11** allowed us to give default values to the class members without the need to define a specific constructor for that, this is called **default member initialization**.
+
+```cpp
+class Player {
+    public:
+        // Player's variables
+        int health = 100;
+        int speed = 10;
+        int level = 1;
+        int xp = 0;
+};
+```
+
+In the above example, we gave default values to the player's variables directly in the class definition, so when creating an object from the class, the variables will be initialized to these values without the need to define a constructor.
+
+### Destructors
+
+Destructors are special member functions that are called when an object is destroyed, they have the same name as the class preceded by a tilde **`~`**, and they don't have parameters or return type.
+
+Just like constructors, if you don't define a destructor for your class, the compiler will provide a default destructor for you, which does nothing. but if you define a destructor, the compiler will not provide a default destructor for you. and the destructor is always public.
+
+You can use the destructor to clean up the object, such as releasing memory from the heap, closing files, or releasing other resources, for each class, there is only one destructor.
+
+The destructor is called automatically when the object goes out of scope, or when the `delete` operator is used to delete the object from the heap.
+
+In the following example, a destructor will be defined for the class `Player` to release memory from the heap:
+
+```cpp
+class Player {
+    public:
+        // Player's variables
+        int* data;
+
+        // Constructor
+        Player() {
+            data = new int[100];
+        }
+
+        // Destructor
+        ~Player() {
+            delete[] data;
+            cout << "Destructor called" << endl;
+        }
+};
+
+int main() {
+    // Create an object of the class
+    Player player;
+    return 0;
+}// Destructor called (destructor is called automatically when the object goes out of scope)
+```
