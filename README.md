@@ -401,7 +401,35 @@ int main() {
 }
 ```
 
-In the above example, we defined two constructors for the class `Player`, the first constructor is the default constructor that initializes the player's variables to default values, and the second constructor is a parameterized constructor that initializes the player's variables to the values passed to it.
+In the above example, we defined two constructors for the class `Player`, the first constructor is the constructor that initializes the player's variables to default values, and the second constructor is a parameterized constructor that initializes the player's variables to the values passed to it.
+
+if you define a constructor with parameters, the compiler will not provide a default constructor for you, **so you have to define it yourself if you need it otherwise you will get a compile error**.
+
+```cpp
+class Player {
+    public:
+        // Player's variables
+        int health;
+        int speed;
+        int level;
+        int xp;
+
+        // Constructors
+        Player(int h, int s, int l, int x) {
+            health = h;
+            speed = s;
+            level = l;
+            xp = x;
+        }
+};
+
+int main() {
+    // Create an object of the class
+    Player player1; // Error: no default constructor available
+    Player player2(200, 20, 2, 100); // health = 200, speed = 20, level = 2, xp = 100
+    return 0;
+}
+```
 
 **C++11** allowed us to give default values to the class members without the need to define a specific constructor for that, this is called **default member initialization**.
 
