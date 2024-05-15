@@ -483,5 +483,35 @@ int main() {
     // Create an object of the class
     Player player;
     return 0;
-}// Destructor called (destructor is called automatically when the object goes out of scope)
+} // Destructor called (destructor is called automatically 
+  //when the object goes out of scope)
+```
+
+## Constructor Initialization Lists
+
+When creating an object from a class, the constructor is called to initialize the object, and the constructor can initialize the object's variables using the constructor body, but there is another way to initialize the object's variables using the constructor initialization list.
+
+This is useful and more efficient when initializing the object's variables as it initializes the variables before entering the constructor body instead of intializing a variable once when it's declared and then intializing it again in the constructor body.
+
+When you give values to the class members in the constructor body, you are actually assigning values to the variables not initializing them, which can cause larger overhead in complex classes.
+
+To use the constructor initialization list, you need to add a colon `:` after the constructor's parameters, followed by the list of variables to be initialized and their values. The following example demonstrates how to use the constructor initialization list:
+
+```cpp
+class Player {
+    public:
+        // Player's variables
+        int health;
+        int speed;
+        int level;
+        int xp;
+
+        Player() : health(100), speed(10), level(1), xp(0) {
+            // Constructor body
+        }
+        // Constructors
+        Player(int h, int s, int l, int x) : health(h), speed(s), level(l), xp(x) {
+            // Constructor body
+        }
+};
 ```
