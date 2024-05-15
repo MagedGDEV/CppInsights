@@ -501,17 +501,37 @@ To use the constructor initialization list, you need to add a colon `:` after th
 class Player {
     public:
         // Player's variables
-        int health;
-        int speed;
-        int level;
-        int xp;
-
-        Player() : health(100), speed(10), level(1), xp(0) {
-            // Constructor body
-        }
-        // Constructors
-        Player(int h, int s, int l, int x) : health(h), speed(s), level(l), xp(x) {
-            // Constructor body
+        string name;
+        // constructor
+        Player(){
+            name = "Player";
         }
 };
+
+class Account {
+    public:
+        // Account's variables
+        string name;
+        double balance;
+        // constructor
+        Account () : name("Account"), balance(0.0) {
+            // constructor body
+        }
+        Account(string n, double b) : name(n), balance(b) {
+            // constructor body
+        }
+};
+
+int main(){
+
+    Player player; 
+    // At player's class name is intialized to empty string first
+    // then it's intialized to "Player" in the constructor body
+    Account account;
+    // At account's class name is intialized to Account and balance to 0.0
+    // directly in the constructor initialization list
+
+    // This saves overhead in complex classes and large programs
+    return 0;
+}
 ```
