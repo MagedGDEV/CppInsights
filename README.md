@@ -535,3 +535,76 @@ int main(){
     return 0;
 }
 ```
+
+## Delegating Constructors in C++
+
+When working with classes, it’s common to use overloaded constructors to provide multiple ways of initializing an object. However, repeating shared initialization code across multiple constructors can lead to code duplication, making maintenance harder and less efficient.
+
+C++11 introduced **delegating constructors**, a feature that allows one constructor to call another constructor in the same class. This approach reduces redundancy by centralizing shared initialization logic.
+
+### Key Points about Delegating Constructors
+
+- Constructors can delegate to other constructors within the same class.
+- Delegation uses the **constructor initialization list** syntax.
+- It improves code readability and reduces redundancy.
+
+### Example: Using Delegating Constructors
+
+Consider the following example, where the `Player` class has three constructors:
+
+1. The **primary constructor** initializes all member variables (`health`, `speed`, and `xp`).
+2. A **secondary constructor** accepts two arguments and delegates the rest to the primary constructor.
+3. A **default constructor** initializes the object with default values by delegating to the primary constructor.
+
+```cpp
+class Player {
+    int health;
+    int speed;
+    int xp;
+
+public:
+    // Primary constructor (Delegating constructor)
+    Player(int health_val, int speed_val, int xp_val)
+        : health{health_val}, speed{speed_val}, xp{xp_val} {
+        cout << "Three-argument constructor" << endl;
+    }
+
+    // Secondary constructor
+    Player(int health_val, int speed_val)
+        : Player{health_val, speed_val, 0} { // Delegates to the primary constructor
+        cout << "Two-argument constructor" << endl;
+    }
+
+    // Default constructor
+    Player()
+        : Player{100, 10, 0} { // Delegates to the primary constructor
+        cout << "Default constructor" << endl;
+    }
+};
+
+int main() {
+    Player p1{100, 20, 300}; // Calls the primary constructor
+    Player p2{150, 25};      // Calls the secondary constructor, which delegates
+    Player p3;               // Calls the default constructor, which delegates
+
+    return 0;
+}
+```
+
+### Explanation of Output
+
+When you run the code, the output is:
+
+```bash
+Three-argument constructor
+Three-argument constructor
+Two-argument constructor
+Three-argument constructor
+Default constructor
+```
+
+#### Breakdown of the Output
+
+1. `p1`: The primary constructor is called directly, initializing all three variables.
+2. `p2`: The secondary constructor delegates to the primary constructor before printing its message.
+3. `p3`: The default constructor delegates to the primary constructor before printing its message.
