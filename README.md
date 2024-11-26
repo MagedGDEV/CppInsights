@@ -611,7 +611,7 @@ Default constructor
 
 ## Constructor Parameters & Default Values
 
-Recall from the [Functions](https://github.com/MagedGDEV/CppInsights/tree/functions#default-arguments) branch, we could add default values to parameters, and likewise, we can apply the same concept to constructors. This allows us to create constructors with varying numbers of arguments, reducing the need for overloading. 
+Recall from the [Functions](https://github.com/MagedGDEV/CppInsights/tree/functions#default-arguments) branch, we could add default values to parameters, and likewise, we can apply the same concept to constructors. This allows us to create constructors with varying numbers of arguments, reducing the need for overloading.
 
 Default parameter values save more code compared to delegating constructors, as they eliminate the need for redundant constructors entirely while still maintaining flexibility.
 
@@ -628,13 +628,13 @@ class Player {
     int speed;
     int xp;
 
-public:
-    // Constructor with default values
-    Player(int health_val = 100, int speed_val = 1, int xp_val = 0)
-        : health{health_val}, speed{speed_val}, xp{xp_val} {
-        cout << "Player created with health: " << health
-             << ", speed: " << speed << ", xp: " << xp << endl;
-    }
+    public:
+        // Constructor with default values
+        Player(int health_val = 100, int speed_val = 1, int xp_val = 0)
+            : health{health_val}, speed{speed_val}, xp{xp_val} {
+            cout << "Player created with health: " << health
+                 << ", speed: " << speed << ", xp: " << xp << endl;
+        }
 };
 
 int main() {
@@ -673,18 +673,18 @@ class Player {
     int health;
     int speed;
 
-public:
-    // Constructor with default values
-    Player(int health_val = 100, int speed_val = 1)
-        : health{health_val}, speed{speed_val} {
-        cout << "Two arguments constructor" << endl;
-    }
+    public:
+        // Constructor with default values
+        Player(int health_val = 100, int speed_val = 1)
+            : health{health_val}, speed{speed_val} {
+            cout << "Two arguments constructor" << endl;
+        }
 
-    // Constructor with one parameter
-    Player(int health_val)
-        : health{health_val}, speed{0} {  // Default speed = 0
-        cout << "One argument constructor" << endl;
-    }
+        // Constructor with one parameter
+        Player(int health_val)
+            : health{health_val}, speed{0} {  // Default speed = 0
+            cout << "One argument constructor" << endl;
+        }
 };
 
 int main() {
@@ -701,3 +701,64 @@ int main() {
 - When the compiler sees Player p1{50}, it cannot determine whether to:
   - Use the two-argument constructor, treating speed_val as defaulted, or
   - Use the one-argument constructor directly.
+
+## Copy Constructor
+
+In C++, copying data from one variable to another is common. Similarly, we can copy data from one object to another using a **copy constructor**. This constructor tells the compiler how to copy the data from one object to another.
+
+### When Do You Need a Copy Constructor?
+
+- When **passing an object by value** as a function parameter.
+- When **returning an object by value** from a function.
+- When **constructing one object from another** of the same class.
+
+If you don't provide a custom copy constructor, C++ will provide a **default compiler-defined copy constructor**. This default constructor:
+
+- Copies the values of each member to the new object.
+- Works well in many cases but may cause problems in some scenarios (e.g., with dynamic memory).
+
+### Syntax of a Copy Constructor
+
+```cpp
+ClassName(const ClassName& other);
+```
+
+- Adding a reference **`&`** in the copy constructor is **crucial** because it prevents unnecessary copies of the source object and **avoids creating an infinite loop by repeatedly calling the constructor**.
+
+- Adding **`const`** ensures that the source object cannot be modified during the copying process.
+
+### Example: Copy Constructor
+
+```cpp
+class Player {
+    int health;
+
+    public:
+        // Constructor
+        Player(int h) : health(h) {}
+
+        // Copy Constructor
+        Player(const Player& other) : health(other.health) {
+            std::cout << "Copy Constructor Called" << std::endl;
+        }
+
+        void showHealth() {
+            std::cout << "Health: " << health << std::endl;
+        }
+};
+
+int main() {
+    Player p1(100);   // Constructor is called
+    Player p2 = p1;    // Copy Constructor is called
+
+    p1.showHealth();   // Displays: Health: 100
+    p2.showHealth();   // Displays: Health: 100
+
+    return 0;
+}
+```
+
+In the above example, the copy constructor ensures that the value of health from **`p1`** is copied to **`p2`**. Since both objects have their own health value, the constructor copies the data without issues.
+
+> [!TIP]
+> Delegating constructors can also be used with copy constructors to simplify and avoid code duplication.
