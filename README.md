@@ -762,3 +762,110 @@ In the above example, the copy constructor ensures that the value of health from
 
 > [!TIP]
 > Delegating constructors can also be used with copy constructors to simplify and avoid code duplication.
+
+### Shallow copying vs Deep copying
+
+As mentioned before, there are situations where using the default copy constructor might not be sufficient, especially when working with dynamically allocated memory (like pointers). A shallow copy can cause serious problems, such as **`double deletion`** or **`data corruption`** when the object is destroyed. In these cases, you need to define a deep copy constructor to ensure each object manages its own memory.
+
+#### Example: Shallow Copy with Pointer (Crashing with Errors)
+
+Here’s an example of shallow copying using a pointer. This approach leads to a crash because both objects end up pointing to the same memory, and when one object is destroyed, it frees the memory that the other object is still using.
+
+```cpp
+class Player {
+    public:
+        int *score;
+
+        // Constructor
+        Player(int val) {
+            score = new int(val);
+            cout << "Player created with score: " << *score << endl;
+        }
+
+        // Shallow copy constructor (just copies the pointer)
+        Player(const Player& other) {
+            score = other.score; // Shallow copy of the pointer
+            cout << "Shallow copy created with score: " << *score << endl;
+        }
+
+        // Destructor
+        ~Player() {
+            cout << "Destroying Player with score: " << *score << endl;
+            delete score; // Deleting memory
+    }
+};
+
+int main() {
+    Player p1(100);     // Player with score 100
+    Player p2 = p1;     // Shallow copy of p1
+
+    return 0;           // Destructor is called for both objects here
+}
+```
+
+#### Output with (crash)
+
+```bash
+Player created with score: 100
+Shallow copy created with score: 100
+Destroying Player with score: 100
+Destroying Player with score: 0  // Undefined behavior, could show 0 or other values
+```
+
+##### Explanation of shallow copying
+
+- When **`p1`** is destroyed, it deletes the memory pointed to by score.
+- **`p2`** shares the same pointer (score) due to the shallow copy. When **`p2`**'s destructor is called, it tries to access the already deleted memory, leading to undefined behavior. The value shown may be the result of accessing a memory location that has already been freed, but it's not guaranteed and depends on the environment and compiler.
+
+> [!WARNING]
+> Another key issue with shallow copying is that if the pointer value in **`p2`** is modified, it will also change the value of the data in **`p1`**, since both objects share the same memory. This can lead to unexpected behavior and bugs.
+
+#### Deep Copy Constructor Example (Fixing the Issue)
+
+To avoid this issue, we can implement a **deep copy constructor**. In a deep copy, we allocate new memory for each object, so they don’t share the same memory. Here’s an updated version of the class with a deep copy constructor:
+
+```cpp
+class Player {
+public:
+    int *score;
+
+    // Constructor
+    Player(int val) {
+        score = new int(val);
+        cout << "Player created with score: " << *score << endl;
+    }
+
+    // Deep copy constructor (allocates new memory)
+    Player(const Player& other) {
+        score = new int(*other.score); // Deep copy (new memory allocation)
+        cout << "Deep copy created with score: " << *score << endl;
+    }
+
+    // Destructor
+    ~Player() {
+        cout << "Destroying Player with score: " << *score << endl;
+        delete score; // Deleting memory
+    }
+};
+
+int main() {
+    Player p1(100);     // Player with score 100
+    Player p2 = p1;     // Deep copy of p1
+
+    return 0;           // Destructor is called for both objects here
+}
+```
+
+#### Output (with no errors)
+
+```bash
+Player created with score: 100
+Deep copy created with score: 100
+Destroying Player with score: 100
+Destroying Player with score: 100
+```
+
+##### Explanation of deep copying
+
+- In this example, when p2 is created as a deep copy of p1, a new memory block is allocated for score, and the value of p1's score is copied into p2's score.
+- The destructors are called for both p1 and p2, but now each object has its own memory, so the memory is deleted correctly without causing any errors.
