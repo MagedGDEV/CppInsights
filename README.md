@@ -562,24 +562,24 @@ class Player {
     int speed;
     int xp;
 
-public:
-    // Primary constructor (Delegating constructor)
-    Player(int health_val, int speed_val, int xp_val)
-        : health{health_val}, speed{speed_val}, xp{xp_val} {
-        cout << "Three-argument constructor" << endl;
-    }
+    public:
+        // Primary constructor (Delegating constructor)
+        Player(int health_val, int speed_val, int xp_val)
+            : health{health_val}, speed{speed_val}, xp{xp_val} {
+            cout << "Three-argument constructor" << endl;
+        }
 
-    // Secondary constructor
-    Player(int health_val, int speed_val)
-        : Player{health_val, speed_val, 0} { // Delegates to the primary constructor
-        cout << "Two-argument constructor" << endl;
-    }
+        // Secondary constructor
+        Player(int health_val, int speed_val)
+            : Player{health_val, speed_val, 0} { // Delegates to the primary constructor
+            cout << "Two-argument constructor" << endl;
+        }
 
-    // Default constructor
-    Player()
-        : Player{100, 10, 0} { // Delegates to the primary constructor
-        cout << "Default constructor" << endl;
-    }
+        // Default constructor
+        Player()
+            : Player{100, 10, 0} { // Delegates to the primary constructor
+            cout << "Default constructor" << endl;
+        }
 };
 
 int main() {
@@ -608,3 +608,96 @@ Default constructor
 1. `p1`: The primary constructor is called directly, initializing all three variables.
 2. `p2`: The secondary constructor delegates to the primary constructor before printing its message.
 3. `p3`: The default constructor delegates to the primary constructor before printing its message.
+
+## Constructor Parameters & Default Values
+
+Recall from the [Functions](https://github.com/MagedGDEV/CppInsights/tree/functions#default-arguments) branch, we could add default values to parameters, and likewise, we can apply the same concept to constructors. This allows us to create constructors with varying numbers of arguments, reducing the need for overloading. 
+
+Default parameter values save more code compared to delegating constructors, as they eliminate the need for redundant constructors entirely while still maintaining flexibility.
+
+> [!TIP]  
+> Default values in a constructor **always override** default member initializers for the same member.
+
+---
+
+### Example: Constructor with Default Values
+
+```cpp
+class Player {
+    int health;
+    int speed;
+    int xp;
+
+public:
+    // Constructor with default values
+    Player(int health_val = 100, int speed_val = 1, int xp_val = 0)
+        : health{health_val}, speed{speed_val}, xp{xp_val} {
+        cout << "Player created with health: " << health
+             << ", speed: " << speed << ", xp: " << xp << endl;
+    }
+};
+
+int main() {
+    Player p1;                     // Uses all defaults: health=100, speed=1, xp=0
+    Player p2{80};                 // Overrides health: health=80, speed=1, xp=0
+    Player p3{70, 5};              // Overrides health and speed: health=70, speed=5, xp=0
+    Player p4{95, 10, 100};        // Overrides all values: health=95, speed=10, xp=100
+
+    return 0;
+}
+```
+
+### Output
+
+```bash
+Player created with health: 100, speed: 1, xp: 0
+Player created with health: 80, speed: 1, xp: 0
+Player created with health: 70, speed: 5, xp: 0
+Player created with health: 95, speed: 10, xp: 100
+```
+
+#### Explanation of the Code Above
+
+- p1: Calls the constructor with no arguments, so all default values are used.
+- p2: Passes 80 for health, and the other parameters (speed and xp) use their defaults.
+- p3: Passes 70 for health and 5 for speed, while xp defaults to 0.
+- p4: Passes values for all parameters, overriding all defaults.
+
+> [!CAUTION]
+> While default values are powerful, they can lead to ambiguity when combined with overloaded constructors. Let’s explore an example of such ambiguity:
+
+### Ambiguity Example
+
+```cpp
+class Player {
+    int health;
+    int speed;
+
+public:
+    // Constructor with default values
+    Player(int health_val = 100, int speed_val = 1)
+        : health{health_val}, speed{speed_val} {
+        cout << "Two arguments constructor" << endl;
+    }
+
+    // Constructor with one parameter
+    Player(int health_val)
+        : health{health_val}, speed{0} {  // Default speed = 0
+        cout << "One argument constructor" << endl;
+    }
+};
+
+int main() {
+    Player p1{50};  // Ambiguity: Which constructor should be called?
+
+    return 0;
+}
+```
+
+#### Why Ambiguity Occurs?
+
+- Player(int health_val = 100, int speed_val = 1) can accept one or two arguments because of the default for speed_val.
+- Player(int health_val) also accepts one argument.
+- When the compiler sees Player p1{50}, it cannot determine whether to:
+  - Use the two-argument constructor, treating speed_val as defaulted, or
+  - Use the one-argument constructor directly.
