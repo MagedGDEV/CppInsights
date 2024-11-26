@@ -615,7 +615,7 @@ Recall from the [Functions](https://github.com/MagedGDEV/CppInsights/tree/functi
 
 Default parameter values save more code compared to delegating constructors, as they eliminate the need for redundant constructors entirely while still maintaining flexibility.
 
-> [!TIP]  
+> [!NOTE]  
 > Default values in a constructor **always override** default member initializers for the same member.
 
 ---
@@ -664,7 +664,7 @@ Player created with health: 95, speed: 10, xp: 100
 - p4: Passes values for all parameters, overriding all defaults.
 
 > [!CAUTION]
-> While default values are powerful, they can lead to ambiguity when combined with overloaded constructors. Let’s explore an example of such ambiguity:
+> While default values in constructors are powerful, they can lead to ambiguity when combined with overloaded constructors. Let’s explore an example of such ambiguity
 
 ### Ambiguity Example
 
