@@ -869,3 +869,83 @@ Destroying Player with score: 100
 
 - In this example, when p2 is created as a deep copy of p1, a new memory block is allocated for score, and the value of p1's score is copied into p2's score.
 - The destructors are called for both p1 and p2, but now each object has its own memory, so the memory is deleted correctly without causing any errors.
+
+## Move Constructor
+
+In modern C++, efficiency is key, especially when dealing with objects that involve resource management, such as dynamic memory or file handles. This is where the move constructor comes into play—it allows for the efficient transfer of resources rather than duplicating them. But before diving into how the move constructor works, we first need to understand two fundamental concepts: L-Value references and R-Value references.
+
+### L-Value references
+
+An **L-value reference** is a reference to a variable (an object or memory location) that has a name and persists in memory. Simply put, it acts like an **alias** for the variable, allowing you to refer to the same memory location using a different name.
+
+L-value references are typically used to pass objects to functions without making a copy, enabling efficient operations while preserving the original value.
+
+#### Key Points for L-Value references
+
+- L-value references can only bind to L-values (objects that have a persistent location in memory).
+- They are commonly used in function parameters to avoid copying data.
+
+#### Example of L-Value references
+
+```cpp
+void modify(int& ref) { // L-value reference as a parameter
+    ref = 10; // Modify the original variable
+}
+
+int main() {
+    int x = 5;
+    cout << "Before: " << x << endl; 
+    modify(x); // Pass x by reference
+    cout << "After: " << x << endl; // x is modified
+    return 0;
+}
+```
+
+##### Output of L-Value references
+
+```bash
+Before: 5
+After: 10
+```
+
+- **`ref`** is an L-value reference that aliases **`x`**.
+- Modifying **`ref`** directly changes the value of **`x`**.
+
+### R-Value references
+
+An **R-value reference** is a reference to a temporary object (an object without a persistent memory location). It allows you to bind to values that would otherwise be inaccessible, such as temporary results of expressions.
+
+R-value references are primarily used for **move semantics** and **perfect forwarding**, enabling efficient handling of resources by transferring ownership instead of copying.
+
+#### Key Points for R-Value References
+
+- R-value references can only bind to R-values (temporary objects or literals).
+- They are denoted using **`&&`** in the syntax.
+- They allow modification of temporary objects.
+
+#### Example of R-Value References
+
+```cpp
+void printAndModify(int&& ref) { // R-value reference as a parameter
+    cout << "Original: " << ref << endl;
+    ref = 20; // Modify the temporary value
+    cout << "Modified: " << ref << endl;
+}
+
+int main() {
+    printAndModify(10); // Pass a temporary (R-value)
+    int x = 10;
+    // printAndModify(x); will cause an error because passing an L-value
+    return 0;
+}
+```
+
+##### Output of R-Value references
+
+```bash
+Original: 10  
+Modified: 20
+```
+
+- **`ref`** is an R-value reference that binds to the temporary **`10`**.
+- It allows modification of a value that would otherwise be discarded.
