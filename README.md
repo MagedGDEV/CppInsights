@@ -826,26 +826,26 @@ To avoid this issue, we can implement a **deep copy constructor**. In a deep cop
 
 ```cpp
 class Player {
-public:
-    int *score;
+    public:
+        int *score;
 
-    // Constructor
-    Player(int val) {
-        score = new int(val);
-        cout << "Player created with score: " << *score << endl;
-    }
+        // Constructor
+        Player(int val) {
+            score = new int(val);
+            cout << "Player created with score: " << *score << endl;
+        }
 
-    // Deep copy constructor (allocates new memory)
-    Player(const Player& other) {
-        score = new int(*other.score); // Deep copy (new memory allocation)
-        cout << "Deep copy created with score: " << *score << endl;
-    }
+        // Deep copy constructor (allocates new memory)
+        Player(const Player& other) {
+            score = new int(*other.score); // Deep copy (new memory allocation)
+            cout << "Deep copy created with score: " << *score << endl;
+        }
 
-    // Destructor
-    ~Player() {
-        cout << "Destroying Player with score: " << *score << endl;
-        delete score; // Deleting memory
-    }
+        // Destructor
+        ~Player() {
+            cout << "Destroying Player with score: " << *score << endl;
+            delete score; // Deleting memory
+        }
 };
 
 int main() {
@@ -949,3 +949,89 @@ Modified: 20
 
 - **`ref`** is an R-value reference that binds to the temporary **`10`**.
 - It allows modification of a value that would otherwise be discarded.
+
+Now that we've covered **L-value** and **R-value references**, let's delve into the **move constructor**, a critical feature in modern C++ that optimizes resource handling.
+
+When we pass or return objects, the **copy constructor** duplicates resources, which can be inefficient for large objects or objects managing dynamically allocated memory. Instead, the **move constructor** transfers ownership of resources from one object to another, avoiding expensive deep copies.
+
+The **move constructor** is invoked when an object is initialized from a temporary (R-value), ensuring efficient resource management by **moving** instead of **copying**.
+
+### Syntax Move Constructor
+
+```cpp
+ClassName(ClassName&& other) noexcept;
+```
+
+- **`&&`** indicates R-Value reference.
+- **`noexcept`** keyword guarantees that this function (move constructor in our case) will not throw exceptions.
+  - While optional, it is **highly recommended** for STL containers like **`std::vector`** or **`std::map`**, as it allows them to perform move operations efficiently during resizing or reallocation.
+  - If noexcept is omitted, STL containers may fall back to the copy constructor, negating the performance benefits of the move constructor.
+
+### Example of move constructor
+
+```cpp
+class Player {
+    std::string name;
+
+    public:
+        Player(std::string name_val) : name{name_val} {
+            std::cout << "Constructor called for " << name << std::endl;
+        }
+
+        // Move Constructor
+        Player(Player&& other) noexcept : name{std::move(other.name)} {
+            std::cout << "Move constructor called for " << name << std::endl;
+        }
+
+        ~Player() {
+            std::cout << "Destructor called for " << name << std::endl;
+    }
+};
+
+int main() {
+    std::vector<Player> players;
+    players.push_back(Player("Player1")); // Move constructor is called
+    players.push_back(Player("Player2")); // Move constructor is called
+
+    return 0;
+}
+```
+
+- **`std::move`** function is part of C++ Standard Library and is used to indicate that an object can be "moved" rather than copied. Specifically, it casts its argument to an R-value reference, allowing the move constructor or move assignment operator to be invoked.
+  - it tells the compiler: "I don't need the contents of **`other.name`** in the original object anymore; you can safely transfer its resources to **`name`**."
+  - Without **`std::move`** the move constructor will act as a copy constructor.
+
+### Output of move constructor
+
+```txt
+Constructor called for Player1
+Move constructor called for Player1
+Destructor called for 
+Constructor called for Player2
+Move constructor called for Player2
+Destructor called for 
+Destructor called for Player1
+Destructor called for Player2
+```
+
+#### Explanation of move constructor
+
+1. First Object Creation **`(Player("Player1"))`**:
+    1. A temporary Player object is created with the name **`Player1`**.
+    2. The constructor is called for this temporary object.
+    3. This temporary object is then moved into the players vector and move constructor is invoked to transfer ownership into vector.
+    4. Once the temporary object is moved, it is destroyed, as its lifetime ends after the move and notice **`name`** is not available when calling the destructor **because it is moved**.
+2. Same Steps happens for Second Object Creation.
+3. At the end the vector is destroyed, destroying it's players.
+
+> [!WARNING]
+> Compiler doesn't provide implementation of move constructor on it's own like copy constructor.
+
+### Why Choose Move Constructor Over Copy Constructor?
+
+When working with large containers like vectors, using a **move constructor** is much more efficient than using a **copy constructor**. Here's why:
+
+- Copy Constructor: Duplicates every element in the container, which can be slow and memory-intensive, especially with large amounts of data.
+- Move Constructor: Instead of copying data, it **transfers ownership** of the data from one object to another, which is much faster and uses less memory.
+
+When a container like a vector needs to resize, the **move constructor** just moves the data, while the **copy constructor** makes a full copy, which is slower. The move constructor is faster and more efficient, especially when dealing with large data.
