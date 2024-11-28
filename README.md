@@ -1197,3 +1197,10 @@ Destructor called for Player1
 2. **Creating `p3`**: The creation of **`p3`** inside a block scope increases **`playerCount`** to 3, and the updated count is displayed.
 3. **Destructor for `p3`**: Once **`p3`** goes out of scope, its destructor is called, and **`playerCount`** is decremented to 2. The updated count is displayed.
 4. **Destructor for `p1` and `p2`**: As the program finishes, the destructors for **`p1`** and **`p2`** decrement **`playerCount`** further. After all destructors are called,**`playerCount`** is 0, indicating all players are destroyed.
+
+## Struct vs Classes
+
+**`struct`** is inherited from C and is essentially the same as a **`class`** in C++. The key difference is that, by default:
+
+- struct members are public.
+- class members are private by default.
