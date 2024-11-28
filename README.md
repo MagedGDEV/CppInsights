@@ -1121,3 +1121,79 @@ int main() {
 
 >[!IMPORTANT]
 > All members must be initialized in the constructor when creating a const object. Once constructed, you cannot modify the members later.
+
+## Static Class Members & Functions
+
+In C++, **`static`** members are variables or functions that are shared across all instances of a class, meaning they do not belong to individual objects but rather to the class itself. This means that **static variables** are common to all instances of the class, and their value is shared between all objects. **Static functions** can also be called on the class itself, not requiring an object instance and they can only access static members of the class.
+
+### Initialization of Static Members Outside the Class
+
+Static class members are declared inside the class, but they must be initialized outside the class. This is because the static member is part of the class definition, but it needs a specific memory location shared by all instances, and this memory needs to be allocated separately. The reason C++ requires the initialization to be outside the class is to ensure that the static member gets allocated a memory location that persists across all instances.
+
+### Example of Static Class Members & Functions
+
+```cpp
+class Player {
+    private:
+        std::string name;
+        static int playerCount; // Static member to track the number of Player  objects
+
+    public:
+        Player(std::string name_val) : name{name_val} {
+            ++playerCount; // Increment count when a new player is created
+            std::cout << "Constructor called for " << name << std::endl;
+        }
+
+        ~Player() {
+            --playerCount; // Decrement count when a player is destroyed
+            std::cout << "Destructor called for " << name << std::endl;
+        }
+
+        // Static function to display the number of players
+        static void displayPlayerCount() {
+            std::cout << "Number of players: " << playerCount << std::endl;
+        }
+};
+
+// Definition of the static member outside the class
+int Player::playerCount = 0;
+
+int main() {
+    Player p1("Player1");
+    Player p2("Player2");
+
+    Player::displayPlayerCount();
+
+    {
+        Player p3("Player3");
+        Player::displayPlayerCount(); 
+    }
+
+    Player::displayPlayerCount(); 
+
+    return 0;
+}
+```
+
+### Output of Static Class Members & Functions
+
+```txt
+Constructor called for Player1
+Constructor called for Player2
+Number of players: 2
+Constructor called for Player3
+Number of players: 3
+Destructor called for Player3
+Number of players: 2
+Destructor called for Player2
+Destructor called for Player1
+```
+
+#### Explanation of Static Class Members & Functions
+
+- Notice **Static member functions** can be called directly on the class, such as **`Player::displayPlayerCount()`**, without needing an object instance.
+
+1. **Creating `p1` and `p2`**: When **`p1`** and **`p2`** are created, the constructors increment playerCount to 2, **`displayPlayerCount()`** shows 2 players.
+2. **Creating `p3`**: The creation of **`p3`** inside a block scope increases **`playerCount`** to 3, and the updated count is displayed.
+3. **Destructor for `p3`**: Once **`p3`** goes out of scope, its destructor is called, and **`playerCount`** is decremented to 2. The updated count is displayed.
+4. **Destructor for `p1` and `p2`**: As the program finishes, the destructors for **`p1`** and **`p2`** decrement **`playerCount`** further. After all destructors are called,**`playerCount`** is 0, indicating all players are destroyed.
