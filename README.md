@@ -1292,3 +1292,5 @@ int main() {
     return 0;
 }
 ```
+
+- **`displayHealth`** is a **friend function** of the **`Player`** class, which allows it to access the private member **`health`** directly.
