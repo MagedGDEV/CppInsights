@@ -1216,3 +1216,79 @@ class Enemy {
     int health;        // private by default
 };
 ```
+
+## Friend of a Class
+
+The **`friend`** keyword grants access to private and protected members of a class to specific functions or other classes. It can be applied to:
+
+- A non-member function.
+- A member function of another class.
+- Another class.
+
+### Syntax for Friend
+
+1. Friend Function (non-member):
+
+    ```cpp
+    class ClassName {
+    private:
+        int privateValue;
+    public:
+        friend void someFunction(ClassName& obj);
+    };
+    ```
+
+2. Friend member function of another class
+
+    ```cpp
+    class AnotherClass;
+
+    class ClassName {
+    private:
+        int privateValue;
+    public:
+        friend void AnotherClass::someFunction(ClassName& obj);
+    };
+    ```
+
+3. Friend Class:
+
+    ```cpp
+    class ClassName {
+    private:
+        int privateValue;
+    public:
+        friend class AnotherClass;
+    };
+    ```
+
+### Example of Friend of a Class
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Player {
+    private:
+        int health;
+
+    public:
+        // Declare a friend function
+        friend void displayHealth(const Player& p);
+        
+        Player(int h) : health(h) {}
+};
+
+// Friend function definition
+void displayHealth(const Player& p) {
+    cout << "Player health: " << p.health << endl;
+}
+
+
+int main() {
+    Player p1(100);
+    displayHealth(p1);  // Can access private member `health` directly
+
+    return 0;
+}
+```
