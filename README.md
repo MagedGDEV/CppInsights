@@ -1025,7 +1025,7 @@ Destructor called for Player2
 3. At the end the vector is destroyed, destroying it's players.
 
 > [!WARNING]
-> Compiler doesn't provide implementation of move constructor on it's own like copy constructor.
+> Compiler does not provide implementation of move constructor on it's own like copy constructor.
 
 ### Why Choose Move Constructor Over Copy Constructor?
 
