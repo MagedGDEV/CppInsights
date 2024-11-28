@@ -1204,3 +1204,15 @@ Destructor called for Player1
 
 - struct members are public.
 - class members are private by default.
+
+```cpp
+struct Player {
+    std::string name;  // public by default
+    int health;        // public by default
+};
+
+class Enemy {
+    std::string name;  // private by default
+    int health;        // private by default
+};
+```
