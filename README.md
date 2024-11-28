@@ -1075,3 +1075,49 @@ int main() {
 ```
 
 In the above example, **`this->health`** is used inside the **`setHealth`** function to clearly reference the member variable, as it shares the same name as the parameter health. Without the this pointer, the compiler would treat the parameter as the variable to assign **(ambiguity)**.
+
+## Using `const` with classes
+
+In the [Variables & Constants](https://github.com/MagedGDEV/CppInsights/tree/variables) branch, we discussed how variables can be initialized with values and how **`const`** disables changes to those variables. Similarly, **`const`** objects prevent any modification of their members.
+
+When dealing with **`const`** objects, any member functions that modify the object's state must be avoided. The compiler enforces this rule by requiring those functions to be marked as **`const`** if they don't modify the object.
+
+### Example of using `const` with classes
+
+```cpp
+class Player {
+    private:
+        int health;
+
+    public:
+        // Constructor to initialize health
+        Player(int health_val) : health{health_val} {}
+
+        // Function that tries to modify the object (will give error)
+        void setHealth(int health_val) {
+            health = health_val; // Error: cannot modify member of a const  object
+        }
+
+        // Function that doesn't modify the object (works fine with const   objects)
+        void showHealth() const {
+            cout << "Health: " << health << endl; // No modification, so it's   fine
+        }
+};
+
+int main() {
+    const Player p1(100); // const object
+
+    // p1.setHealth(50); // Error: can't call non-const function on a const object
+    p1.showHealth(); // Works fine: const function, doesn't modify object
+
+    return 0;
+}
+```
+
+#### Explanation of using `const` with classes
+
+- **`setHealth`**: This function tries to modify the member health, which is not allowed when working with a **`const`** object. This will result in a **compilation error**.
+- **`showHealth`**: This function is marked as **`const`**, meaning it guarantees not to modify any members of the object. Thus, it works fine with **`const`** objects.
+
+>[!IMPORTANT]
+> All members must be initialized in the constructor when creating a const object. Once constructed, you cannot modify the members later.
