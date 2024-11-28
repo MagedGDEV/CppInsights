@@ -1035,3 +1035,43 @@ When working with large containers like vectors, using a **move constructor** is
 - Move Constructor: Instead of copying data, it **transfers ownership** of the data from one object to another, which is much faster and uses less memory.
 
 When a container like a vector needs to resize, the **move constructor** just moves the data, while the **copy constructor** makes a full copy, which is slower. The move constructor is faster and more efficient, especially when dealing with large data.
+
+## The 'this' pointer
+
+The **`this`** pointer is a special, implicit pointer that refers to the current instance of a class. It holds the address of the object for which a non-static member function is called. Although we don't typically need to use the **`this`** pointer explicitly because the compiler automatically uses it to access members, there are cases where we need to reference it, such as when there is a name conflict between member variables and function parameters.
+
+### When to Use the `this` Pointer
+
+A common scenario where the **`this`** pointer is useful is when a member variable and a parameter share the same name. In such cases, using the **`this`** pointer helps differentiate between the two.
+
+### Example of `this` Pointer
+
+```cpp
+class Player {
+    public:
+        int health;
+
+        // Constructor
+        Player(int health_val) : health{health_val} {}
+
+        // Member function using 'this' to avoid name conflict
+        void setHealth(int health) {
+            this->health = health;  // 'this' differentiates member variable and parameter
+        }
+
+        void showHealth() {
+            cout << "Health: " << health << endl;  // 'this' is optional here
+    }
+};
+
+int main() {
+    Player p1(100);
+    p1.showHealth();  // Output: Health: 100
+    p1.setHealth(80);
+    p1.showHealth();  // Output: Health: 80
+
+    return 0;
+}
+```
+
+In the above example, **`this->health`** is used inside the **`setHealth`** function to clearly reference the member variable, as it shares the same name as the parameter health. Without the this pointer, the compiler would treat the parameter as the variable to assign **(ambiguity)**.
