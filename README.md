@@ -65,9 +65,6 @@ int main() {
 
 Now, the operation is more intuitive, and we can use the operators directly. The operator overloading makes the code more natural and readable, similar to how the operators works with primitive types.
 
->[!WARNING]
-> C++ automatically generates a default assignment operator for you, but it may not always do what you expect, especially when your class contains complex members like pointers.
-
 ### Important Rules for Operator Overloading
 
 1. **Precedence & Associativity:** You cannot change the precedence or associativity of operators. They will remain the same as predefined in C++.
@@ -94,3 +91,141 @@ These operators are reserved by the language and cannot be overloaded.
 
 > [!IMPORTANT]
 > Operator overloading should be used to make code more intuitive and readable. If overloading an operator would make the code more complex or less clear, it's better to use a member function or an external function instead.
+
+## Overloading the Assignment Operator (copy)
+
+In C++, the **copy assignment operator** is called when you assign a value or copy an object from one to another, such as with the statement **`s2 = s1`**. On the other hand, the **copy constructor** is called when an object is initialized with another object, for example, **`MyClass obj2 = obj1;`**. The key difference is that the copy assignment operator is invoked during assignment, while the copy constructor is invoked during initialization.
+
+By default, C++ provides a **shallow copy** for the copy assignment operator, which works fine in many simple cases. However, if your class contains pointers or other dynamically allocated resources, this shallow copy will not be sufficient, leading to issues like double freeing memory or shallow copying of resources. In such cases, you need to provide a custom **deep copy assignment operator**.
+
+### Syntax of the Copy Assignment Operator
+
+The general syntax for defining a copy assignment operator is as follows:
+
+```cpp
+TYPE& TYPE::operator=(const TYPE& rhs) {
+    // Implementation
+}
+```
+
+#### Explanation of copy assignment operator syntax
+
+1. **`TYPE&`**:
+
+    - The operator returns a reference to the current object (**`*this`**). This is essential for supporting chained assignments, such as **`a = b = c;`**.
+    - If you return **`TYPE`** (a value) instead of **`TYPE&`**, the operator would create **an unnecessary copy** of the object. This can degrade performance and lead to unexpected behavior.
+
+2. **`TYPE::operator=`**:
+
+    - This declares the function as the **`operator=`** for the class **`TYPE`**.
+
+3. **`const TYPE& rhs`**:
+
+    - This is the parameter that represents the right-hand side of the assignment (**`rhs`**).
+    - The parameter is passed by **constant reference** to:
+        - Avoid unnecessary copying (improves performance).
+        - Ensure the source object (**`rhs`**) is not modified during the assignment.
+
+#### Behind the Scenes
+
+When you write:
+
+```cpp
+s2 = s1;
+```
+
+The compiler translates this into:
+
+```cpp
+s2.operator=(s1);
+```
+
+This calls the **`operator=`** function on **`s2`**, passing **`s1`** as the argument.
+
+#### Why **`TYPE&`** Is Used Instead of **`TYPE`**
+
+1. **Avoiding Unnecessary Copies:**
+
+    - Returning **`TYPE`** (by value) creates a copy of the object after every  assignment, which is inefficient and unnecessary.
+    - Returning **`TYPE&`** avoids the copy, as it directly returns a reference to the current object.
+
+2. Chained Assignments:
+
+    - When you write **`a = b = c;`**, it is interpreted as:
+
+    ```cpp
+    a = (b = c);
+    ```
+
+    - This requires **`b = c`** to return a reference to **`b`** so that **`a = b`** can be evaluated.
+    - If the operator returned **`TYPE`** instead of **`TYPE&`**, the temporary object would not refer to **`b`**, and the code would fail to chain properly, but it will work.
+3. **`(a = b) = c` Wouldn't Work:**
+
+    - If the operator returns **`TYPE`** instead of **`TYPE&`**, the result of **`a = b`** would be a temporary object. Assigning **`c`** to this temporary object **`((a = b) = c)`** would fail because you cannot modify a temporary value.
+
+### Copy Assignment Operator Example
+
+Here is an example of implementing a deep copy assignment operator in a class **`MyClass`** with a pointer.
+
+**Code Example:**
+
+```cpp
+class MyClass {
+public:
+    int* data;
+
+
+    MyClass(int value) : data(new int(value)) {}
+    ~MyClass() { delete data; }
+
+    // Custom Copy Assignment Operator (Deep Copy)
+    MyClass& operator=(const MyClass& other) {
+        if (this != &other) {  // Prevent self-assignment
+            delete data;  // Free the existing memory
+            data = new int(*other.data);  // Allocate new memory and copy the value
+        }
+        return *this;  // Return the current object for chaining
+    }
+
+    void print() const {
+        std::cout << *data << std::endl;
+    }
+};
+
+int main() {
+    MyClass obj1(10);  
+    MyClass obj2(20); 
+
+    obj2 = obj1;  // Assign obj1 to obj2 (calls the copy assignment operator)
+
+    std::cout << "obj1 data: ";
+    obj1.print();  // 10
+
+    std::cout << "obj2 data: ";
+    obj2.print();  // 10 
+
+    return 0;
+}
+```
+
+#### Explanation of Copy Assignment Operator
+
+1. **Constructor:** Dynamically allocates memory for the integer and initializes it with a value.
+2. **Destructor:** Releases the allocated memory when the object is destroyed.
+3. **Copy Assignment Operator:**
+
+    - Prevents self-assignment using if (**`this != &other`**).
+    - Releases the currently held resource using **`delete`**.
+    - Allocates new memory and performs a deep copy of the data.
+    - Returns **`*this`** to support chained assignments.
+
+4. Printing Values: Demonstrates that **`obj2`** is a separate deep copy of **`obj1`**.
+
+#### Output of Copy Assignment Operator
+
+```cpp
+obj1 data: 10
+obj2 data: 10
+```
+
+After the assignment **`obj2 = obj1;`**, **`obj2`** contains a separate copy of **`obj1`**'s data, ensuring proper ownership and avoiding issues like double deletion.
