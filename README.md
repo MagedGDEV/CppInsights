@@ -317,3 +317,151 @@ Data: 50
 ```
 
 **`MyClass obj1(20);`** creates **`obj1`** with **`20`**,**`obj1 = MyClass(50);`** moves the resource **`50`** to **`obj1`**, nullifies the temporary object's data.
+
+## Overloading operators as Member Functions
+
+We can define custom behaviors for operators like **`+`**, **`-`**, **`==`**, and more when they are applied to objects of a class. Just as we overloaded the assignment operators (copy and move), we can overload other operators to make them behave in a way that fits the needs of our class.
+
+In this section, we'll explore how to overload the following operators:
+
+- Unary **`-`** to transform a string into lowercase.
+- Binary **`+`** to concatenate two strings.
+- Binary **`==`** to compare two values of a class.
+
+Each of these examples will help us understand how operator overloading can make our code more intuitive and easier to read, while also demonstrating the difference between unary and binary operators.
+
+### 1. Overloading the Unary `-` Operator (Convert Text to Lowercase)
+
+The **unary** **`-`** operator typically operates on a single operand. In this example, we will overload the **`-`** operator to turn the characters in a string to lowercase.
+
+```cpp
+TYPE operator-() {
+    // Implementation
+}
+```
+
+**Example:**
+
+```cpp
+class MyString {
+private:
+    std::string str;
+
+public:
+    MyString(const std::string& s) : str(s) {}
+
+    // Overloading the unary - operator to convert string to lowercase
+    MyString operator-() {
+        for (char& c : str) {
+            c = std::tolower(c);  // Convert each character to lowercase
+        }
+        return *this;
+    }
+
+    void print() const {
+        std::cout << str << std::endl;
+    }
+};
+
+int main() {
+    MyString text("Hello World");
+    -text;  // Using the overloaded - operator to convert to lowercase
+    text.print();  // Output: hello world
+    return 0;
+}
+```
+
+**Explanation:**
+
+- **`operator-()`:** This function defines the behavior of the unary **`-`** operator. It iterates over each character in the string and converts it to lowercase using **`std::tolower`**.
+- **Usage:** The expression **`-text`** invokes the overloaded **`operator-()`** to modify **`text`** into lowercase.
+
+### 2. Overloading the Binary `+` Operator (Concatenate Two Strings)
+
+The binary **`+`** operator operates on two operands. In this example, we will overload the **`+`** operator to concatenate two strings together.
+
+```cpp
+TYPE operator+(const TYPE& rhs) {
+    // Implementation
+}
+```
+
+**Example:**
+
+```cpp
+class MyString {
+private:
+    std::string str;
+
+public:
+    MyString(const std::string& s) : str(s) {}
+
+    // Overloading the binary + operator to concatenate two strings
+    MyString operator+(const MyString& rhs) {
+        return MyString(str + rhs.str);  // Concatenate strings and return new MyString object
+    }
+
+    void print() const {
+        std::cout << str << std::endl;
+    }
+};
+
+int main() {
+    MyString text1("Hello ");
+    MyString text2("World");
+    MyString result = text1 + text2;  // Using the overloaded + operator to concatenate
+    result.print();  // Output: Hello World
+    return 0;
+}
+```
+
+**Explanation:**
+
+- **`operator+(const MyString& rhs)`:** This function defines the behavior of the binary **`+`** operator. It concatenates the **`str`** of the current object with the **`str`** of the object passed as the argument **`rhs`**.
+- **Usage:** The expression **`text1 + text2`** invokes the overloaded **operator+()** and returns a new object containing the concatenated strings.
+
+### 3. Overloading the Binary `==` Operator (Compare Two Values)
+
+The binary **`==`** operator is used to compare two objects of a class. In this example, we will overload the **`==`** operator to compare two values in a class and check for equality.
+
+```cpp
+bool operator==(const TYPE& rhs) const {
+    // Implementation
+}
+```
+
+**Example:**
+
+```cpp
+class MyClass {
+private:
+    int value;
+
+public:
+    MyClass(int v) : value(v) {}
+
+    // Overloading the binary == operator to compare values
+    bool operator==(const MyClass& rhs) const {
+        return value == rhs.value;  // Compare the value of current object and rhs
+    }
+};
+
+int main() {
+    MyClass obj1(10);
+    MyClass obj2(10);
+    MyClass obj3(20);
+
+    std::cout << (obj1 == obj2) << std::endl;  // Output: 1 (true)
+    std::cout << (obj1 == obj3) << std::endl;  // Output: 0 (false)
+    return 0;
+}
+```
+
+**Explanation:**
+
+- **`operator==(const MyClass& rhs)`:** This function defines the behavior of the binary **`==`** operator. It compares the **`value`** of the current object with the **`value`** of the object passed as the argument **`rhs`**.
+- **Usage:** The expression **`obj1 == obj2`** invokes the overloaded **`operator==()`** and returns **`true`** if the values are equal, otherwise **false**.
+
+### Conclusion
+
+Operator overloading can significantly improve the readability and intuitiveness of your code by allowing you to use operators like **`-`**, **`+`**, and **`==`** with custom behavior specific to your class. Each of these examples demonstrates how to make C++ operators work for complex objects in a way that fits the problem you're solving.
