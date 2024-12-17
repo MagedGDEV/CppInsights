@@ -167,7 +167,6 @@ This calls the **`operator=`** function on **`s2`**, passing **`s1`** as the arg
 
 Here is an example of implementing a deep copy assignment operator in a class **`MyClass`** with a pointer.
 
-**Code Example:**
 
 ```cpp
 class MyClass {
@@ -223,9 +222,98 @@ int main() {
 
 #### Output of Copy Assignment Operator
 
-```cpp
+```txt
 obj1 data: 10
 obj2 data: 10
 ```
 
 After the assignment **`obj2 = obj1;`**, **`obj2`** contains a separate copy of **`obj1`**'s data, ensuring proper ownership and avoiding issues like double deletion.
+
+## Overloading the Assignment Operator (move)
+
+In C++, the **move assignment operator** is called when you assign an **r-value** (temporary object) to an existing object. For example, this happens in the statement **`s1 = "String";`** where the right-hand side is an r-value. On the other hand, the **move constructor** is called when you create a new object from an r-value, as in **`std::string s1 = "String";`**.
+
+### Syntax of the Move Assignment Operator
+
+```cpp
+TYPE& TYPE::operator=(TYPE&& rhs) noexcept {
+    // Implementation
+}
+```
+
+#### Explanation of Move Assignment Operator Syntax
+
+1. **`TYPE&`:**
+
+    - The operator returns a reference to the current object (**`*this`**) to allow **chained assignments**, such as **`a = b = c;`**.
+
+2. **`TYPE&& rhs`:**
+
+    - The parameter **`rhs`** is an r-value reference.
+    - The double ampersand **`&&`** indicates that the function accepts **r-values** (temporary objects) as input.
+3. **`noexcept`:**
+
+    - Declaring the move assignment operator **`noexcept`** signals that the operation will not throw exceptions, allowing optimizations like **`std::vector`** to move elements instead of copying them.
+
+### Move Assignment Operator Example
+
+Below is an example of a class **`MyClass`** that implements a move assignment operator to manage a dynamically allocated resource
+
+```cpp
+class MyClass {
+private:
+    int* data;
+
+public:
+    MyClass(int value) : data(new int(value)) {}
+
+    MyClass& operator=(MyClass&& rhs) noexcept {
+        if (this != &rhs) {  // Prevent self-assignment
+            delete data;      // Release current resource
+            data = rhs.data;  // Steal resource
+            rhs.data = nullptr;  // Nullify source
+        }
+        return *this;  // Return current object
+    }
+
+    ~MyClass() {
+        delete data;
+    }
+
+    void print() const {
+        if (data)
+            std::cout << "Data: " << *data << std::endl;
+        else
+            std::cout << "Data is null\n";
+    }
+};
+
+int main() {
+    MyClass obj1(20);  
+
+    obj1.print()      // Data is 20
+    obj1 = obj(50)   // Move Assignment Operator
+    obj1.print();   // Data is 50
+
+    return 0;
+}
+```
+
+#### Explanation of Move Assignment Operator
+
+- **`Move Assignment Operator (operator=(MyClass&& rhs) noexcept)`:**
+  - **Steps:**
+    - Prevent self-assignment
+    - Release current resource
+    - **Steal resource:** Transfers ownership of the memory from the source object **`rhs`** to the current object **`data = rhs.data;`**.
+    - **Nullify the source object:** Ensures the source object is left in a valid state by setting **`rhs.data = nullptr;`**.
+    - **Return **`*this`**:** to support chaining assignments.
+
+#### Output of Move Assignment Operator
+
+```txt
+Data: 20
+Data: 50
+```
+
+**`MyClass obj1(20);`** creates **`obj1`** with **`20`**,**`obj1 = MyClass(50);`** moves the resource **`50`** to **`obj1`**, nullifies the temporary object's data.
