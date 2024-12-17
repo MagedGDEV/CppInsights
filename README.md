@@ -370,27 +370,25 @@ In the following example, multiple constructors will be defined for the class `P
 
 ```cpp
 class Player {
-    public:
-        // Player's variables
-        int health;
-        int speed;
-        int level;
-        int xp;
-
-        // Constructors
-        Player() {
-            health = 100;
-            speed = 10;
-            level = 1;
-            xp = 0;
-        }
-
-        Player(int h, int s, int l, int x) {
-            health = h;
-            speed = s;
-            level = l;
-            xp = x;
-        }
+public:
+    // Player's variables
+    int health;
+    int speed;
+    int level;
+    int xp;
+    // Constructors
+    Player() {
+        health = 100;
+        speed = 10;
+        level = 1;
+        xp = 0;
+    }
+    Player(int h, int s, int l, int x) {
+        health = h;
+        speed = s;
+        level = l;
+        xp = x;
+    }
 };
 
 int main() {
@@ -410,20 +408,19 @@ if you define a constructor with parameters, the compiler will not provide a def
 
 ```cpp
 class Player {
-    public:
-        // Player's variables
-        int health;
-        int speed;
-        int level;
-        int xp;
-
-        // Constructor
-        Player(int h, int s, int l, int x) {
-            health = h;
-            speed = s;
-            level = l;
-            xp = x;
-        }
+public:
+    // Player's variables
+    int health;
+    int speed;
+    int level;
+    int xp;
+    // Constructor
+    Player(int h, int s, int l, int x) {
+        health = h;
+        speed = s;
+        level = l;
+        xp = x;
+    }
 };
 
 int main() {
@@ -438,12 +435,12 @@ int main() {
 
 ```cpp
 class Player {
-    public:
-        // Player's variables
-        int health = 100;
-        int speed = 10;
-        int level = 1;
-        int xp = 0;
+public:
+    // Player's variables
+    int health = 100;
+    int speed = 10;
+    int level = 1;
+    int xp = 0;
 };
 ```
 
@@ -463,20 +460,18 @@ In the following example, a destructor will be defined for the class `Player` to
 
 ```cpp
 class Player {
-    public:
-        // Player's variables
-        int* data;
-
-        // Constructor
-        Player() {
-            data = new int[100];
-        }
-
-        // Destructor
-        ~Player() {
-            delete[] data;
-            cout << "Destructor called" << endl;
-        }
+public:
+    // Player's variables
+    int* data;
+    // Constructor
+    Player() {
+        data = new int[100];
+    }
+    // Destructor
+    ~Player() {
+        delete[] data;
+        cout << "Destructor called" << endl;
+    }
 };
 
 int main() {
@@ -499,27 +494,27 @@ To use the constructor initialization list, you need to add a colon `:` after th
 
 ```cpp
 class Player {
-    public:
-        // Player's variables
-        string name;
-        // constructor
-        Player(){
-            name = "Player";
-        }
+public:
+    // Player's variables
+    string name;
+    // constructor
+    Player(){
+        name = "Player";
+    }
 };
 
 class Account {
-    public:
-        // Account's variables
-        string name;
-        double balance;
-        // constructor
-        Account () : name("Account"), balance(0.0) {
-            // constructor body
-        }
-        Account(string n, double b) : name(n), balance(b) {
-            // constructor body
-        }
+public:
+    // Account's variables
+    string name;
+    double balance;
+    // constructor
+    Account () : name("Account"), balance(0.0) {
+        // constructor body
+    }
+    Account(string n, double b) : name(n), balance(b) {
+        // constructor body
+    }
 };
 
 int main(){
@@ -558,28 +553,27 @@ Consider the following example, where the `Player` class has three constructors:
 
 ```cpp
 class Player {
+
     int health;
     int speed;
     int xp;
 
-    public:
-        // Primary constructor (Delegating constructor)
-        Player(int health_val, int speed_val, int xp_val)
-            : health{health_val}, speed{speed_val}, xp{xp_val} {
-            cout << "Three-argument constructor" << endl;
-        }
-
-        // Secondary constructor
-        Player(int health_val, int speed_val)
-            : Player{health_val, speed_val, 0} { // Delegates to the primary constructor
-            cout << "Two-argument constructor" << endl;
-        }
-
-        // Default constructor
-        Player()
-            : Player{100, 10, 0} { // Delegates to the primary constructor
-            cout << "Default constructor" << endl;
-        }
+public:
+    // Primary constructor (Delegating constructor)
+    Player(int health_val, int speed_val, int xp_val)
+        : health{health_val}, speed{speed_val}, xp{xp_val} {
+        cout << "Three-argument constructor" << endl;
+    }
+    // Secondary constructor
+    Player(int health_val, int speed_val)
+        : Player{health_val, speed_val, 0} { // Delegates to theprimary constructor
+        cout << "Two-argument constructor" << endl;
+    }
+    // Default constructor
+    Player()
+        : Player{100, 10, 0} { // Delegates to the primary constructor
+        cout << "Default constructor" << endl;
+    }
 };
 
 int main() {
@@ -624,17 +618,18 @@ Default parameter values save more code compared to delegating constructors, as 
 
 ```cpp
 class Player {
+
     int health;
     int speed;
     int xp;
 
-    public:
-        // Constructor with default values
-        Player(int health_val = 100, int speed_val = 1, int xp_val = 0)
-            : health{health_val}, speed{speed_val}, xp{xp_val} {
-            cout << "Player created with health: " << health
-                 << ", speed: " << speed << ", xp: " << xp << endl;
-        }
+public:
+    // Constructor with default values
+    Player(int health_val = 100, int speed_val = 1, int xp_val = 0)
+        : health{health_val}, speed{speed_val}, xp{xp_val} {
+        cout << "Player created with health: " << health
+             << ", speed: " << speed << ", xp: " << xp << endl;
+    }
 };
 
 int main() {
@@ -670,21 +665,21 @@ Player created with health: 95, speed: 10, xp: 100
 
 ```cpp
 class Player {
+
     int health;
     int speed;
 
-    public:
-        // Constructor with default values
-        Player(int health_val = 100, int speed_val = 1)
-            : health{health_val}, speed{speed_val} {
-            cout << "Two arguments constructor" << endl;
-        }
-
-        // Constructor with one parameter
-        Player(int health_val)
-            : health{health_val}, speed{0} {  // Default speed = 0
-            cout << "One argument constructor" << endl;
-        }
+public:
+    // Constructor with default values
+    Player(int health_val = 100, int speed_val = 1)
+        : health{health_val}, speed{speed_val} {
+        cout << "Two arguments constructor" << endl;
+    }
+    // Constructor with one parameter
+    Player(int health_val)
+        : health{health_val}, speed{0} {  // Default speed = 0
+        cout << "One argument constructor" << endl;
+    }
 };
 
 int main() {
@@ -731,20 +726,19 @@ ClassName(const ClassName& other);
 
 ```cpp
 class Player {
+    
     int health;
 
-    public:
-        // Constructor
-        Player(int h) : health(h) {}
-
-        // Copy Constructor
-        Player(const Player& other) : health(other.health) {
-            std::cout << "Copy Constructor Called" << std::endl;
-        }
-
-        void showHealth() {
-            std::cout << "Health: " << health << std::endl;
-        }
+public:
+    // Constructor
+    Player(int h) : health(h) {}
+    // Copy Constructor
+    Player(const Player& other) : health(other.health) {
+        std::cout << "Copy Constructor Called" << std::endl;
+    }
+    void showHealth() {
+        std::cout << "Health: " << health << std::endl;
+    }
 };
 
 int main() {
@@ -773,25 +767,22 @@ Here’s an example of shallow copying using a pointer. This approach leads to a
 
 ```cpp
 class Player {
-    public:
-        int *score;
-
-        // Constructor
-        Player(int val) {
-            score = new int(val);
-            cout << "Player created with score: " << *score << endl;
-        }
-
-        // Shallow copy constructor (just copies the pointer)
-        Player(const Player& other) {
-            score = other.score; // Shallow copy of the pointer
-            cout << "Shallow copy created with score: " << *score << endl;
-        }
-
-        // Destructor
-        ~Player() {
-            cout << "Destroying Player with score: " << *score << endl;
-            delete score; // Deleting memory
+public:
+    int *score;
+    // Constructor
+    Player(int val) {
+        score = new int(val);
+        cout << "Player created with score: " << *score << endl;
+    }
+    // Shallow copy constructor (just copies the pointer)
+    Player(const Player& other) {
+        score = other.score; // Shallow copy of the pointer
+        cout << "Shallow copy created with score: " << *score << endl;
+    }
+    // Destructor
+    ~Player() {
+        cout << "Destroying Player with score: " << *score << endl;
+        delete score; // Deleting memory
     }
 };
 
@@ -826,26 +817,23 @@ To avoid this issue, we can implement a **deep copy constructor**. In a deep cop
 
 ```cpp
 class Player {
-    public:
-        int *score;
-
-        // Constructor
-        Player(int val) {
-            score = new int(val);
-            cout << "Player created with score: " << *score << endl;
-        }
-
-        // Deep copy constructor (allocates new memory)
-        Player(const Player& other) {
-            score = new int(*other.score); // Deep copy (new memory allocation)
-            cout << "Deep copy created with score: " << *score << endl;
-        }
-
-        // Destructor
-        ~Player() {
-            cout << "Destroying Player with score: " << *score << endl;
-            delete score; // Deleting memory
-        }
+public:
+    int *score;
+    // Constructor
+    Player(int val) {
+        score = new int(val);
+        cout << "Player created with score: " << *score << endl;
+    }
+    // Deep copy constructor (allocates new memory)
+    Player(const Player& other) {
+        score = new int(*other.score); // Deep copy (new memoryallocation)
+        cout << "Deep copy created with score: " << *score << endl;
+    }
+    // Destructor
+    ~Player() {
+        cout << "Destroying Player with score: " << *score << endl;
+        delete score; // Deleting memory
+    }
 };
 
 int main() {
@@ -971,21 +959,20 @@ ClassName(ClassName&& other) noexcept;
 
 ```cpp
 class Player {
+
     std::string name;
 
-    public:
-        Player(std::string name_val) : name{name_val} {
-            std::cout << "Constructor called for " << name << std::endl;
-        }
-
-        // Move Constructor
-        Player(Player&& other) noexcept : name{std::move(other.name)} {
-            std::cout << "Move constructor called for " << name << std::endl;
-        }
-
-        ~Player() {
-            std::cout << "Destructor called for " << name << std::endl;
+public:
+    Player(std::string name_val) : name{name_val} {
+        std::cout << "Constructor called for " << name << std::endl;
     }
+    // Move Constructor
+    Player(Player&& other) noexcept : name{std::move(other.name)} {
+        std::cout << "Move constructor called for " << name <<std::endl;
+    }
+    ~Player() {
+        std::cout << "Destructor called for " << name << std::endl;
+}
 };
 
 int main() {
@@ -1024,10 +1011,7 @@ Destructor called for Player2
 2. Same Steps happens for Second Object Creation.
 3. At the end the vector is destroyed, destroying it's players.
 
-> [!WARNING]
-> Compiler does not provide implementation of move constructor on it's own like copy constructor.
-
-### Why Choose Move Constructor Over Copy Constructor?
+### Why Move Constructor Is Essential Despite the Presence of a Copy Constructor?
 
 When working with large containers like vectors, using a **move constructor** is much more efficient than using a **copy constructor**. Here's why:
 
@@ -1048,20 +1032,17 @@ A common scenario where the **`this`** pointer is useful is when a member variab
 
 ```cpp
 class Player {
-    public:
-        int health;
-
-        // Constructor
-        Player(int health_val) : health{health_val} {}
-
-        // Member function using 'this' to avoid name conflict
-        void setHealth(int health) {
-            this->health = health;  // 'this' differentiates member variable and parameter
-        }
-
-        void showHealth() {
-            cout << "Health: " << health << endl;  // 'this' is optional here
+public:
+    int health;
+    // Constructor
+    Player(int health_val) : health{health_val} {}
+    // Member function using 'this' to avoid name conflict
+    void setHealth(int health) {
+        this->health = health;  // 'this' differentiates membervariable and parameter
     }
+    void showHealth() {
+        cout << "Health: " << health << endl;  // 'this' is optionalhere
+}
 };
 
 int main() {
@@ -1086,22 +1067,20 @@ When dealing with **`const`** objects, any member functions that modify the obje
 
 ```cpp
 class Player {
-    private:
-        int health;
 
-    public:
-        // Constructor to initialize health
-        Player(int health_val) : health{health_val} {}
+    int health;
 
-        // Function that tries to modify the object (will give error)
-        void setHealth(int health_val) {
-            health = health_val; // Error: cannot modify member of a const  object
-        }
-
-        // Function that doesn't modify the object (works fine with const   objects)
-        void showHealth() const {
-            cout << "Health: " << health << endl; // No modification, so it's   fine
-        }
+public:
+    // Constructor to initialize health
+    Player(int health_val) : health{health_val} {}
+    // Function that tries to modify the object (will give error)
+    void setHealth(int health_val) {
+        health = health_val; // Error: cannot modify member of aconst  object
+    }
+    // Function that doesn't modify the object (works fine withconst   objects)
+    void showHealth() const {
+        cout << "Health: " << health << endl; // No modification, soit's   fine
+    }
 };
 
 int main() {
@@ -1134,25 +1113,23 @@ Static class members are declared inside the class, but they must be initialized
 
 ```cpp
 class Player {
-    private:
-        std::string name;
-        static int playerCount; // Static member to track the number of Player  objects
 
-    public:
-        Player(std::string name_val) : name{name_val} {
-            ++playerCount; // Increment count when a new player is created
-            std::cout << "Constructor called for " << name << std::endl;
-        }
+    std::string name;
+    static int playerCount; // Static member to track the number ofPlayer  objects
 
-        ~Player() {
-            --playerCount; // Decrement count when a player is destroyed
-            std::cout << "Destructor called for " << name << std::endl;
-        }
-
-        // Static function to display the number of players
-        static void displayPlayerCount() {
-            std::cout << "Number of players: " << playerCount << std::endl;
-        }
+public:
+    Player(std::string name_val) : name{name_val} {
+        ++playerCount; // Increment count when a new player is created
+        std::cout << "Constructor called for " << name << std::endl;
+    }
+    ~Player() {
+        --playerCount; // Decrement count when a player is destroyed
+        std::cout << "Destructor called for " << name << std::endl;
+    }
+    // Static function to display the number of players
+    static void displayPlayerCount() {
+        std::cout << "Number of players: " << playerCount << std::endl;
+    }
 };
 
 // Definition of the static member outside the class
@@ -1269,14 +1246,13 @@ The **`friend`** keyword grants access to private and protected members of a cla
 using namespace std;
 
 class Player {
-    private:
-        int health;
 
-    public:
-        // Declare a friend function
-        friend void displayHealth(const Player& p);
-        
-        Player(int h) : health(h) {}
+    int health;
+public:
+    // Declare a friend function
+    friend void displayHealth(const Player& p);
+    
+    Player(int h) : health(h) {}
 };
 
 // Friend function definition
