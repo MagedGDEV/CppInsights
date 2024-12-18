@@ -167,7 +167,6 @@ This calls the **`operator=`** function on **`s2`**, passing **`s1`** as the arg
 
 Here is an example of implementing a deep copy assignment operator in a class **`MyClass`** with a pointer.
 
-
 ```cpp
 class MyClass {
 public:
