@@ -101,7 +101,7 @@ class Player {
 
 Once we have declared the class, we can create objects from it. we can deal with the object as we deal with variables, we can create an array of objects, pass objects to functions, and return objects from functions, create objects on the heap using pointers, and so on.
 
-To create an object from a class, we use the class name followed by the object name, and the object name.
+To create an object from a class, we use the class name followed by the object name.
 
 ```cpp
 
