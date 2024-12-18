@@ -805,8 +805,8 @@ Destroying Player with score: 0  // Undefined behavior, could show 0 or other va
 
 ##### Explanation of shallow copying
 
-- When **`p1`** is destroyed, it deletes the memory pointed to by score.
-- **`p2`** shares the same pointer (score) due to the shallow copy. When **`p2`**'s destructor is called, it tries to access the already deleted memory, leading to undefined behavior. The value shown may be the result of accessing a memory location that has already been freed, but it's not guaranteed and depends on the environment and compiler.
+- When **`p2`** is destroyed, it deletes the memory pointed to by score.
+- **`p1`** shares the same pointer (score) due to the shallow copy. When **`p1`**'s destructor is called, it tries to access the already deleted memory, leading to undefined behavior. The value shown may be the result of accessing a memory location that has already been freed, but it's not guaranteed and depends on the environment and compiler.
 
 > [!WARNING]
 > Another key issue with shallow copying is that if the pointer value in **`p2`** is modified, it will also change the value of the data in **`p1`**, since both objects share the same memory. This can lead to unexpected behavior and bugs.
