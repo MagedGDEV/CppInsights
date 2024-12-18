@@ -566,7 +566,7 @@ public:
     }
     // Secondary constructor
     Player(int health_val, int speed_val)
-        : Player{health_val, speed_val, 0} { // Delegates to theprimary constructor
+        : Player{health_val, speed_val, 0} { // Delegates to the primary constructor
         cout << "Two-argument constructor" << endl;
     }
     // Default constructor
