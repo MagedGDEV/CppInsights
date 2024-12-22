@@ -549,3 +549,123 @@ Operator overloading World
 - If we had used a **member function** to overload the **`+`** operator, we could only perform concatenation with another **`MyString`** object, not a **`const char*`** string. This is because member functions have access to the left operand (the current object) but not the right operand in a way that would allow us to handle other types (like **`const char*`**) without additional complexity.
 
 - By defining the operator as a **global function**, we can seamlessly handle both directions of concatenation and support different types, making the code more flexible and user-friendly.
+
+## Overloading the Stream Insertion and Extraction Operators
+
+In C++, the stream insertion **`<<`** and extraction **`>>`** operators are used to input and output data, typically to and from streams like **`std::cin`** and **`std::cout`**. Overloading these operators allows you to define how objects of your class are inputted and outputted.
+
+These operators **must be overloaded as global functions** because they need access to both the left-hand operand (the stream object, like **`std::cout`**) and the right-hand operand (the object you want to insert or extract). Since these operators are non-member functions, defining them as global functions allows them to work with objects of your class while adhering to the syntax required by stream operations.
+
+### Syntax of the Stream Insertion Operator (<<)
+
+```cpp
+std::ostream& operator<<(std::ostream& os, const TYPE& obj) {
+    // Implementation
+}
+```
+
+#### Explanation of Stream Insertion Operator Syntax
+
+- **`std::ostream&`:**
+  - The function returns a reference to the output stream (**`os`**), allowing multiple outputs to be chained together (e.g., **`std::cout << obj1 << obj2;`**).
+- **`std::ostream& os`:**
+  - The first parameter is a reference to the output stream (**`os`**), usually **`std::cout`**, which is used to output data.
+- **`const TYPE& obj`:**
+  - The second parameter is a constant reference to the object being output. This ensures the object is not modified and avoids unnecessary copies.
+
+### Syntax of the Stream Extraction Operator (>>)
+
+```cpp
+std::istream& operator>>(std::istream& is, TYPE& obj) {
+    // Implementation
+}
+```
+
+#### Explanation of Stream Extraction Operator Syntax
+
+- **`std::istream&`:**
+  - The function returns a reference to the input stream (**`is`**), allowing multiple inputs to be chained together (e.g., **`std::cin >> obj1 >> obj2;`**).
+- **`std::istream& is`:**
+  - The first parameter is a reference to the input stream (**`is`**), usually **`std::cin`**, which is used to receive data from the user.
+- **`TYPE& obj`:**
+  - The second parameter is a reference to the object being modified. This allows the extracted value to be stored in the object.
+
+### Example of Overloading the Stream Insertion and Extraction Operators
+
+Consider a simple **`MyNumber`** class that holds an integer. We will overload the **`<<`** and **`>>`** operators to allow input and output of **`MyNumber`** objects.
+
+```cpp
+class MyNumber {
+
+    friend std::ostream& operator<<(std::ostream& os, const MyNumber& obj);
+    friend std::istream& operator>>(std::istream& is, MyNumber& obj);
+
+private:
+    int* num;
+
+public:
+    MyNumber(int n = 0) : num(new int(n)) {}
+
+    MyNumber(MyNumber&& other) noexcept : num(std::move(other.num)) {
+        other.num = nullptr;
+    }
+
+    MyNumber& operator=(MyNumber&& other) noexcept {
+        if (this != &other) {
+            delete num;       
+            num = other.num;  
+            other.num = nullptr;
+        }
+        return *this;
+    }
+
+    ~MyNumber() {
+        delete num;
+    }
+};
+
+// Stream Insertion Operator (<<) for output
+std::ostream& operator<<(std::ostream& os, const MyNumber& obj) {
+    os << *(obj.num);  // Dereference the pointer to get the value
+    return os;
+}
+
+// Stream Extraction Operator (>>) for input
+std::istream& operator>>(std::istream& is, MyNumber& obj) {
+    is >> *(obj.num);  // Read value into the dynamically allocated memory
+    return is;
+}
+
+int main() {
+    MyNumber number1(10);  
+    MyNumber number2(0);   
+
+    std::cout << "Original number1: " << number1 << std::endl;  // Output: 10
+
+    std::cout << "Enter a new value for number2: ";
+    std::cin >> number2;  // Input a new value
+    std::cout << "Updated number2: " << number2 << std::endl;  // Output: user input
+
+    MyNumber number3 = std::move(number1);  // Move number1 to number3
+    std::cout << "Moved number3: " << number3 << std::endl;  // Output: 10 
+    return 0;
+}
+```
+
+### Output of Overloading the Stream Insertion and Extraction Operators
+
+```txt
+Original number1: 10
+Enter a new value for number2: 25
+Updated number2: 25
+Moved number3: 10
+```
+
+#### Explanation of Overloading the Stream Insertion and Extraction Operators
+
+- **Stream Insertion (`<<`) Operator:**
+  - **`The operator<<`** outputs the integer stored in the dynamically allocated memory (**`num`**) of the **`MyNumber`** object.
+  - This operator is overloaded as a friend function, allowing it to access the private **`num`** pointer.
+- **Stream Extraction (`>>`) Operator:**
+  - The **`operator>>`** reads an integer from the user input and stores it in the **`num`** pointer.
+  - This operator is also overloaded as a friend function.
