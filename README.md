@@ -464,3 +464,88 @@ int main() {
 ### Conclusion
 
 Operator overloading can significantly improve the readability and intuitiveness of your code by allowing you to use operators like **`-`**, **`+`**, and **`==`** with custom behavior specific to your class. Each of these examples demonstrates how to make C++ operators work for complex objects in a way that fits the problem you're solving.
+
+## Overloading operators as Global Functions
+
+In addition to overloading operators as member functions, we can define them as **global functions**. These global operator functions work similarly to member functions but have a broader scope. To access private or protected members of a class, you can either use **getter methods** or declare the operator function as a **friend** of the class.
+
+In some cases, overloading operators as global functions is more suitable than using member functions. This approach provides greater flexibility, allowing operations where the left-hand operand is not of the class type, such as combining custom objects with standard types like **`std::string`**. It also ensures symmetry for commutative operators like + and ==, enabling expressions like **`obj + str`** and **`str + obj`** to work seamlessly.
+
+> [!IMPORTANT]
+> You cannot define both a member and a global operator overload for the same operator, as it would result in ambiguity for the compiler.
+
+### Example of Overloading operators as Global Functions
+
+Below, we will overload the **`+`** operator as a global function to concatenate two **`MyString`** objects and allow concatenation of an object with a string directly.
+
+```cpp
+class MyString {
+    friend MyString operator+(const MyString &lhs, const MyString &rhs);
+private:
+    char *str;   
+
+public:
+    MyString() : str{nullptr} {
+        str = new char[1];
+        *str = '\0';
+    }
+
+    MyString(const char *s) : str {nullptr} {
+        if (s == nullptr) {
+            str = new char[1];
+            *str = '\0';
+        } else {
+            str = new char[std::strlen(s) + 1];
+            std::strcpy(str, s);
+        }
+    }
+
+    void print() {
+        std::cout << str << std::endl;
+    }
+
+    ~MyString() {
+        delete[] str;
+    }
+};
+
+MyString operator+(const MyString &lhs, const MyString &rhs) {
+    char *buff = new char[std::strlen(lhs.str) + std::strlen(rhs.str) + 1];
+    std::strcpy(buff, lhs.str);
+    std::strcat(buff, rhs.str);
+    MyString temp {buff};
+    delete[] buff;
+    return temp;
+}
+
+int main() {
+    MyString obj1("Hello ");
+    MyString obj2("World");
+    MyString result1 = obj1 + obj2;  // Concatenate two objects
+    result1.print();  // Output: Hello World
+
+    MyString result2 = obj1 + "C++";  // Concatenate object and string
+    result2.print();  // Output: Hello C++
+
+    MyString result3 = "Operator overloading " + obj2;
+    result3.print();  // Output: Operator overloading World
+
+    return 0;
+}
+```
+
+### Output of Overloading operators as Global Functions
+
+```txt
+Hello World
+Hello C++
+Operator overloading World
+```
+
+#### Explanation of Overloading operators as Global Functions
+
+- In this example, we overload the **`+`** operator as a **global function** to allow concatenation between two **`MyString`** objects or between a **`MyString`** object and a **`const char*`** string. This approach gives us the flexibility to use the **`+`** operator both ways: we can concatenate **`"some string" + MyString`** as well as **`MyString + "some string"`**.
+
+- If we had used a **member function** to overload the **`+`** operator, we could only perform concatenation with another **`MyString`** object, not a **`const char*`** string. This is because member functions have access to the left operand (the current object) but not the right operand in a way that would allow us to handle other types (like **`const char*`**) without additional complexity.
+
+- By defining the operator as a **global function**, we can seamlessly handle both directions of concatenation and support different types, making the code more flexible and user-friendly.
