@@ -207,3 +207,15 @@ Student Name: Alice, Age: 20, ID: S12345
     - Direct access to **`name`** or **`age`** through the object **`s`** is not allowed.
 4. **Protected Inheritance:**
     - Protected inheritance ensures that all public and protected members of the base class are inherited as **protected** in the derived class, restricting their access to further derived classes or member functions of the derived class.
+
+## Access Control Table  
+
+| **Access Level** | **Private Members** | **Protected Members** | **Public Members** |
+|-|-|-|-|
+| **Accessible in Base Class**   | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Accessible in Derived Class** | ❌ No | ✅ Yes | ✅ Yes |
+| **Accessible by Objects**      | ❌ No | ❌ No | ✅ Yes |
+| **Inheritance with `public`** | Not inherited (remains private in base class, inaccessible in derived class) | Becomes **protected** in derived class | Remains **public** in derived class |
+| **Inheritance with `protected`** | Not inherited (remains private in base class, inaccessible in derived class) | Remains **protected** in derived class | Becomes **protected** in derived class |
+| **Inheritance with `private`** | Not inherited (remains private in base class, inaccessible in derived class) | Becomes **private** in derived class | Becomes **private** in derived class |
+| **Use Case** | - Used to strictly restrict access, ensuring only the base class can use it. | - Used to allow derived classes to access members while still hiding them from objects. | - Used to make members widely accessible to other classes or functions. |
