@@ -62,3 +62,72 @@ A **Person** has an **Account** this is **composition**. The **Account** belongs
 Now, an **Employee** and a **Manager** are both types of **Person** this is **inheritance**. They both inherit the **Account** from **Person** but also have their own specific features.
 
 So, **Employee** and **Manager** both ***have*** an **Account** (composition) and ***are*** a **Person** (inheritance).
+
+## Deriving class from existing class
+
+In C++, you can derive a class from an existing class (called the base class) to create a new class (called the derived class). This allows you to reuse the code from the base class while adding new features or modifying existing ones.
+
+Syntax for Deriving a Class:
+
+```cpp
+class DerivedClass : accessSpecifier BaseClass {
+    // Derived class members and functions
+};
+```
+
+### Explanation of Access Specifiers in Inheritance
+
+In inheritance, access specifiers play an important role in determining how members of the base class are accessible in the derived class:
+
+1. **Public Inheritance `public`**:
+    - In **public inheritance**, the public and protected members of the base class remain accessible in the derived class.
+    - This represents an "is-a" relationship. For example, a **Car** "is a" **Vehicle**.
+2. **Private Inheritance `private`:**
+    - In **private inheritance**, the public and protected members of the base class become private members of the derived class.
+    - This is generally used when the derived class wants to use the base class functionality internally but does not want to expose it to the outside world.
+    - This represents a **has-a** relationship, similar to composition. For example, a **Smartphone** "has a" **Battery**.
+3. **Protected Inherithance `proctected`:** explain later in this branch.
+
+#### Example of Public Inheritance
+
+```cpp
+class Vehicle {
+public:
+    void startEngine() {
+        // Start the engine
+    }
+};
+
+class Car : public Vehicle {
+public:
+    void drive() {
+        // Drive the car
+    }
+};
+```
+
+##### Explanation of Public Inheritance
+
+In this example, **`Car`** publicly inherits from **`Vehicle`**. The **`Car`** class can access public members of the **`Vehicle`** class, such as **``**.
+
+#### Example of Private Inheritance
+
+```cpp
+class Engine {
+public:
+    void start() {
+        // Start engine
+    }
+};
+
+class Car : private Engine {
+public:
+    void drive() {
+        start();  // Accesses Engine's start function
+    }
+};
+```
+
+##### Explanation of Private Inheritance
+
+In this case, **`Car`** privately inherits from **`Engine`**. The **`Car`** class can use the **`start()`** function from **`Engine`**, but it is not accessible outside of **`Car`** because the inheritance is private.
