@@ -131,3 +131,79 @@ public:
 ##### Explanation of Private Inheritance
 
 In this case, **`Car`** privately inherits from **`Engine`**. The **`Car`** class can use the **`start()`** function from **`Engine`**, but it is not accessible outside of **`Car`** because the inheritance is private.
+
+## Protected Members and Class Access
+
+### Protected Member
+
+A protected member in a class is similar to a private member but with an important difference:
+
+- **Accessible from Base Class**
+- **Accessible from Derived Class:**
+- **Not Accessible by Objects:** Protected members cannot be accessed directly by objects of the class or derived class.
+
+### Protected Inheritance
+
+- When a class is derived using **protected inheritance**, the public and protected members of the base class become **protected** in the derived class.
+- This means they are not accessible directly by objects, but they are still accessible in further derived classes.
+
+### Example of Protected Members and Protected Inheritance
+
+```cpp
+class Person {
+protected:
+    string name;  // Protected member
+    int age;      // Protected member
+
+public:
+    Person(string n, int a) : name(n), age(a) {}
+
+    void displayInfo() const {
+        cout << "Name: " << name << ", Age: " << age << endl;
+    }
+};
+
+class Student : protected Person {  // Protected inheritance
+private:
+    string studentID;
+
+public:
+    Student(string n, int a, string id) : Person(n, a), studentID(id) {}
+
+    void displayStudent() const {
+        // Accessing protected members from the base class
+        cout << "Student Name: " << name << ", Age: " << age << ", ID: " << studentID << endl;
+    }
+};
+
+int main() {
+
+    Student s("Alice", 20, "S12345");
+
+    s.displayStudent();  // Accessing derived class member function
+
+    // cout << s.name;  // Error: Protected members are not accessible directly by objects.
+
+    return 0;
+}
+```
+
+### Output of Protected Members and Protected Inheritance
+
+```txt
+Student Name: Alice, Age: 20, ID: S12345
+```
+
+#### Explanation
+
+1. **Protected Members in the Base Class:**
+    - **`name`** and **`age`** are declared as **protected** in the Person class.
+    - This means they are accessible in the **`Person`** class and in classes derived from **`Person`**.
+2. **Access in Derived Class:**
+    - In the **`Student`** class, which inherits **`Person`** with **protected inheritance**, **`name`** and **`age`** are accessible.
+    - However, they are treated as **protected** in **`Student`**, so they are not directly accessible by objects of **`Student`**.
+3. **Access by Objects:**
+    - **`s.displayStudent()`** works because the function has access to the protected members of the base class.
+    - Direct access to **`name`** or **`age`** through the object **`s`** is not allowed.
+4. **Protected Inheritance:**
+    - Protected inheritance ensures that all public and protected members of the base class are inherited as **protected** in the derived class, restricting their access to further derived classes or member functions of the derived class.
