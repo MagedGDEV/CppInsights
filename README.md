@@ -24,15 +24,41 @@ Inheritance is a powerful feature of object-oriented programming that allows us 
 - **Base class (Parent class):** The class from which properties and behaviors are inherited.
 - **Derived class (Child class):** The class that inherits from the base class and may extend or override its functionality.
 
-### Examples of Inheritance
+#### Examples of Inheritance
 
 1. Student, Teacher and Staff inherits from a general class **Person**.
 2. Player and Enemy inherits from a general class **Character**.
 3. Car, Truck and Motorcycle from a general class **Vehicle**.
 4. Circle, Rectangle and Triangle from a general clas **Shape**.
 
-## Why Inheritance is Useful
+### Why Inheritance is Useful
 
 - **Code Reusability:** Instead of writing the same code in multiple classes, inheritance lets us define shared behavior once in the base class and then inherit it in derived classes.
 - **Maintainability:** If we need to change or fix a feature that is shared across many classes, we only need to update the base class, and all derived classes will automatically benefit from the change.
 - **Flexibility:** Derived classes can override or extend the functionality of the base class. For example, if a derived class needs to behave differently, it can modify inherited methods, or add entirely new ones, without affecting the base class.
+
+## Inheritance vs Composition
+
+Both **inheritance** and **composition** allow us to reuse existing classes, but they represent different types of relationships between objects. Here's a breakdown of their differences and when to use each:
+
+### When to use Inheritance
+
+- Use inheritance when a **derived** class is a **specialization** of a **base** class.
+- If the derived class is a type of the base class, then inheritance is appropriate. The derived class should be able to inherit and extend the functionality of the base class
+
+### Composition
+
+- **"has-a" relationship:** Composition represents a **"has-a"** relationship, where one class contains an instance of another class as a member. The class **has** another class as part of its state or behavior.
+
+#### When to use composition
+
+- Use composition when one class **contains** an instance of another class, but the contained class **does not** need to be a specialized type of the containing class.
+- Composition is used to model relationships where objects are composed of other objects.
+
+### Example of Inheritance and Composition
+
+A **Person** has an **Account** this is **composition**. The **Account** belongs to the **Person** but isn't a **specialized** version of it.
+
+Now, an **Employee** and a **Manager** are both types of **Person** this is **inheritance**. They both inherit the **Account** from **Person** but also have their own specific features.
+
+So, **Employee** and **Manager** both ***have*** an **Account** (composition) and ***are*** a **Person** (inheritance).
