@@ -377,7 +377,7 @@ When working with derived classes, it's important to understand how **copy const
 
 In inheritance, the base class's copy constructor and assignment operator are not automatically invoked unless explicitly called in the derived class. This can lead to incomplete copying or assignment if the derived class adds extra data or resources. Properly managing copy constructors and assignment operators ensures that both the base and derived portions are handled correctly, especially when dynamic memory or external resources are involved.
 
-**Important Notes:**
+### Important Notes
 
 1. **Object Slicing:**
 
