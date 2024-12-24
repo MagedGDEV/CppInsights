@@ -299,3 +299,76 @@ Base destructor called
     - The derived class does not have an assignment operator explicitly defined.
     - Therefore, the base class's assignment operator is invoked when **`d2 = d1;`** is   executed.
     - If the derived class had additional resources, it would need its own assignment operator to manage them.
+
+## Passing Arguments to Base Class Constructors
+
+When a derived class is instantiated, you can call any constructor from the base class to initialize its members. This allows you to pass specific arguments to the base class constructor as needed.
+
+> [!NOTE]
+> If you don't explicitly invoke a specific constructor of the base class in the derived class's initializer list, the base class's default (no-argument) constructor will be called automatically.
+
+### Example of Passing Arguments to Base Class Constructors
+
+```cpp
+class Base {
+private:
+    string name;
+
+public:
+    Base() : name("Default Base") {
+        cout << "Base no-args constructor called\n";
+    }
+
+    Base(const string& name) : name(name) {
+        cout << "Base parameterized constructor called\n";
+    }
+
+    void showBase() const {
+        cout << "Base name: " << name << "\n";
+    }
+};
+
+class Derived : public Base {
+private:
+    int value;
+
+public:
+    // Explicitly calling the base class parameterized constructor
+    Derived(const string& baseName, int val) : Base(baseName), value(val) {
+        cout << "Derived constructor called\n";
+    }
+
+    void showDerived() const {
+        showBase(); // Use Base's member function to display base details
+        cout << "Derived value: " << value << "\n";
+    }
+};
+
+int main() {
+
+    cout << "Creating object with specific base constructor:\n";
+    Derived obj1("Custom Base", 42);
+    obj1.showDerived();
+
+    return 0;
+}
+```
+
+### Output of Passing Arguments to Base Class Constructors
+
+```txt
+Creating object with specific base constructor:
+Base parameterized constructor called
+Derived constructor called
+Base name: Custom Base
+Derived value: 42
+```
+
+#### Explanation of Passing Arguments to Base Class Constructors
+
+1. **Base Class Constructor Selection:**
+    - **`obj1`** uses the base class's parameterized constructor to set the **`Base`** member to **`"Custom Base"`**.
+2. **Construction Order:**
+    - The base class constructor is called before the derived class constructor, ensuring the base class's members are fully initialized.
+3. **Separate Responsibilities:**
+    - The base class handles its own initialization **`name`**, while the derived class focuses on its specific members **`value`**.
