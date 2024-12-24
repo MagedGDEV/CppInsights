@@ -227,7 +227,7 @@ In inheritance, the order of construction and destruction is crucial. When a der
 During destruction, the process is reversed: the derived class destructor is executed first, followed by the base class destructor. Each class is responsible for managing its own resources.
 
 >[!NOTE]
-> Derived classes do not inherit constructors, destructors, overloaded assignment operators, or friends from the base class. However, if the derived class does not have additional resources, it can rely on the base class’s overloaded assignment operator.
+> Derived classes do not inherit constructors, destructors, overloaded assignment operators, or friends from the base class.
 
 ### Example of Constructors & Destructors
 
@@ -265,9 +265,6 @@ int main() {
     Derived d1;
     Derived d2;
 
-    cout << "Assigning d1 to d2 using the base class's assignment operator" << endl;
-    d2 = d1;
-
     return 0;
 }
 ```
@@ -279,8 +276,6 @@ Base constructor called
 Derived constructor called
 Base constructor called
 Derived constructor called
-Assigning d1 to d2 using the base class's assignment operator
-Base assignment operator called
 Derived destructor called
 Base destructor called
 Derived destructor called
@@ -375,3 +370,144 @@ Derived value: 42
 
 > [!TIP]
 > You can simplify the process by using delegate constructors in combination with inheritance.
+
+## Copy/Move Constructors & Assignment Operator with Derived Classes
+
+When working with derived classes, it's important to understand how **copy constructors** and **assignment operators** behave. Since the derived class inherits from the base class, the derived class contains the base class portion as well. Therefore, when creating or assigning a derived class object, you must consider both the base and derived portions.
+
+In inheritance, the base class's copy constructor and assignment operator are not automatically invoked unless explicitly called in the derived class. This can lead to incomplete copying or assignment if the derived class adds extra data or resources. Properly managing copy constructors and assignment operators ensures that both the base and derived portions are handled correctly, especially when dynamic memory or external resources are involved.
+
+**Important Notes:**
+
+1. **Object Slicing:**
+
+    When assigning or passing a derived object to a base object, the compiler slices off the derived-specific data, leaving only the base part.
+
+2. **Base Class in Assignment Operator:**
+
+    If you don't explicitly call the base class's assignment operator in the derived class, the base portion of the derived object will not be assigned.
+
+3. **Copy Constructor in Derived:**
+
+    If a copy constructor or assignment operator is created in the derived class, it's critical to ensure the base class's version is also invoked to handle the base portion of the object.
+
+4. **Dynamic Memory or Resources:**
+
+    If neither the base nor the derived class manages dynamic memory or external resources (like files), there's no need to create custom copy/move constructors or assignment operators. The default ones are sufficient.
+
+5. **No Extra Data:**
+
+    If the derived class does not add any new data members, the default copy/move constructors and assignment operators automatically handle the situation, invoking the base class's versions as needed.
+
+### Example of Copy Constructor and Assignment Operator in Derived Classes
+
+```cpp
+class Base {
+private:
+    string base_data;
+public:
+    Base(const string& data = "Base Data") : base_data{data} {}
+
+    Base(const Base& source) : base_data{source.base_data} {
+        cout << "Base Copy Constructor Called" << endl;
+    }
+
+    Base& operator=(const Base& rhs) {
+        if (this != &rhs) {
+            base_data = rhs.base_data;
+            cout << "Base Assignment Operator Called" << endl;
+        }
+        return *this;
+    }
+
+    void display() const {
+        cout << "Base Data: " << base_data << endl;
+    }
+};
+
+class Derived : public Base {
+private:
+    string derived_data;
+public:
+    Derived(const string& base_data = "Base Data", const string& derived_data = "Derived Data") 
+        : Base{base_data}, derived_data{derived_data} {}
+
+    // Only Base part is taken from rhs (slicing operation)
+    Derived(const Derived& source) 
+        : Base{source}, derived_data{source.derived_data} {
+        cout << "Derived Copy Constructor Called" << endl;
+    }
+
+    Derived& operator=(const Derived& rhs) {
+        if (this != &rhs) {
+            // Only Base part is taken from rhs (slicing operation)
+            Base::operator=(rhs);  // Call base class assignment part 
+
+            derived_data = rhs.derived_data;
+            cout << "Derived Assignment Operator Called" << endl;
+        }
+        return *this;
+    }
+
+    void display() const {
+        Base::display();
+        cout << "Derived Data: " << derived_data << endl;
+    }
+};
+
+int main() {
+    Derived d1{"Base Info", "Derived Info"};
+    d1.display();
+
+    cout << "\nCopying d1 to d2:" << endl;
+    Derived d2{d1};  // Calls copy constructor
+    d2.display();
+
+    cout << "\nAssigning d1 to d3:" << endl;
+    Derived d3;
+    d3 = d1;  // Calls assignment operator
+    d3.display();
+
+    return 0;
+}
+```
+
+### Output of Copy Constructor and Assignment Operator in Derived Classes
+
+```txt
+Base Data: Base Info
+Derived Data: Derived Info
+
+Copying d1 to d2:
+Base Copy Constructor Called
+Derived Copy Constructor Called
+Base Data: Base Info
+Derived Data: Derived Info
+
+Assigning d1 to d3:
+Base Assignment Operator Called
+Derived Assignment Operator Called
+Base Data: Base Info
+Derived Data: Derived Info
+```
+
+#### Explanation of Copy Constructor and Assignment Operator in Derived Classes
+
+1. **Base Copy Constructor & Assignment Operator:**
+
+    When a derived class object is copied or assigned, the base portion of the derived object must also be copied or assigned. This is achieved by explicitly calling the base class's constructor or assignment operator in the derived class's implementations.
+
+2. **Derived Class Copy Constructor & Assignment Operator:**
+
+    The derived class constructor or assignment operator handles its own members after delegating the base class portion.
+
+3. **Object Slicing:**
+
+    If a derived object is passed or assigned to a base object, the derived-specific data would be sliced off, leaving only the base part.
+
+4. **Dynamic Memory Management:**
+
+    If dynamic memory or other resources were involved, these constructors and assignment operators would ensure proper resource handling, avoiding memory leaks or undefined behavior.
+
+> [!NOTE]
+> These rules also apply to the move constructor and the move assignment operator.
