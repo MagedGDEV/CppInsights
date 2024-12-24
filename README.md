@@ -372,3 +372,6 @@ Derived value: 42
     - The base class constructor is called before the derived class constructor, ensuring the base class's members are fully initialized.
 3. **Separate Responsibilities:**
     - The base class handles its own initialization **`name`**, while the derived class focuses on its specific members **`value`**.
+
+> [!TIP]
+> You can simplify the process by using delegate constructors in combination with inheritance.
