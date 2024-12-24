@@ -511,3 +511,52 @@ Derived Data: Derived Info
 
 > [!NOTE]
 > These rules also apply to the move constructor and the move assignment operator.
+
+## Redefining Base Class Methods
+
+In C++, inheritance allows derived classes to not only call base class methods but also to **override** them, providing a specialized implementation of the same function in the derived class. This means that the derived class can take a method from the base class and modify its functionality to fit its needs.
+
+Additionally, it is possible to call the base class method from the derived class and add additional behavior. This enables the derived class to **extend** or **complete** the base class functionality.
+
+### Example of Redefining Base Class Methods
+
+```cpp
+class Base {
+public:
+    void greet() {
+        cout << "Hello from Base class!" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void greet() {
+        cout << "Hello from Derived class!" << endl;
+        Base::greet();  // Calling the base class method from derived class
+    }
+};
+
+int main() {
+    Base b;
+    Derived d;
+    
+    b.greet();        // Calls the Base class method
+    d.greet();        // Calls the Derived class method (overridden)
+
+    return 0;
+}
+```
+
+### Output of Redefining the Base Class Methods
+
+```txt
+Hello from Base class!
+Hello from Derived class!
+Hello from Base class!
+```
+
+#### Explanation of Redefining the Base Class Methods
+
+- **`b.greet()`** calls the **`greet`** method from the **`Base`** class because the object b is of type **`Base`**.
+- **`d.greet()`** calls the **`greet`** method from the **`Derived`** class because the object **`d`** is of type **`Derived`**, which overrides the method from the base class.
+- **`d.greet()`** calls the **`greet`** method from the **`Base`** class explicitly within the derived class using **`Base::greet()`**. This demonstrates how we can use the base class method even when it has been overridden in the derived class.
