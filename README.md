@@ -108,7 +108,7 @@ public:
 
 ##### Explanation of Public Inheritance
 
-In this example, **`Car`** publicly inherits from **`Vehicle`**. The **`Car`** class can access public members of the **`Vehicle`** class, such as **``**.
+In this example, **`Car`** publicly inherits from **`Vehicle`**. The **`Car`** class can access public members of the **`Vehicle`** class.
 
 #### Example of Private Inheritance
 
@@ -219,3 +219,83 @@ Student Name: Alice, Age: 20, ID: S12345
 | **Inheritance with `protected`** | Not inherited (remains private in base class, inaccessible in derived class) | Remains **protected** in derived class | Becomes **protected** in derived class |
 | **Inheritance with `private`** | Not inherited (remains private in base class, inaccessible in derived class) | Becomes **private** in derived class | Becomes **private** in derived class |
 | **Use Case** | - Used to strictly restrict access, ensuring only the base class can use it. | - Used to allow derived classes to access members while still hiding them from objects. | - Used to make members widely accessible to other classes or functions. |
+
+## Constructors & Destructors
+
+In inheritance, the order of construction and destruction is crucial. When a derived class is instantiated, the base class constructor is executed first.
+
+During destruction, the process is reversed: the derived class destructor is executed first, followed by the base class destructor. Each class is responsible for managing its own resources.
+
+>[!NOTE]
+> Derived classes do not inherit constructors, destructors, overloaded assignment operators, or friends from the base class. However, if the derived class does not have additional resources, it can rely on the base class’s overloaded assignment operator.
+
+### Example of Constructors & Destructors
+
+This example illustrates the order of construction and destruction.
+
+```cpp
+class Base {
+public:
+    Base() {
+        cout << "Base constructor called" << endl;
+    }
+
+    ~Base() {
+        cout << "Base destructor called" << endl;
+    }
+
+    Base& operator=(const Base& rhs) {
+        cout << "Base assignment operator called" << endl;
+        return *this;
+    }
+};
+
+class Derived : public Base {
+public:
+    Derived() {
+        cout << "Derived constructor called" << endl;
+    }
+
+    ~Derived() {
+        cout << "Derived destructor called" << endl;
+    }
+};
+
+int main() {
+    Derived d1;
+    Derived d2;
+
+    cout << "Assigning d1 to d2 using the base class's assignment operator" << endl;
+    d2 = d1;
+
+    return 0;
+}
+```
+
+### Output of Constructors & Destructors
+
+```txt
+Base constructor called
+Derived constructor called
+Base constructor called
+Derived constructor called
+Assigning d1 to d2 using the base class's assignment operator
+Base assignment operator called
+Derived destructor called
+Base destructor called
+Derived destructor called
+Base destructor called
+```
+
+#### Explanation of Constructors & Destructors
+
+1. **Order of Construction:**
+    - The **`Base`** constructor is executed first for each **`Derived`** object.
+    - After the base portion is initialized, the **`Derived`** constructor is called.
+2. **Order of Destruction:**
+    - When the program ends, the **`Derived`** destructor is executed first for each object.
+    - The **`Base`** destructor is then executed to clean up resources in the base class.
+3. **Assignment Operator:**
+    - The derived class does not have an assignment operator explicitly defined.
+    - Therefore, the base class's assignment operator is invoked when **`d2 = d1;`** is   executed.
+    - If the derived class had additional resources, it would need its own assignment operator to manage them.
