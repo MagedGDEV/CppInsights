@@ -560,3 +560,99 @@ Hello from Base class!
 - **`b.greet()`** calls the **`greet`** method from the **`Base`** class because the object b is of type **`Base`**.
 - **`d.greet()`** calls the **`greet`** method from the **`Derived`** class because the object **`d`** is of type **`Derived`**, which overrides the method from the base class.
 - **`d.greet()`** calls the **`greet`** method from the **`Base`** class explicitly within the derived class using **`Base::greet()`**. This demonstrates how we can use the base class method even when it has been overridden in the derived class.
+
+## Multiple Inheritance
+
+This is a feature in C++ that allows a class to inherit from more than one base class. This means the derived class can combine the features and functionalities of multiple base classes into a single class. While powerful, multiple inheritance should be used carefully because it can lead to complexities, such as **ambiguity** when the same member exists in multiple base classes.
+
+### Key Points of Multiple Inheritance
+
+- The derived class inherits members and behaviors from all base classes.
+- To resolve ambiguities (e.g., if two base classes have methods with the same name), you must explicitly specify which base class's method to call.
+- Arguments can be passed to base class constructors using an **initializer list** in the derived class.
+
+### Example of Multiple Inheritance
+
+```cpp
+class Person {
+protected:
+    string name;
+
+public:
+    Person(string personName) : name(personName) {
+        cout << "Person constructor called for " << name << endl;
+    }
+};
+
+class Employee {
+protected:
+    int employeeID;
+
+public:
+    Employee(int id) : employeeID(id) {
+        cout << "Employee constructor called with ID " << employeeID << endl;
+    }
+};
+
+class Manager : public Person, public Employee {
+private:
+    string department;
+
+public:
+    Manager(string personName, int id, string dept)
+        : Person(personName), Employee(id), department(dept) {
+        cout << "Manager constructor called for department " << department << endl;
+    }
+
+    void display() {
+        cout << "Manager Name: " << name << endl;
+        cout << "Employee ID: " << employeeID << endl;
+        cout << "Department: " << department << endl;
+    }
+};
+
+int main() {
+    Manager mgr("Alice", 101, "Sales");
+    mgr.display();
+    return 0;
+}
+```
+
+### Output of Multiple Inheritance
+
+```txt
+Person constructor called for Alice
+Employee constructor called with ID 101
+Manager constructor called for department Sales
+Manager Name: Alice
+Employee ID: 101
+Department: Sales
+```
+
+#### Explanation of Multiple Inheritance
+
+1. **Base Class Constructors:**
+
+    - The **Person** constructor initializes the **name** of the person.
+    - The **Employee** constructor initializes the **employeeID**.
+
+2. **Derived Class Constructor:**
+
+    - The **Manager** class inherits from both **Person** and **Employee**.
+    - Using the initializer list, the **Manager** constructor explicitly calls the **Person** and **Employee** constructors, passing arguments (**"Alice"** and **101** respectively).
+
+3. **Order of Construction:**
+
+    - The **`Person`** constructor is called first because it is listed first in the inheritance list (**: public Person, public Employee**).
+    - The **`Employee`** constructor is called next.
+    - Finally, the **`Manager`** constructor completes its initialization.
+
+4. **Order of Destruction:**
+
+    - The **`Manager`** destructor is called first because it is the most derived class.
+    - Then, the **`Employee`** destructor is executed, as it was inherited after **`Person`**.
+    - Finally, the **`Person`** destructor is called, completing the cleanup process in the reverse order of construction.
+
+5. **`display()` Method:**
+
+    - The derived class (**`Manager`**) can access the protected members (**`name`** and **`employeeID`**) of the base classes and use them to display relevant information.
