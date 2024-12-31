@@ -519,3 +519,14 @@ Area: 78.5
 Drawing Rectangle
 Area: 24
 ```
+
+### Explanation of Pure Virtual & Abstract Classes
+
+1. **Abstract Class:**
+    - The **`Shape`** class is abstract because it contains pure virtual functions: **`draw()`** and **`area()`**.
+    - You cannot create an object of **`Shape`**.
+2. **Concrete Classes:**
+    - **`Circle`** and **`Rectangle`** are concrete classes because they provide implementations for all pure virtual functions in **`Shape`**.
+3. **Polymorphism:**
+    - A vector of **`Shape*`** is used to store objects of both **`Circle`** and **`Rectangle`**.
+    - The correct **`draw()`** and **`area()`** functions are called dynamically at runtime based on the type of object stored in the vector.
