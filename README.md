@@ -96,3 +96,76 @@ Accompanied by detailed explanations in the README file, each branch serves as a
   - How Functions Work
   - Inline Functions
   
+- **[Pointers & References](https://github.com/MagedGDEV/CppInsights/tree/pointers)**
+
+  Pointers and references are used to store memory addresses and access data indirectly. We will cover the following:
+
+  - Pointer Declaration & Initialization
+  - Accessing Pointers & Storing Addresses
+  - Dereferencing Pointers
+  - Dynamic Memory Allocation
+    - Relationship Between Pointers & Arrays
+  - Pointer Arithmetic
+  - Constants & Pointers
+  - Pointers & Functions
+  - Potiential Pointer Pitfalls
+
+- **[OOP - Classes & Objects](https://github.com/MagedGDEV/CppInsights/tree/OOP)**
+
+  Object-Oriented Programming (OOP) is a programming paradigm that uses objects to model real-world entities. We will cover the following:
+
+  - What is Object-Oriented Programming?
+  - What are Classes & Objects?
+  - Declaring Classes and creating Objects
+  - Accessing Class Members
+  - Public & Private Access Specifiers
+  - Implementing Class Functions
+  - Constructors & Destructors
+  - Constructor initializer lists
+  - Delegating Constructors
+  - Constructor parameters with default values
+  - Copy Constructor
+  - Move Constructor
+  - The **`this`** Pointer
+  - Static Class Members & Functions
+  - Structs vs Classes
+  - Friend Functions & Classes
+
+- **[Operator Overloading](https://github.com/MagedGDEV/CppInsights/tree/operatorOverloading)**
+
+  Operator overloading allows operators to be redefined for user-defined types. We will cover the following:
+
+  - Why operator overloading?
+  - Overloading the assignment operator (Copy)
+  - Overloading the assignment operator (Move)
+  - Overloading operators as Member Functions
+  - Overloading operators as Global Functions
+  - Overloading the stream insertion and extraction operators
+
+- **[Inheritance](https://github.com/MagedGDEV/CppInsights/tree/inheritance)**
+
+  Inheritance is a mechanism that allows a class to inherit properties and behaviors from another class. We will cover the following:
+
+  - Key Concepts in Inheritance
+  - Inheritance vs Composition
+  - Deriving class from existing class
+  - Protected Members and Class Access
+  - Access Control Table
+  - Constructors and Destructors in Inheritance
+  - Passing Arguments to Base Class Constructors
+  - Copy/Move Constructors and Assignment Operators in Inheritance
+  - Redefining Base Methods
+  - Multiple Inheritance
+
+- **[Polymorphism](https://github.com/MagedGDEV/CppInsights/tree/polymorphism)**
+
+  Polymorphism is a feature that allows objects to be treated as instances of their parent class. We will cover the following:
+
+  - What is Polymorphism?
+  - Static vs Dynamic Polymorphism
+  - Base Class Pointers or References
+  - Virtual Functions
+  - Virtual Destructor
+  - **`override`** keyword
+  - **`final`** keyword
+  - Pure Virtual & Abstract Classes
