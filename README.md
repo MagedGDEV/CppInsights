@@ -358,3 +358,164 @@ The **`final`** keyword in C++11 is used to prevent further overriding of a virt
     - With the knowledge that a **`final`** function or class cannot change further, the compiler can safely inline the function for better performance, avoiding the overhead of a function call.
 3. **Simplified Memory Layout:**
     - When a class is marked as **final**, the compiler knows that it cannot be extended. This allows the compiler to optimize the memory layout of the class and its derived objects, reducing unnecessary overhead.
+
+### Example of the final keyword
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual void show() const {
+        cout << "Base class\n";
+    }
+
+    virtual void display() const final {  // Marked as final, cannot be overridden further
+        cout << "Display from Base class\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() const override {  // Overriding is allowed here
+        cout << "Derived class\n";
+    }
+
+    // Uncommenting the below code will cause a compilation error because display() is final
+    // void display() const override {
+    //     cout << "Display from Derived class\n";
+    // }
+};
+
+class DerivedFinal final : public Base {
+    // No class can inherit from DerivedFinal
+};
+
+// Uncommenting this class will cause a compilation error because DerivedFinal is marked as final
+// class FurtherDerived : public DerivedFinal {};
+
+int main() {
+    Base* basePtr = new Derived();  // Base class pointer to Derived class object
+    basePtr->show();               // Calls Derived::show() (overridden function)
+    basePtr->display();            
+
+    DerivedFinal derivedFinalObj;
+    derivedFinalObj.display();     // Calls Base::display()
+
+    delete basePtr;
+
+    return 0;
+}
+```
+
+### Output of the final keyword
+
+```txt
+Derived class
+Display from Base class
+Derived class
+Display from Base class
+Display from Base class
+```
+
+#### Explanation of the final keyword
+
+1. **`show():`**
+    - The overridden function in **Derived** is called because the function is virtual and not marked as **final**.
+2. **`display():`**
+    - The **`display()`** function from the **Base** class is called because it is marked as **final** and cannot be overridden.
+
+## Pure Virtual & Abstract Classes
+
+In C++, **pure virtual** functions and **abstract** classes provide a way to enforce an interface or structure in derived classes. They are powerful tools for achieving **polymorphism** and designing code with high flexibility and reusability.
+
+### Pure Virtual Function
+
+- A pure virtual function is a function that is declared in a base class but does not have any implementation.
+- It is declared using the **`= 0`** syntax:
+
+    ```cpp
+    virtual void functionName() = 0;
+    ```
+
+- A class that contains at least **one** pure virtual function becomes an **abstract class**.
+
+### Abstract Class
+
+- An abstract class acts as a blueprint for other classes. It **cannot** be instantiated (i.e., you cannot create objects of it).
+- The purpose of an abstract class is to enforce derived classes to provide specific implementations for the pure virtual functions.
+
+### Concrete Class
+
+- A concrete class is a class that provides implementations for all pure virtual functions of its base class.
+- Unlike an abstract class, a concrete class **can** be instantiated.
+
+### Example of Pure Virtual & Abstract Classes
+
+```cpp
+#include <iostream>
+#include <vector>
+
+class Shape {
+public:
+    virtual void draw() const = 0;  // Pure virtual function
+    virtual double area() const = 0; // Pure virtual function
+    virtual ~Shape() {} 
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    void draw() const override {
+        std::cout << "Drawing Circle" << std::endl;
+    }
+    double area() const override {
+        return 3.14 * radius * radius;
+    }
+};
+
+class Rectangle : public Shape {
+private:
+    double length, width;
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+    void draw() const override {
+        std::cout << "Drawing Rectangle" << std::endl;
+    }
+    double area() const override {
+        return length * width;
+    }
+};
+
+int main() {
+    // Abstract class cannot be instantiated
+    // Shape shape; // Error!
+
+    // Concrete classes can be instantiated
+    Circle circle(5);
+    Rectangle rectangle(4, 6);
+
+    // Base class pointer to derived class object
+    std::vector<Shape*> shapes = {new Circle(5), new Rectangle(4, 6)};
+
+    for (const auto& shape : shapes) {
+        shape->draw();
+        std::cout << "Area: " << shape->area() << "\n";
+        delete shape;
+    }
+
+    return 0;
+}
+```
+
+### Output of Pure Virtual & Abstract Classes
+
+```txt
+Drawing Circle
+Area: 78.5
+Drawing Rectangle
+Area: 24
+```
