@@ -133,3 +133,112 @@ Internship Duration: 4 months
 
     - The function **`displayEmployeeDetails()`** accepts a base class reference (**`Employee&`**), allowing derived objects to be passed.
     - The overridden **`displayDetails()`** function of each derived class is called, showcasing polymorphism in action when passing derived objects as references.
+
+## Virtual Functions
+
+In C++, virtual functions enable dynamic (or runtime) polymorphism. They allow a derived class to override a function in the base class such that the function that gets called is determined at runtime, not at compile-time. Without virtual functions, the compiler uses static binding (compile-time decision) for function calls, which means the base class version will always be called, even if the object is of the derived class type.
+
+Virtual functions achieve this through a mechanism called the vtable (virtual table). When a class contains virtual functions, a vtable is created for it. The vtable is essentially a table of function pointers, pointing to the appropriate function implementation based on the actual object type.
+
+### Syntax of Virtual Functions
+
+```cpp
+class Base {
+public:
+    virtual void func() { // Virtual function in base class
+        // Implementation
+    }
+};
+```
+
+1. The **`virtual`** keyword is used in the base class to declare a function as virtual.
+2. The **`virtual`** keyword is **not required** in the **derived class**, but using it improves code readability.
+3. Function parameters and return types in the derived class must match the base class to override it. otherwise, it will be treated as function overloading, leading to static binding.
+
+### Example of Virtual Functions
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Base class
+class Shape {
+public:
+    // Virtual function
+    virtual void draw() const {
+        cout << "Drawing a generic shape" << endl;
+    }
+
+    // Non-virtual function
+    void info() const {
+        cout << "This is a Shape" << endl;
+    }
+};
+
+class Circle : public Shape {
+public:
+    virtual void draw() const { 
+        cout << "Drawing a Circle" << endl;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    virtual void draw() const { 
+        cout << "Drawing a Rectangle" << endl;
+    }
+};
+
+
+int main() {
+    Shape* shapePtr;
+
+    Circle circle;
+    Rectangle rectangle;
+
+    // Pointer to a Circle
+    shapePtr = &circle;
+    cout << "Circle object:" << endl;
+    shapePtr->draw();  // Calls Circle's draw function (dynamic binding)
+    shapePtr->info();  // Calls Shape's info function (static binding)
+
+    // Pointer to a Rectangle
+    shapePtr = &rectangle;
+    cout << "\nRectangle object:" << endl;
+    shapePtr->draw();  // Calls Rectangle's draw function (dynamic binding)
+    shapePtr->info();  // Calls Shape's info function (static binding)
+
+    return 0;
+}
+```
+
+#### Output of Virtual Functions
+
+```txt
+Circle object:
+Drawing a Circle
+This is a Shape
+
+Rectangle object:
+Drawing a Rectangle
+This is a Shape
+```
+
+#### Explanation of Virtual Functions
+
+1. **Virtual Function (`draw`):**
+
+    - Declared as **`virtual`** in the **`Shape`** base class.
+    - Overridden in the **`Circle`** and **`Rectangle`** classes.
+    - At runtime, the actual type of the object (**`Circle`** or **`Rectangle`**) determines which version of the **`draw`** function is executed.
+
+2. **Non-Virtual Function (`info`):**
+
+    - Not declared as **`virtual`**.
+    - Always calls the **`Shape`** class's **`info`** function, regardless of the object type, due to static binding.
+
+3. Polymorphism:
+
+    - The **`Shape`** pointer **`shapePtr`** can point to objects of derived classes (**`Circle`** or **`Rectangle`**).
+    - The overridden **`draw`** function is called based on the actual type of the object being pointed to.
+    
