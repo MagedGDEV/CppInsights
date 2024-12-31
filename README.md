@@ -120,17 +120,12 @@ Internship Duration: 4 months
 #### Explanation of Base Class Pointer or Reference
 
 1. **Using a Single Base Class Pointer:**
-
     - The base class pointer **`employee`** is assigned to a **`Manager`** object.
     - Polymorphism ensures that **`Manager::displayDetails()`** is called, demonstrating the ability of the base class pointer to interact with derived class objects.
-
 2. **Using a Vector of Base Class Pointers:**
-
     - The **`std::vector`** stores pointers to both **`Manager`** and **`Intern`** objects, but the type of the pointers is **`Employee*`**.
     - The correct **`displayDetails()`** function is called for each object in the vector because of polymorphism. This setup is practical for managing a collection of objects of various derived types through a common interface.
-
 3. **Using Base Class Reference in a Function:**
-
     - The function **`displayEmployeeDetails()`** accepts a base class reference (**`Employee&`**), allowing derived objects to be passed.
     - The overridden **`displayDetails()`** function of each derived class is called, showcasing polymorphism in action when passing derived objects as references.
 
@@ -223,18 +218,13 @@ This is a Shape
 #### Explanation of Virtual Functions
 
 1. **Virtual Function (`draw`):**
-
     - Declared as **`virtual`** in the **`Shape`** base class.
     - Overridden in the **`Circle`** and **`Rectangle`** classes.
     - At runtime, the actual type of the object (**`Circle`** or **`Rectangle`**) determines which version of the **`draw`** function is executed.
-
 2. **Non-Virtual Function (`info`):**
-
     - Not declared as **`virtual`**.
     - Always calls the **`Shape`** class's **`info`** function, regardless of the object type, due to static binding.
-
-3. Polymorphism:
-
+3. **Polymorphism:**
     - The **`Shape`** pointer **`shapePtr`** can point to objects of derived classes (**`Circle`** or **`Rectangle`**).
     - The overridden **`draw`** function is called based on the actual type of the object being pointed to.
 
@@ -294,3 +284,54 @@ Base destructor called
 
 - The destructors are dynamically bound at runtime, ensuring both the derived and base destructors are called in the correct order.
 - The derived class destructor executes first, followed by the base class destructor.
+
+## Override keyword
+
+The **`override`** keyword in C++11 is used to explicitly declare that a function in a derived class is intended to override a virtual function in the base class. This keyword helps prevent errors due to mismatched function signatures or unintended function hiding.
+
+### Why use the `override` keyword?
+
+1. **Prevents Errors:**
+    - If the function in the derived class does not match the signature of the base class function, the compiler will generate an error.
+    - This helps catch mistakes where the function in the derived class is not actually overriding the base class function.
+2. **Improves Code Readability:**
+    - The **`override`** keyword makes it clear that a function is intended to override a virtual function from the base class.
+
+### Example of the override keyword
+
+```cpp
+
+class Base {
+
+public:
+    virtual void display() const {
+        cout << "Base Display" << endl;
+    }
+};
+
+class Derived : public Base {
+
+public:
+    void display() const override {
+        cout << "Derived Display" << endl;
+    }
+};
+
+int main() {
+    Base* ptr = new Derived();
+    ptr->display();  // Calls Derived's display function
+    delete ptr;
+    return 0;
+}
+```
+
+#### Output of the override keyword
+
+```txt
+Derived Display
+```
+
+#### Explanation of the override keyword
+
+- The **`override`** keyword in the **`Derived`** class explicitly indicates that the **`display`** function is overriding the **`display`** function in the **`Base`** class.
+- If the function in the **`Derived`** class does not match the signature of the **`Base`** class function, the compiler will generate an error.
