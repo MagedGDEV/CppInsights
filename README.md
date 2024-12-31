@@ -43,3 +43,93 @@ Without polymorphism, the base class implementation of **`calculateSalary()`** w
 - You can override the **`calculateSalary()`** function in each derived class to provide role-specific behavior.
 - A base class pointer or reference can invoke the correct function dynamically at runtime based on the actual object type.
 
+To enable polymorphism in C++, a few key components are required:
+
+1. Inheritance
+2. Base Class Pointer or Reference
+3. Virtual Functions
+
+## Base Class Pointer or Reference
+
+A **base class pointer** or **reference** can point to or refer to objects of derived classes. This allows us to treat all derived objects uniformly through the base class interface, enabling more flexible and reusable code.
+
+When a base class pointer or reference points to a derived class object:
+
+- It **only knows about the base class part** of the object.
+- By default, it uses **static binding** and calls base class functions unless a function is marked as **`virtual`**.
+- If a function is **`virtual`**, **dynamic binding** occurs, and the function of the actual object type (derived class) is called.
+
+### Example of Base Class Pointer or Reference
+
+```cpp
+// Function that accepts a base class reference
+void displayEmployeeDetails(const Employee& emp) {
+    emp.displayDetails(); // Calls the appropriate derived class function
+}
+
+int main() {
+    // Single Base Class Pointer
+    Employee* employee = new Manager("Alice", 5);
+    std::cout << "Using Base Class Pointer:\n";
+    employee->displayDetails(); // Calls Manager's displayDetails
+    delete employee;
+
+    // Vector of Base Class Pointers
+    std::vector<Employee*> employeesVector;
+    employeesVector.push_back(new Manager("Bob", 3));
+    employeesVector.push_back(new Intern("Charlie", 6));
+
+    std::cout << "\nUsing Vector of Base Class Pointers:\n";
+    for (Employee* emp : employeesVector) {
+        emp->displayDetails(); // Calls the appropriate derived class function
+        delete emp;
+    }
+
+    // Base Class Reference in a Function
+    Manager manager("Daisy", 7);
+    Intern intern("Eve", 4);
+
+    std::cout << "\nUsing Base Class Reference in a Function:\n";
+    displayEmployeeDetails(manager); // Calls Manager's displayDetails
+    displayEmployeeDetails(intern);  // Calls Intern's displayDetails
+
+    return 0;
+}
+```
+
+#### Output of Base Class Pointer or Reference
+
+```txt
+Using Base Class Pointer:
+Manager: Employee: Alice
+Team Size: 5
+
+Using Vector of Base Class Pointers:
+Manager: Employee: Bob
+Team Size: 3
+Intern: Employee: Charlie
+Internship Duration: 6 months
+
+Using Base Class Reference in a Function:
+Manager: Employee: Daisy
+Team Size: 7
+Intern: Employee: Eve
+Internship Duration: 4 months
+```
+
+#### Explanation of Base Class Pointer or Reference
+
+1. **Using a Single Base Class Pointer:**
+
+    - The base class pointer **`employee`** is assigned to a **`Manager`** object.
+    - Polymorphism ensures that **`Manager::displayDetails()`** is called, demonstrating the ability of the base class pointer to interact with derived class objects.
+
+2. **Using a Vector of Base Class Pointers:**
+
+    - The **`std::vector`** stores pointers to both **`Manager`** and **`Intern`** objects, but the type of the pointers is **`Employee*`**.
+    - The correct **`displayDetails()`** function is called for each object in the vector because of polymorphism. This setup is practical for managing a collection of objects of various derived types through a common interface.
+
+3. **Using Base Class Reference in a Function:**
+
+    - The function **`displayEmployeeDetails()`** accepts a base class reference (**`Employee&`**), allowing derived objects to be passed.
+    - The overridden **`displayDetails()`** function of each derived class is called, showcasing polymorphism in action when passing derived objects as references.
