@@ -335,3 +335,26 @@ Derived Display
 
 - The **`override`** keyword in the **`Derived`** class explicitly indicates that the **`display`** function is overriding the **`display`** function in the **`Base`** class.
 - If the function in the **`Derived`** class does not match the signature of the **`Base`** class function, the compiler will generate an error.
+
+## Final keyword
+
+The **`final`** keyword in C++11 is used to prevent further overriding of a virtual function in derived classes or to prevent inheritance of a class. When a function is marked as **`final`**, it cannot be overridden in any derived class. Similarly, when a class is marked as **`final`**, it cannot be inherited by other classes.
+
+### Why use the final keyword?
+
+1. **Prevents Further Overriding:**
+    - The **`final`** keyword ensures that a virtual function cannot be overridden in any further derived classes.
+    - This can be useful when you want to enforce a specific implementation of a function.
+2. **Prevents Inheritance:**
+    - When a class is marked as **`final`**, it cannot be used as a base class for other classes.
+    - This can be useful when you want to prevent further specialization of a class.
+
+### Final keyword Enable Compiler Optimization
+
+1. **No Need for Virtual Table Lookups:**
+    - If a virtual function is marked as **`final`**, the compiler knows that this function cannot be overridden in any derived class.
+    - This eliminates the need for the compiler to use the virtual table (vtable) to resolve the function call dynamically at runtime. Instead, the compiler can resolve the call at compile-time (static binding), which is faster.
+2. **Inline Expansion:**
+    - With the knowledge that a **`final`** function or class cannot change further, the compiler can safely inline the function for better performance, avoiding the overhead of a function call.
+3. **Simplified Memory Layout:**
+    - When a class is marked as **final**, the compiler knows that it cannot be extended. This allows the compiler to optimize the memory layout of the class and its derived objects, reducing unnecessary overhead.
