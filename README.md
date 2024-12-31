@@ -158,10 +158,6 @@ public:
 ### Example of Virtual Functions
 
 ```cpp
-#include <iostream>
-using namespace std;
-
-// Base class
 class Shape {
 public:
     // Virtual function
@@ -241,4 +237,60 @@ This is a Shape
 
     - The **`Shape`** pointer **`shapePtr`** can point to objects of derived classes (**`Circle`** or **`Rectangle`**).
     - The overridden **`draw`** function is called based on the actual type of the object being pointed to.
-    
+
+## Virtual Destructor
+
+A **virtual destructor** is essential in achieving fully functional polymorphism in C++. When using polymorphism, if an object of a derived class is deleted through a base class pointer, the base class destructor is called. Without a virtual destructor, the destructor of the derived class will **not** be invoked, potentially leading to resource leaks or undefined behavior.
+
+### Why do we need a Virtual Destructor?
+
+If a base class destructor is not marked as virtual, the **destructor of the derived class will not be called** when a derived class object is deleted through a base class pointer. This happens because the destructor is **statically bound** (resolved at compile time) by default.
+
+However, with a virtual destructor, the destructor becomes **dynamically bound** (resolved at runtime), ensuring both the derived and base class destructors are called in the correct order.
+
+> [!CAUTION]
+> If a class has even a **singlevirtual function**, the destructor should always be **virtual**.
+
+### Example of Virtual Destructor
+
+```cpp
+class Base {
+public:
+    Base() {
+        cout << "Base constructor called" << endl;
+    }
+    virtual ~Base() {  
+        cout << "Base destructor called" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    Derived() {
+        cout << "Derived constructor called" << endl;
+    }
+    ~Derived() {
+        cout << "Derived destructor called" << endl;
+    }
+};
+
+int main() {
+    Base* ptr = new Derived();  // Base class pointer to derived class object
+    delete ptr;  // Both Base and Derived destructors will be called
+    return 0;
+}
+```
+
+#### Output of Virtual Destructor
+
+```txt
+Base constructor called
+Derived constructor called
+Derived destructor called
+Base destructor called
+```
+
+#### Explanation of Virtual Destructor
+
+- The destructors are dynamically bound at runtime, ensuring both the derived and base destructors are called in the correct order.
+- The derived class destructor executes first, followed by the base class destructor.
