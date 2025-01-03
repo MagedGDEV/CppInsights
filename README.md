@@ -232,12 +232,8 @@ A `std::shared_ptr` is a smart pointer in C++ that provides a **shared ownership
 3. **Exception Safety**: Ensures proper cleanup in case of exceptions.
 4. **Simplifies Code**: Handles ownership and lifecycle management seamlessly.
 
-### Using `std::make_shared`
-
-- The `std::make_shared` function is the recommended way to create a `std::shared_ptr`.
-- It:
-  - Allocates memory for both the control block (reference count) and the managed object in one step, improving performance.
-  - Is exception-safe, ensuring no memory leaks occur during initialization.
+> [!NOTE]
+> `std::make_shared` (introduced in C++11) is the preferred method for creating `std::shared_ptr`. It efficiently allocates memory for both the control block and the managed object in one step, improving performance. Like `std::make_unique` for `std::unique_ptr`, it is exception-safe, preventing memory leaks during initialization.
 
 ### Example of Shared Pointers
 
