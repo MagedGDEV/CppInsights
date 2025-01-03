@@ -208,3 +208,99 @@ int main() {
     ptr->show();  // Output: x: 10
 }
 ```
+
+## Shared Pointer (`std::shared_ptr`) in C++
+
+### Overview
+
+A `std::shared_ptr` is a smart pointer in C++ that provides a **shared ownership model**, allowing multiple `std::shared_ptr` instances to manage the same object on the heap. It uses **reference counting** to track ownership and ensure the object is automatically deleted when no `std::shared_ptr` instances are referencing it.
+
+### Key Features
+
+- **Shared Ownership**: Multiple `std::shared_ptr` instances can refer to the same heap object.
+- **Reference Counting**:
+  - Each `std::shared_ptr` increments the reference count when it shares ownership of an object.
+  - The reference count decrements when a `std::shared_ptr` is destroyed or reset.
+  - The managed object is destroyed when the reference count reaches zero.
+- **Copyable and Movable**: `std::shared_ptr` can be copied and assigned, unlike `std::unique_ptr`.
+- **Use Count**: The `use_count()` method returns the current reference count.
+
+### Advantages of `std::shared_ptr`
+
+1. **Automatic Resource Management**: Automatically deletes the managed object when no references remain.
+2. **No Manual Memory Management**: Reduces the risk of memory leaks and dangling pointers.
+3. **Exception Safety**: Ensures proper cleanup in case of exceptions.
+4. **Simplifies Code**: Handles ownership and lifecycle management seamlessly.
+
+### Using `std::make_shared`
+
+- The `std::make_shared` function is the recommended way to create a `std::shared_ptr`.
+- It:
+  - Allocates memory for both the control block (reference count) and the managed object in one step, improving performance.
+  - Is exception-safe, ensuring no memory leaks occur during initialization.
+
+### Example of Shared Pointers
+
+```cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+    // Create the first shared pointer
+    std::shared_ptr<int> p1 = std::make_shared<int>(100);
+    std::cout << "p1 created. Value: " << *p1 << ", Use count: " << p1.use_count() << "\n";
+
+    // Create another shared pointer sharing ownership with p1
+    std::shared_ptr<int> p2 = p1;
+    std::cout << "p2 created. Value: " << *p2 << ", Use count: " << p1.use_count() << "\n";
+
+    // Create another shared pointer inside a block
+    {
+        std::shared_ptr<int> p3 = p1;
+        std::cout << "p3 created in block. Value: " << *p3 << ", Use count: " << p1.use_count() << "\n";
+    }
+    // p3 goes out of scope here
+    std::cout << "p3 is out of scope. Use count: " << p1.use_count() << "\n";
+
+    // Reset p2
+    p2.reset();
+    std::cout << "p2 reset. Use count: " << p1.use_count() << "\n";
+
+    // Reset p1
+    p1.reset();
+    std::cout << "p1 reset. The managed object is now destroyed as use count reached 0.\n";
+
+    return 0;
+}
+```
+
+### Output
+
+```plaintext
+p1 created. Value: 100, Use count: 1
+p2 created. Value: 100, Use count: 2
+p3 created in block. Value: 100, Use count: 3
+p3 is out of scope. Use count: 2
+p2 reset. Use count: 1
+p1 reset. The managed object is now destroyed as use count reached 0.
+```
+
+#### Explanation
+
+1. **`p1` Creation**:
+   - `p1` is created using `std::make_shared<int>(100)`. The reference count is initialized to **1**.
+
+2. **`p2` Creation**:
+   - `p2` shares ownership with `p1`, increasing the reference count to **2**.
+
+3. **`p3` Creation in the Block**:
+   - Inside the block, `p3` shares ownership with `p1` and `p2`. The reference count increases to **3**.
+
+4. **Block End (`p3` Goes Out of Scope)**:
+   - When `p3` is destroyed, the reference count decreases to **2**.
+
+5. **`p2.reset()`**:
+   - `p2` releases ownership. The reference count decreases to **1**.
+
+6. **`p1.reset()`**:
+   - When `p1` releases ownership, the reference count reaches **0**, and the heap object is destroyed.
